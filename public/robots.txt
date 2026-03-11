@@ -1,0 +1,27 @@
+User-agent: *
+Allow: /
+
+Disallow: /admin/
+Disallow: /cart
+Disallow: /profile
+Disallow: /orders/
+Disallow: /reservations/
+Disallow: /login
+Disallow: /register
+Disallow: /logout
+Disallow: /api/
+Disallow: /forgot-password
+Disallow: /reset-password
+
+Disallow: /*?sort=*
+Disallow: /*?page=*
+Disallow: /*?status=*
+Disallow: /*?search=*
+Disallow: /*?category=*
+
+Allow: /$
+Allow: /menu$
+Allow: /menu/category/$
+
+Sitemap: https://sozvezdie-vkusov.ru/sitemap.xml
+
