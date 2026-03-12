@@ -2,6 +2,7 @@
 // app/Http/Controllers/AdminController.php
 namespace App\Http\Controllers;
 
+use App\Models\TableReservation;
 use App\Models\Reservation;
 use App\Models\User;
 use App\Models\Gallery;
@@ -28,21 +29,27 @@ class AdminController extends Controller
     // ================ DASHBOARD ================
     public function dashboard()
     {
-        $reservations = Reservation::orderBy('date', 'desc')
-            ->orderBy('time', 'desc')
+        // последние брони столиков
+        $reservations = TableReservation::with('table')
+            ->orderBy('start_at', 'desc')
             ->take(10)
             ->get();
-            
+            // статистика по бронированию столиков
         $stats = [
-            'total_reservations' => Reservation::count(),
-            'today_reservations' => Reservation::whereDate('date', today())->count(),
-            'pending_reservations' => Reservation::where('confirmed', false)->count(),
+            // общее количество броней столиков
+            'total_reservations' => TableReservation::count(),
+            // брони на сегодня (по дате начала)
+            'today_reservations' => TableReservation::whereDate('start_at', today())->count(),
+            // "ожидают" = активные, не отменённые, ещё не закончились
+            'pending_reservations' => TableReservation::where('cancelled', false)
+                ->where('end_at', '>', now())
+                ->count(),
+            // остальное как было
             'total_users' => User::count(),
             'total_orders' => Order::count(),
             'pending_orders' => Order::where('status', 'pending')->count(),
-        ];
-        
-        return view('admin.dashboard', compact('reservations', 'stats'));
+    ];
+    return view('admin.dashboard', compact('reservations', 'stats'));
     }
 
     // ================ БРОНИРОВАНИЯ ================
@@ -85,13 +92,42 @@ class AdminController extends Controller
         return back()->with('success', 'Бронь обновлена');
     }
 
+    public function tableReservations(Request $request)
+        {
+            $query = TableReservation::with(['table', 'user'])->orderBy('start_at', 'desc');
+
+            if ($request->filled('only_active')) {
+                $query->where('cancelled', false)
+                    ->where('end_at', '>', now());
+            }
+
+            $reservations = $query->paginate(20);
+
+            return view('admin.table-reservations.index', compact('reservations'));
+        }
+
+        public function cancelTableReservation($id)
+        {
+            $reservation = TableReservation::findOrFail($id);
+            $reservation->cancelled = true;
+            $reservation->save();
+
+            return redirect()->route('admin.table-reservations')
+                ->with('success', "Бронь столика #{$reservation->id} помечена как отменённая.");
+    }
+
     // ================ ЗАКАЗЫ ================
     public function orders()
     {
-        $orders = Order::with('user', 'items.product')
-            ->orderBy('created_at', 'desc')
-            ->paginate(20);
-            
+        $query = Order::with('user', 'items.product')
+            ->orderBy('created_at', 'desc');
+
+        if (request()->filled('status')) {
+            $query->where('status', request('status'));
+        }
+
+        $orders = $query->paginate(20)->withQueryString();
+
         return view('admin.orders.index', compact('orders'));
     }
 

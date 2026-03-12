@@ -38,7 +38,7 @@
                             <div class="dish-content">
                                 <div class="d-flex justify-content-between align-items-start mb-2">
                                     <h5 class="dish-title">{{ $item['name'] }}</h5>
-                                    <span class="badge" style="background: var(--accent); color: var(--bg-dark);">{{ $item['weight'] }}</span>
+                                    <span class="badge" style="background: #AD1C43; color: var(--bg-dark);">{{ $item['weight'] }}</span>
                                 </div>
                                 <p class="dish-description">Ароматный бульон с нежными вонтонами и свежей зеленью</p>
                                 <div class="d-flex justify-content-between align-items-center">
@@ -65,7 +65,7 @@
                             <div class="dish-content">
                                 <div class="d-flex justify-content-between align-items-start mb-2">
                                     <h5 class="dish-title">{{ $item['name'] }}</h5>
-                                    <span class="badge" style="background: var(--accent); color: var(--bg-dark);">{{ $item['weight'] }}</span>
+                                    <span class="badge" style="background: #AD1C43; color: var(--bg-dark);">{{ $item['weight'] }}</span>
                                 </div>
                                 <p class="dish-description">Свежие роллы с лососем, сливочным сыром и авокадо</p>
                                 <div class="d-flex justify-content-between align-items-center">
@@ -108,7 +108,7 @@
             color: var(--text-light);
             margin-bottom: 30px;
             padding-bottom: 15px;
-            border-bottom: 2px solid var(--accent);
+            border-bottom: 2px solid #AD1C43;
         }
         
         .btn-sm {

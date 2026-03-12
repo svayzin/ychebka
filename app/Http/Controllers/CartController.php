@@ -227,11 +227,22 @@ class CartController extends Controller
     }
 
     // Создаем заказ
+    $user = Auth::user();
     $order = Order::create([
-        'user_id' => Auth::id(),
-        'total' => $total,
+        'user_id' => $user->id,
+        'full_name' => $user->full_name ?? '',
+        'phone' => $user->phone ?? '',
+        'email' => $user->email,
         'address' => $address,
-        'notes' => $request->notes,
+        'city' => $request->city,
+        'street' => $request->street,
+        'house' => $request->house,
+        'apartment' => $request->apartment,
+        'entrance' => $request->entrance,
+        'floor' => $request->floor,
+        'intercom' => $request->intercom,
+        'total_amount' => $total,
+        'comment' => $request->notes,
         'delivery_type' => $request->delivery_type,
         'payment_method' => $request->payment_method,
         'status' => 'pending',

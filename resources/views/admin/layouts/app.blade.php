@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@yield('title', 'Админ панель') - Созвездие вкусов</title>
+    <title>@yield('title', 'Админ панель') - Crimson Flame</title>
     
     <!-- Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -20,7 +20,7 @@
             --bg-light: #2A2A2A;
             --text-light: #FFFFFF;
             --text-gray: #B0B0B0;
-            --accent: #C9A86A;
+            --accent: #AD1C43;
             --accent-light: #D4B77D;
             --border: #333333;
         }
@@ -69,7 +69,7 @@
         }
         
         .sidebar-logo span {
-            color: var(--accent);
+            color: #AD1C43;
         }
         
         .sidebar-subtitle {
@@ -103,14 +103,14 @@
         }
         
         .nav-link:hover {
-            background: rgba(201, 168, 106, 0.1);
-            color: var(--accent);
+            background: rgba(144, 88, 103, 0.38);
+            color: #AD1C43;
         }
         
         .nav-link.active {
-            background: rgba(201, 168, 106, 0.15);
-            color: var(--accent);
-            border-left-color: var(--accent);
+            background: rgba(126, 48, 69, 0.38);
+            color: #AD1C43;
+            border-left-color: #AD1C43;
         }
         
         .nav-link i {
@@ -164,14 +164,14 @@
         }
         
         .user-role {
-            color: var(--accent);
+            color: #AD1C43;
             font-size: 14px;
             font-weight: 500;
         }
         
         .btn-exact {
-            background: var(--accent);
-            color: var(--bg-dark);
+            background: #AD1C43;
+            color: #ffffff;
             border: none;
             padding: 8px 20px;
             font-weight: 600;
@@ -181,7 +181,7 @@
         }
         
         .btn-exact:hover {
-            background: var(--accent-light);
+            background: #430011;
             transform: translateY(-2px);
         }
         
@@ -197,8 +197,8 @@
         }
         
         .btn-outline-exact:hover {
-            border-color: var(--accent);
-            color: var(--accent);
+            border-color: #AD1C43;
+            color: #AD1C43;
         }
         
         /* Основной блок контента */
@@ -217,7 +217,7 @@
         }
         
         .stat-card:hover {
-            border-color: var(--accent);
+            border-color: #AD1C43;
             transform: translateY(-5px);
         }
         
@@ -316,7 +316,7 @@
         
         .form-control-admin:focus {
             background: var(--bg-card);
-            border-color: var(--accent);
+            border-color: #AD1C43;
             color: var(--text-light);
             box-shadow: 0 0 0 3px rgba(201, 168, 106, 0.2);
         }
@@ -411,14 +411,14 @@
         }
         
         .pagination-admin .page-link:hover {
-            background: var(--accent);
-            border-color: var(--accent);
+            background: #AD1C43;
+            border-color: #AD1C43;
             color: var(--bg-dark);
         }
         
         .pagination-admin .page-item.active .page-link {
-            background: var(--accent);
-            border-color: var(--accent);
+            background: #AD1C43;
+            border-color: #AD1C43;
             color: var(--bg-dark);
         }
     </style>
@@ -431,7 +431,7 @@
         <aside class="admin-sidebar" id="adminSidebar">
             <div class="sidebar-header">
                 <a href="{{ route('admin.dashboard') }}" class="sidebar-logo">
-                    Созвездие<span>Вкусов</span>
+                    Crimson Flame
                 </a>
                 <div class="sidebar-subtitle">Административная панель</div>
             </div>
@@ -444,9 +444,9 @@
                 </a>
                 
                 <div class="nav-section-title">Управление</div>
-                <a href="{{ route('admin.reservations') }}" class="nav-link @if(request()->routeIs('admin.reservations*')) active @endif">
+                <a href="{{ route('admin.table-reservations') }}" class="nav-link @if(request()->routeIs('admin.table-reservations*')) active @endif">
                     <i class="bi bi-calendar-check"></i>
-                    <span>Бронирования</span>
+                    <span>Бронирования столиков</span>
                 </a>
                 <a href="{{ route('admin.orders') }}" class="nav-link @if(request()->routeIs('admin.orders*')) active @endif">
                     <i class="bi bi-cart"></i>
@@ -461,12 +461,6 @@
                 <a href="{{ route('admin.products') }}" class="nav-link @if(request()->routeIs('admin.products*')) active @endif">
                     <i class="bi bi-egg-fried"></i>
                     <span>Блюда</span>
-                </a>
-                
-                <div class="nav-section-title">Контент</div>
-                <a href="{{ route('admin.gallery') }}" class="nav-link @if(request()->routeIs('admin.gallery*')) active @endif">
-                    <i class="bi bi-images"></i>
-                    <span>Галерея</span>
                 </a>
                 
                 <div class="nav-section-title">Навигация</div>

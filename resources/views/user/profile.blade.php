@@ -50,8 +50,8 @@
                         <a href="{{ route('orders.index') }}" class="btn-exact-outline w-100 mb-2">
                             <i class="bi bi-box"></i> Мои заказы
                         </a>
-                        <a href="{{ route('reservations.index') }}" class="btn-exact-outline w-100 mb-2">
-                            <i class="bi bi-calendar-check"></i> Мои бронирования
+                        <a href="{{ route('table-reservations.index') }}" class="btn-exact-outline w-100 mb-2">
+                            <i class="bi bi-calendar-check me-2"></i> Мои бронирования
                         </a>
                         <a href="{{ route('cart.index') }}" class="btn-exact-outline w-100">
                             <i class="bi bi-cart"></i> Корзина
@@ -205,7 +205,7 @@
                     </div>
                     
                     <a href="{{ route('reservations.index') }}" class="btn-link mt-3">
-                        Все бронирования <i class="bi bi-arrow-right"></i>
+                        <i class="bi bi-calendar-check me-1"></i> Перейти к моим бронированиям
                     </a>
                 </div>
                 @endif
@@ -238,7 +238,7 @@
 }
 
 .profile-card:hover {
-    border-color: var(--accent);
+    border-color: #AD1C43;
 }
 
 .card-title {
@@ -247,14 +247,14 @@
     margin-bottom: 25px;
     color: var(--text-light);
     padding-bottom: 15px;
-    border-bottom: 2px solid var(--accent);
+    border-bottom: 2px solid #AD1C43;
     display: flex;
     align-items: center;
     gap: 10px;
 }
 
 .card-title i {
-    color: var(--accent);
+    color: #AD1C43;
 }
 
 /* Левая колонка - профиль */
@@ -265,7 +265,7 @@
 
 .profile-avatar {
     font-size: 80px;
-    color: var(--accent);
+    color: #AD1C43;
     margin-bottom: 15px;
 }
 
@@ -304,7 +304,7 @@
 .stat-value {
     font-size: 24px;
     font-weight: 700;
-    color: var(--accent);
+    color: #AD1C43;
 }
 
 .profile-actions {
@@ -331,7 +331,7 @@
 
 .form-control:focus {
     background: var(--bg-card);
-    border-color: var(--accent);
+    border-color: #AD1C43;
     color: var(--text-light);
     box-shadow: 0 0 0 3px rgba(201, 168, 106, 0.2);
 }
@@ -345,7 +345,7 @@
     background: var(--bg-light);
     padding: 15px;
     border-radius: 8px;
-    border-left: 4px solid var(--accent);
+    border-left: 4px solid #AD1C43;
     margin-bottom: 20px;
 }
 
@@ -355,7 +355,7 @@
 }
 
 .two-factor-info i {
-    color: var(--accent);
+    color: #AD1C43;
     margin-right: 8px;
 }
 
@@ -390,7 +390,7 @@
 
 /* Кнопки */
 .btn-exact {
-    background: var(--accent);
+    background: #AD1C43;
     color: var(--bg-dark);
     border: none;
     padding: 12px 30px;
@@ -417,12 +417,12 @@
 }
 
 .btn-exact-outline:hover {
-    border-color: var(--accent);
-    color: var(--accent);
+    border-color: #AD1C43;
+    color: #AD1C43;
 }
 
 .btn-link {
-    color: var(--accent);
+    color: #AD1C43;
     text-decoration: none;
     display: inline-flex;
     align-items: center;
@@ -500,7 +500,7 @@
     flex: 0.5;
     text-align: right;
     font-weight: 600;
-    color: var(--accent);
+    color: #AD1C43;
     margin-right: 15px;
 }
 
@@ -533,7 +533,7 @@
 }
 
 .reservation-time {
-    color: var(--accent);
+    color: #AD1C43;
     font-weight: 500;
 }
 

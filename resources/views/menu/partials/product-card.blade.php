@@ -49,7 +49,7 @@
 .product-card:hover {
     transform: translateY(-5px);
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
-    border-color: var(--accent);
+    border-color: #AD1C43;
 }
 
 .product-image {
@@ -138,7 +138,7 @@
 .product-price {
     font-size: 20px;
     font-weight: 700;
-    color: var(--accent);
+    color: #AD1C43;
 }
 
 .add-to-cart {

@@ -55,11 +55,11 @@
                 <tr>
                     <td><strong>#{{ $order->id }}</strong></td>
                     <td>
-                        <div class="fw-semibold">{{ $order->user->full_name }}</div>
-                        <small class="text-muted">{{ $order->user->email }}</small>
+                        <div class="fw-semibold">{{ $order->user?->full_name ?? $order->full_name }}</div>
+                        <small class="text-muted">{{ $order->user?->email ?? $order->email }}</small>
                     </td>
                     <td>
-                        <div class="fw-semibold">{{ number_format($order->total, 0, '.', ' ') }} ₽</div>
+                        <div class="fw-semibold">{{ $order->formatted_total }}</div>
                         <small class="text-muted">{{ $order->items->count() }} товаров</small>
                     </td>
                     <td>
@@ -89,8 +89,19 @@
                         </button>
                     </td>
                 </tr>
+                @empty
+                <tr>
+                    <td colspan="7" class="text-center py-5">
+                        <i class="bi bi-cart-x" style="font-size: 48px; color: var(--text-gray);"></i>
+                        <p class="mt-3 text-muted">Заказы не найдены</p>
+                    </td>
+                </tr>
+                @endforelse
+            </tbody>
+        </table>
+    </div>
 
-                <!-- Модальное окно с деталями заказа -->
+    @foreach($orders as $order)
                 <div class="modal fade" id="orderModal{{ $order->id }}" tabindex="-1">
                     <div class="modal-dialog modal-lg">
                         <div class="modal-content" style="background: var(--bg-card); color: var(--text-light);">
@@ -102,14 +113,14 @@
                                 <div class="row mb-4">
                                     <div class="col-md-6">
                                         <h6 class="mb-3"><i class="bi bi-person me-2"></i> Информация о клиенте</h6>
-                                        <p><strong>ФИО:</strong> {{ $order->user->full_name }}</p>
-                                        <p><strong>Email:</strong> {{ $order->user->email }}</p>
-                                        <p><strong>Телефон:</strong> {{ $order->user->phone ?? 'Не указан' }}</p>
+                                        <p><strong>ФИО:</strong> {{ $order->user?->full_name ?? $order->full_name }}</p>
+                                        <p><strong>Email:</strong> {{ $order->user?->email ?? $order->email }}</p>
+                                        <p><strong>Телефон:</strong> {{ $order->user?->phone ?? $order->phone ?? 'Не указан' }}</p>
                                     </div>
                                     <div class="col-md-6">
                                         <h6 class="mb-3"><i class="bi bi-truck me-2"></i> Информация о доставке</h6>
-                                        <p><strong>Статус:</strong> 
-                                            <span class="badge-admin 
+                                        <p><strong>Статус:</strong>
+                                            <span class="badge-admin
                                                 @if($order->status == 'pending') badge-warning
                                                 @elseif($order->status == 'processing') badge-info
                                                 @elseif($order->status == 'completed') badge-success
@@ -118,12 +129,11 @@
                                             </span>
                                         </p>
                                         <p><strong>Адрес:</strong> {{ $order->address }}</p>
-                                        @if($order->notes)
-                                        <p><strong>Комментарий:</strong> {{ $order->notes }}</p>
+                                        @if($order->comment)
+                                        <p><strong>Комментарий:</strong> {{ $order->comment }}</p>
                                         @endif
                                     </div>
                                 </div>
-                                
                                 <h6 class="mb-3"><i class="bi bi-cart me-2"></i> Состав заказа</h6>
                                 <div class="table-responsive">
                                     <table class="table table-sm">
@@ -176,17 +186,7 @@
                         </div>
                     </div>
                 </div>
-                @empty
-                <tr>
-                    <td colspan="7" class="text-center py-5">
-                        <i class="bi bi-cart-x" style="font-size: 48px; color: var(--text-gray);"></i>
-                        <p class="mt-3 text-muted">Заказы не найдены</p>
-                    </td>
-                </tr>
-                @endforelse
-            </tbody>
-        </table>
-    </div>
+    @endforeach
     
     @if($orders->hasPages())
     <div class="table-footer p-3 border-top">

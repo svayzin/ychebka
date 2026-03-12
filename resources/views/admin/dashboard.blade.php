@@ -9,8 +9,8 @@
 <div class="row mb-4">
     <div class="col-12">
         <div class="d-flex gap-3 flex-wrap">
-            <a href="{{ route('admin.reservations') }}" class="btn-exact">
-                <i class="bi bi-calendar-check me-2"></i> Бронирования
+            <a href="{{ route('admin.table-reservations') }}" class="btn-exact">
+                <i class="bi bi-calendar-check me-2"></i> Бронирования столиков
             </a>
             <a href="{{ route('admin.orders') }}" class="btn-exact">
                 <i class="bi bi-cart me-2"></i> Заказы
@@ -102,10 +102,12 @@
             <thead>
                 <tr>
                     <th>ID</th>
-                    <th>Имя</th>
-                    <th>Телефон</th>
+                    <th>Столик</th>
+                    <th>Гость</th>
+                    <th>Контакты</th>
                     <th>Дата и время</th>
-                    <th>Гости</th>
+                    <th>Гостей</th>
+                    <th>Депозит</th>
                     <th>Статус</th>
                 </tr>
             </thead>
@@ -113,27 +115,38 @@
                 @forelse($reservations as $reservation)
                 <tr>
                     <td><strong>#{{ $reservation->id }}</strong></td>
-                    <td>{{ $reservation->name }}</td>
-                    <td>{{ $reservation->phone }}</td>
+                    <td>№{{ optional($reservation->table)->number ?? '—' }}</td>
+                    <td>{{ $reservation->guest_name }}</td>
                     <td>
-                        {{ $reservation->date->format('d.m.Y') }}
-                        <span class="text-muted">в</span>
-                        {{ $reservation->time }}
+                        <div>{{ $reservation->guest_phone }}</div>
+                        @if($reservation->guest_email)
+                            <small class="text-muted">{{ $reservation->guest_email }}</small>
+                        @endif
                     </td>
-                    <td>{{ $reservation->guests }}</td>
                     <td>
-                        @if($reservation->confirmed)
-                        <span class="badge-admin badge-success">Подтверждена</span>
+                        {{ $reservation->start_at->format('d.m.Y') }}
+                        <span class="text-muted">с</span>
+                        {{ $reservation->start_at->format('H:i') }}
+                        <span class="text-muted">до</span>
+                        {{ $reservation->end_at->format('H:i') }}
+                    </td>
+                    <td>{{ $reservation->guests_count }}</td>
+                    <td>{{ number_format($reservation->deposit_total, 0, ',', ' ') }} ₽</td>
+                    <td>
+                        @if($reservation->cancelled)
+                            <span class="badge-admin bg-warning text-dark">Отменена</span>
+                        @elseif($reservation->end_at->isPast())
+                            <span class="badge-admin bg-secondary">Завершена</span>
                         @else
-                        <span class="badge-admin badge-warning">Ожидает</span>
+                            <span class="badge-admin bg-success">Активна</span>
                         @endif
                     </td>
                 </tr>
                 @empty
                 <tr>
-                    <td colspan="6" class="text-center py-4 text-muted">
+                    <td colspan="8" class="text-center py-4 text-muted">
                         <i class="bi bi-calendar-x" style="font-size: 48px;"></i>
-                        <p class="mt-2">Нет бронирований</p>
+                        <p class="mt-2">Нет бронирований столиков</p>
                     </td>
                 </tr>
                 @endforelse
@@ -154,9 +167,6 @@
                 <a href="{{ route('admin.products') }}" class="btn-outline-exact text-start">
                     <i class="bi bi-egg-fried me-2"></i> Все блюда
                 </a>
-                <a href="{{ route('admin.gallery') }}" class="btn-outline-exact text-start">
-                    <i class="bi bi-images me-2"></i> Галерея
-                </a>
             </div>
         </div>
     </div>
@@ -170,9 +180,6 @@
                 </a>
                 <a href="{{ route('admin.products.create') }}" class="btn-exact text-start">
                     <i class="bi bi-plus-circle me-2"></i> Добавить блюдо
-                </a>
-                <a href="{{ route('admin.gallery') }}" class="btn-exact text-start">
-                    <i class="bi bi-plus-circle me-2"></i> Добавить в галерею
                 </a>
             </div>
         </div>
@@ -220,7 +227,7 @@
 
 /* Дополнительная подсветка заголовка секции */
 .stat-card h4 {
-    border-bottom: 2px solid var(--accent);
+    border-bottom: 2px solid #AD1C43;
     padding-bottom: 10px;
     display: inline-block;
 }

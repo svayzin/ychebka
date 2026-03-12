@@ -174,7 +174,7 @@
 }
 
 .detail-item strong {
-    color: var(--accent);
+    color: #AD1C43;
     margin-right: 5px;
     min-width: 80px;
     display: inline-block;

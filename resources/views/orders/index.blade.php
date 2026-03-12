@@ -152,7 +152,7 @@
 }
 
 .detail-item strong {
-    color: var(--accent);
+    color: #AD1C43;
     margin-right: 5px;
 }
 
@@ -187,7 +187,7 @@
 }
 
 .item-total {
-    color: var(--accent);
+    color: #AD1C43;
     font-weight: 600;
 }
 

@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>@yield('title', 'Созвездие вкусов')</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
@@ -17,7 +18,7 @@
             --text-dark: #E0E0E0;
             --border: #333333;
             --border-light: #404040;
-            --accent: #C9A86A;
+            --accent: #AD1C43;
             --accent-light: #D4B77D;
             --accent-dark: #B89448;
         }
@@ -31,7 +32,7 @@
 
         @font-face {
             font-family: "Adieu-Regular";
-            src: url("/fonts/Adieu/Adieu-Regular.ttf") format("opentype");
+            src: url("/fonts/avian/avian.otf") format("opentype");
             font-style: normal;
             font-display: swap;
         }
@@ -106,7 +107,7 @@
         }
         
         .logo span {
-            color: var(--accent);
+            color: #AD1C43;
         }
         
         /* Основная навигация */
@@ -126,7 +127,7 @@
         }
         
         .nav-item:hover {
-            color: var(--accent);
+            color: #AD1C43;
         }
         
         /* Контакты в шапке */
@@ -144,7 +145,7 @@
         }
         
         .header-phone:hover {
-            color: var(--accent);
+            color: #AD1C43;
         }
         
         /* Стили для кнопок входа и регистрации */
@@ -167,17 +168,17 @@
         
         .btn-login {
             background: transparent;
-            color: var(--accent);
-            border: 1px solid var(--accent);
+            color: #AD1C43;
+            border: 1px solid #AD1C43;
         }
         
         .btn-login:hover {
-            background: var(--accent);
+            background: #AD1C43;
             color: var(--bg-dark);
         }
         
         .btn-register {
-            background: var(--accent);
+            background: #AD1C43;
             color: var(--bg-dark);
             border: none;
         }
@@ -218,7 +219,7 @@
             position: absolute;
             top: -5px;
             right: -5px;
-            background: var(--accent);
+            background: #AD1C43;
             color: var(--bg-dark);
             border-radius: 50%;
             width: 20px;
@@ -244,7 +245,7 @@
         }
         
         .dropdown-item:hover {
-            background: var(--accent);
+            background: #AD1C43;
             color: var(--bg-dark);
         }
         
@@ -448,7 +449,7 @@
                     <ul class="dropdown-menu dropdown-menu-end">
                         <li><span class="dropdown-item-text">{{ Auth::user()->full_name }}</span></li>
                         <li><a class="dropdown-item" href="{{ route('orders.index') }}">Мои заказы</a></li>
-                        <li><a class="dropdown-item" href="{{ route('reservations.index') }}">Мои бронирования</a></li>
+                        <li><a class="dropdown-item" href="{{ route('table-reservations.index') }}">Мои бронирования</a></li>
                         @if(Auth::user()->is_admin)
                         <li><a class="dropdown-item" href="{{ route('admin.dashboard') }}">Админ панель</a></li>
                         @endif
@@ -595,7 +596,7 @@
                     alertDiv.className = 'alert alert-success position-fixed top-20 start-50 translate-middle-x';
                     alertDiv.style.zIndex = '9999';
                     alertDiv.style.minWidth = '300px';
-                    alertDiv.style.backgroundColor = 'var(--accent)';
+                    alertDiv.style.backgroundColor = '#AD1C43';
                     alertDiv.style.color = 'var(--bg-dark)';
                     alertDiv.style.border = 'none';
                     alertDiv.style.borderRadius = '8px';

@@ -141,7 +141,7 @@ body {
 }
 
 .auth-subtitle strong {
-    color: var(--accent);
+    color: #AD1C43;
     display: block;
     margin-top: 5px;
     word-break: break-all;
@@ -181,7 +181,7 @@ body {
 
 .code-input:focus {
     outline: none;
-    border-color: var(--accent);
+    border-color: #AD1C43;
     box-shadow: 0 0 0 4px rgba(201, 168, 106, 0.15);
     background: var(--bg-card);
 }
@@ -224,7 +224,7 @@ body {
     display: block;
     width: 100%;
     padding: 14px;
-    background: var(--accent);
+    background: #AD1C43;
     color: var(--bg-dark);
     border: none;
     border-radius: 14px;
@@ -244,7 +244,7 @@ body {
 .btn-link {
     background: none;
     border: none;
-    color: var(--accent);
+    color: #AD1C43;
     font-size: 15px;
     cursor: pointer;
     transition: color 0.3s ease;
@@ -287,7 +287,7 @@ body {
 }
 
 .text-link {
-    color: var(--accent);
+    color: #AD1C43;
     text-decoration: none;
     transition: color 0.3s ease;
 }

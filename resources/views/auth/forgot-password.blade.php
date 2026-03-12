@@ -13,10 +13,10 @@
     --text-muted: #808080;
     --border: #2a2a2a;
     --border-light: #333333;
-    --accent: #C9A86A;
+    --accent: #AD1C43;
     --accent-light: #d4b77d;
     --accent-dark: #b89448;
-    --accent-gradient: linear-gradient(135deg, #C9A86A 0%, #b89448 100%);
+    --accent-gradient: linear-gradient(135deg, #AD1C43 0%, #b89448 100%);
     --error: #ff4444;
     --error-bg: rgba(255, 68, 68, 0.1);
     --success: #4CAF50;
@@ -107,14 +107,14 @@ body::before {
 .auth-icon {
     width: 70px;
     height: 70px;
-    background: rgba(201, 168, 106, 0.1);
+    background: rgba(126, 48, 69, 0.38);
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
     margin: 0 auto 20px;
     font-size: 32px;
-    color: var(--accent);
+    color: #AD1C43;
     border: 1px solid rgba(201, 168, 106, 0.3);
 }
 
@@ -148,7 +148,7 @@ body::before {
 }
 
 .form-label i {
-    color: var(--accent);
+    color: #AD1C43;
     margin-right: 6px;
 }
 
@@ -166,7 +166,7 @@ body::before {
 
 .form-control:focus {
     outline: none;
-    border-color: var(--accent);
+    border-color: #AD1C43;
     box-shadow: 0 0 0 4px rgba(201, 168, 106, 0.15);
     background: var(--bg-card);
 }
@@ -291,7 +291,7 @@ body::before {
 }
 
 .text-link {
-    color: var(--accent);
+    color: #AD1C43;
     text-decoration: none;
     transition: all 0.3s ease;
     font-size: 15px;
@@ -307,7 +307,7 @@ body::before {
     left: 0;
     width: 0;
     height: 1px;
-    background: var(--accent);
+    background: #AD1C43;
     transition: width 0.3s ease;
 }
 

@@ -21,22 +21,20 @@ class TableBookingController extends Controller
     {
         $data = $request->validate([
             'date' => 'required|date',
-            'start' => 'required|date_format:H:i',
-            'end' => 'required|date_format:H:i',
+            'time' => 'required|date_format:H:i',
             'buffer_minutes' => 'nullable|integer|min:0|max:120',
         ]);
 
-        $buffer = (int)($data['buffer_minutes'] ?? 15);
+        $buffer = (int)($data['buffer_minutes'] ?? 0);
 
-        $start = Carbon::parse($data['date'].' '.$data['start'])->subMinutes($buffer);
-        $end   = Carbon::parse($data['date'].' '.$data['end'])->addMinutes($buffer);
-
-        $tables = Table::where('active', true)->orderBy('number')->get();
+        $time = Carbon::parse($data['date'].' '.$data['time']);
+        $windowStart = (clone $time)->subMinutes($buffer);
+        $windowEnd = (clone $time)->addMinutes($buffer);
 
         $busyTableIds = TableReservation::query()
             ->where('cancelled', false)
-            ->where('start_at', '<', $end)
-            ->where('end_at', '>', $start)
+            ->where('start_at', '<=', $windowEnd)
+            ->where('end_at', '>', $windowStart)
             ->pluck('table_id')
             ->unique()
             ->values();
@@ -57,6 +55,12 @@ class TableBookingController extends Controller
             'start_at' => 'required|date',
             'end_at' => 'required|date|after:start_at',
         ]);
+
+        $table = Table::findOrFail($data['table_id']);
+        $startAt = Carbon::parse($data['start_at']);
+        if ($startAt->isPast()) {
+            return response()->json(['message' => 'Нельзя забронировать столик на прошедшее время'], 422);
+        }
 
         $table = Table::findOrFail($data['table_id']);
 
@@ -99,5 +103,18 @@ class TableBookingController extends Controller
             'id' => $reservation->id,
             'deposit_total' => $depositTotal,
         ], 201);
+    }
+
+    public function userIndex()
+    {
+        if (!Auth::check()) {
+            return redirect()->route('login')
+                ->with('error', 'Для просмотра бронирований необходимо войти в систему');
+        }
+        $reservations = TableReservation::with('table')
+            ->where('user_id', Auth::id())
+            ->orderBy('start_at', 'desc')
+            ->paginate(10);
+        return view('reservation.table-index', compact('reservations'));
     }
 }

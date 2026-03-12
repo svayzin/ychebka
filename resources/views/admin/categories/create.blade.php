@@ -203,7 +203,7 @@
 
 .form-control-admin.animated:focus {
     background: var(--bg-card);
-    border-color: var(--accent);
+    border-color: #AD1C43;
     box-shadow: 0 0 0 3px rgba(201, 168, 106, 0.15);
 }
 
@@ -211,7 +211,7 @@
 .form-control-admin.animated:not(:placeholder-shown) + .animated-label {
     transform: translateY(-8px);
     font-size: 12px;
-    color: var(--accent);
+    color: #AD1C43;
 }
 
 .form-control-admin.animated.textarea {
@@ -271,13 +271,13 @@
 .section-icon {
     width: 40px;
     height: 40px;
-    background: rgba(201, 168, 106, 0.1);
+    background: rgba(126, 48, 69, 0.38);
     border-radius: 10px;
     display: flex;
     align-items: center;
     justify-content: center;
     margin-right: 15px;
-    color: var(--accent);
+    color: #AD1C43;
     font-size: 18px;
 }
 
@@ -308,7 +308,7 @@
 .setting-icon {
     font-size: 24px;
     margin-bottom: 15px;
-    color: var(--accent);
+    color: #AD1C43;
 }
 
 .setting-content {
@@ -352,7 +352,7 @@
 
 .form-control-number:focus {
     outline: none;
-    border-color: var(--accent);
+    border-color: #AD1C43;
     box-shadow: 0 0 0 2px rgba(201, 168, 106, 0.2);
 }
 
@@ -371,8 +371,8 @@
 }
 
 .number-btn:hover {
-    background: var(--accent);
-    border-color: var(--accent);
+    background: #AD1C43;
+    border-color: #AD1C43;
     color: var(--bg-dark);
 }
 
@@ -395,8 +395,8 @@
 }
 
 .form-check-input:checked {
-    background-color: var(--accent);
-    border-color: var(--accent);
+    background-color: #AD1C43;
+    border-color: #AD1C43;
 }
 
 .form-check-label {
@@ -415,7 +415,7 @@
 }
 
 .btn-create {
-    background: linear-gradient(135deg, var(--accent) 0%, var(--accent-dark) 100%);
+    background: linear-gradient(135deg, #AD1C43 0%, var(--accent-dark) 100%);
     color: var(--bg-dark);
     font-weight: 600;
     padding: 15px 40px;
@@ -427,7 +427,7 @@
 .btn-create:hover {
     transform: translateY(-2px);
     box-shadow: 0 5px 20px rgba(201, 168, 106, 0.4);
-    background: linear-gradient(135deg, var(--accent-light) 0%, var(--accent) 100%);
+    background: linear-gradient(135deg, var(--accent-light) 0%, #AD1C43 100%);
 }
 
 /* ===== АНИМАЦИИ ===== */

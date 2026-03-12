@@ -180,7 +180,7 @@
                                 <h4 class="section-title">Комментарий к заказу</h4>
                                 <div class="form-group">
                                     <textarea class="form-control" id="notes" name="notes" rows="3"
-                                              placeholder="Пожелания по доставке, особенности, звонок в домофон и т.д.">{{ old('notes') }}</textarea>
+                                              placeholder="Ваши пожелания ">{{ old('notes') }}</textarea>
                                 </div>
                             </div>
                             
@@ -350,7 +350,7 @@
 }
 
 .cart-item-price-single {
-    color: var(--accent);
+    color: #AD1C43;
     font-size: 14px;
     margin: 5px 0 0 0;
     font-weight: 600;
@@ -377,8 +377,8 @@
 }
 
 .quantity-btn:hover {
-    border-color: var(--accent);
-    color: var(--accent);
+    border-color: #AD1C43;
+    color: #AD1C43;
 }
 
 .quantity-input {
@@ -409,7 +409,7 @@
     display: block;
     font-size: 18px;
     font-weight: 700;
-    color: var(--accent);
+    color: #AD1C43;
 }
 
 .cart-item-remove {
@@ -440,7 +440,7 @@
     font-weight: 600;
     margin-bottom: 25px;
     color: var(--text-light);
-    border-bottom: 2px solid var(--accent);
+    border-bottom: 2px solid #AD1C43;
     padding-bottom: 15px;
 }
 
@@ -487,8 +487,8 @@
 }
 
 .delivery-radio:checked + .delivery-label {
-    background: var(--accent);
-    border-color: var(--accent);
+    background: #AD1C43;
+    border-color: #AD1C43;
     color: var(--bg-dark);
 }
 
@@ -530,7 +530,7 @@
 
 .form-control:focus {
     outline: none;
-    border-color: var(--accent);
+    border-color: #AD1C43;
     box-shadow: 0 0 0 2px rgba(201, 168, 106, 0.2);
 }
 
@@ -556,7 +556,7 @@ textarea.form-control {
 
 .pickup-icon {
     font-size: 32px;
-    color: var(--accent);
+    color: #AD1C43;
 }
 
 .pickup-details h5 {
@@ -575,7 +575,7 @@ textarea.form-control {
 .pickup-hours i,
 .pickup-phone i {
     margin-right: 5px;
-    color: var(--accent);
+    color: #AD1C43;
 }
 
 /* Стили для способов оплаты */
@@ -612,13 +612,13 @@ textarea.form-control {
 }
 
 .payment-radio:checked + .payment-label {
-    background: rgba(201, 168, 106, 0.1);
-    border-color: var(--accent);
+    background: rgba(126, 48, 69, 0.38);
+    border-color: #AD1C43;
 }
 
 .payment-label i {
     font-size: 24px;
-    color: var(--accent);
+    color: #AD1C43;
 }
 
 .payment-info {
@@ -663,7 +663,7 @@ textarea.form-control {
 }
 
 .summary-row.total-row .total-amount {
-    color: var(--accent);
+    color: #AD1C43;
     font-size: 24px;
 }
 
@@ -684,7 +684,7 @@ textarea.form-control {
 }
 
 .btn-link {
-    color: var(--accent);
+    color: #AD1C43;
     text-decoration: none;
     display: inline-flex;
     align-items: center;

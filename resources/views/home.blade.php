@@ -17,7 +17,7 @@
                         <a href="{{ route('menu') }}" class="btn-menu-primary">
                             Посмотреть меню
                         </a>
-                        <a href="{{ route('home') }}#reservation" class="btn-reservation-outline hero-reservation-btn">
+                        <a href="{{ route('home') }}#reservation" class="btn-reservation-outline hero-reservation-btn btn-menu-primary">
                             Забронировать стол
                         </a>
                     </div>
@@ -100,7 +100,6 @@
         border: none;
         font-size: 16px;
         font-weight: 600;
-        margin-bottom: 110px;
         text-decoration: none;
         transition: all 0.3s ease;
         display: inline-block;
@@ -123,28 +122,6 @@
     }
     
     /* УНИКАЛЬНЫЕ СТИЛИ ДЛЯ КНОПКИ В "О РЕСТОРАНЕ" */
-    .about-reservation-btn {
-        margin-left: 290px;
-        left: 0;
-        width: 150px;
-        height: 150px;
-    }
-    
-    .about-reservation-btn::after {
-        left: -75px;
-        width: 170px;
-        content: 'Забронировать стол';
-    }
-    
-    .about-reservation-btn::before {
-        left: 65px;
-    }
-    
-    .about-reservation-btn .arrow-tip {
-        left: calc(50% + 40px);
-        top: calc(50% + 20px);
-    }
-    
     .hero-img-exact {
         width: 620px;
         height: 620px;
@@ -167,7 +144,6 @@
         
         .hero-image-exact {
             height: 300px;
-            margin-top: 40px;
         }
         
         .hero-buttons-exact {
@@ -230,774 +206,6 @@
     
 </style>
 
-<!-- Популярные блюда -->
-<section class="section-exact" id="menu">
-    <div class="container-exact">
-        <h2 class="section-title-exact">Популярные блюда</h2>
-        
-        <div class="bordered-exact">
-            <!-- Кнопки-вкладки для категорий -->
-            <div class="category-tabs-exact">
-                <button class="category-tab-exact active" data-category="soups">Супы</button>
-                <button class="category-tab-exact" data-category="rolls">Роллы</button>
-                <button class="category-tab-exact" data-category="appetizers">Закуски</button>
-                <button class="category-tab-exact" data-category="salads">Салаты</button>
-                <button class="category-tab-exact" data-category="pizza">Пицца</button>
-                <button class="category-tab-exact" data-category="hot">Горячее</button>
-                <button class="category-tab-exact" data-category="desserts">Десерты</button>
-            </div>
-            
-            <!-- Слайдер для каждой категории -->
-            <div class="dishes-slider-container-exact">
-                <!-- Супы (активная по умолчанию) -->
-                <div class="category-slider-exact active" id="soups-slider">
-                    <div class="swiper dishes-swiper-exact">
-                        <div class="swiper-wrapper">
-                            <!-- 3 блюда для супов -->
-                            <div class="swiper-slide">
-                                <div class="dish-item-exact">
-                                    <div class="dish-image-exact">
-                                        <img src="{{ asset('images/dishes/soup1.jpg') }}" alt="Бульон с вонтонами">
-                                    </div>
-                                    <div class="dish-name-exact">Бульон с вонтонами</div>
-                                    <div class="dish-weight-exact">270 гр.</div>
-                                    <div class="dish-price-exact">590 ₽</div>
-                                    <button class="btn-exact btn-sm-exact">В корзину</button>
-                                </div>
-                            </div>
-                            <div class="swiper-slide">
-                                <div class="dish-item-exact">
-                                    <div class="dish-image-exact">
-                                        <img src="{{ asset('images/dishes/soup2.jpg') }}" alt="Том Ям Красный">
-                                    </div>
-                                    <div class="dish-name-exact">Том Ям Красный</div>
-                                    <div class="dish-weight-exact">400 гр.</div>
-                                    <div class="dish-price-exact">750 ₽</div>
-                                    <button class="btn-exact btn-sm-exact">В корзину</button>
-                                </div>
-                            </div>
-                            <div class="swiper-slide">
-                                <div class="dish-item-exact">
-                                    <div class="dish-image-exact">
-                                        <img src="{{ asset('images/dishes/soup3.jpg') }}" alt="Том Ям Кокос">
-                                    </div>
-                                    <div class="dish-name-exact">Том Ям Кокос</div>
-                                    <div class="dish-weight-exact">400 гр.</div>
-                                    <div class="dish-price-exact">890 ₽</div>
-                                    <button class="btn-exact btn-sm-exact">В корзину</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Роллы -->
-                <div class="category-slider-exact" id="rolls-slider">
-                    <div class="swiper dishes-swiper-exact">
-                        <div class="swiper-wrapper">
-                            <!-- 3 блюда для роллов -->
-                            <div class="swiper-slide">
-                                <div class="dish-item-exact">
-                                    <div class="dish-image-exact">
-                                        <img src="{{ asset('images/dishes/roll1.jpg') }}" alt="Ролл Филадельфия">
-                                    </div>
-                                    <div class="dish-name-exact">Ролл Филадельфия</div>
-                                    <div class="dish-weight-exact">250 гр.</div>
-                                    <div class="dish-price-exact">650 ₽</div>
-                                    <button class="btn-exact btn-sm-exact">В корзину</button>
-                                </div>
-                            </div>
-                            <div class="swiper-slide">
-                                <div class="dish-item-exact">
-                                    <div class="dish-image-exact">
-                                        <img src="{{ asset('images/dishes/roll2.jpg') }}" alt="Ролл Калифорния">
-                                    </div>
-                                    <div class="dish-name-exact">Ролл Калифорния</div>
-                                    <div class="dish-weight-exact">230 гр.</div>
-                                    <div class="dish-price-exact">550 ₽</div>
-                                    <button class="btn-exact btn-sm-exact">В корзину</button>
-                                </div>
-                            </div>
-                            <div class="swiper-slide">
-                                <div class="dish-item-exact">
-                                    <div class="dish-image-exact">
-                                        <img src="{{ asset('images/dishes/roll3.jpg') }}" alt="Запеченный ролл">
-                                    </div>
-                                    <div class="dish-name-exact">Запеченный ролл</div>
-                                    <div class="dish-weight-exact">280 гр.</div>
-                                    <div class="dish-price-exact">720 ₽</div>
-                                    <button class="btn-exact btn-sm-exact">В корзину</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Закуски -->
-                <div class="category-slider-exact" id="appetizers-slider">
-                    <div class="swiper dishes-swiper-exact">
-                        <div class="swiper-wrapper">
-                            <!-- 3 блюда для закусок -->
-                            <div class="swiper-slide">
-                                <div class="dish-item-exact">
-                                    <div class="dish-image-exact">
-                                        <img src="{{ asset('images/dishes/app1.jpg') }}" alt="Брускетта">
-                                    </div>
-                                    <div class="dish-name-exact">Брускетта</div>
-                                    <div class="dish-weight-exact">180 гр.</div>
-                                    <div class="dish-price-exact">320 ₽</div>
-                                    <button class="btn-exact btn-sm-exact">В корзину</button>
-                                </div>
-                            </div>
-                            <div class="swiper-slide">
-                                <div class="dish-item-exact">
-                                    <div class="dish-image-exact">
-                                        <img src="{{ asset('images/dishes/app2.jpg') }}" alt="Тар-тар из говядины">
-                                    </div>
-                                    <div class="dish-name-exact">Тар-тар из говядины</div>
-                                    <div class="dish-weight-exact">200 гр.</div>
-                                    <div class="dish-price-exact">580 ₽</div>
-                                    <button class="btn-exact btn-sm-exact">В корзину</button>
-                                </div>
-                            </div>
-                            <div class="swiper-slide">
-                                <div class="dish-item-exact">
-                                    <div class="dish-image-exact">
-                                        <img src="{{ asset('images/dishes/app3.jpg') }}" alt="Сырное плато">
-                                    </div>
-                                    <div class="dish-name-exact">Сырное плато</div>
-                                    <div class="dish-weight-exact">350 гр.</div>
-                                    <div class="dish-price-exact">890 ₽</div>
-                                    <button class="btn-exact btn-sm-exact">В корзину</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Салаты -->
-                <div class="category-slider-exact" id="salads-slider">
-                    <div class="swiper dishes-swiper-exact">
-                        <div class="swiper-wrapper">
-                            <!-- 3 блюда для салатов -->
-                            <div class="swiper-slide">
-                                <div class="dish-item-exact">
-                                    <div class="dish-image-exact">
-                                        <img src="{{ asset('images/dishes/salad1.jpg') }}" alt="Цезарь с креветками">
-                                    </div>
-                                    <div class="dish-name-exact">Цезарь с креветками</div>
-                                    <div class="dish-weight-exact">300 гр.</div>
-                                    <div class="dish-price-exact">650 ₽</div>
-                                    <button class="btn-exact btn-sm-exact">В корзину</button>
-                                </div>
-                            </div>
-                            <div class="swiper-slide">
-                                <div class="dish-item-exact">
-                                    <div class="dish-image-exact">
-                                        <img src="{{ asset('images/dishes/salad2.jpg') }}" alt="Греческий салат">
-                                    </div>
-                                    <div class="dish-name-exact">Греческий салат</div>
-                                    <div class="dish-weight-exact">350 гр.</div>
-                                    <div class="dish-price-exact">420 ₽</div>
-                                    <button class="btn-exact btn-sm-exact">В корзину</button>
-                                </div>
-                            </div>
-                            <div class="swiper-slide">
-                                <div class="dish-item-exact">
-                                    <div class="dish-image-exact">
-                                        <img src="{{ asset('images/dishes/salad3.jpg') }}" alt="Салат с тунцом">
-                                    </div>
-                                    <div class="dish-name-exact">Салат с тунцом</div>
-                                    <div class="dish-weight-exact">280 гр.</div>
-                                    <div class="dish-price-exact">520 ₽</div>
-                                    <button class="btn-exact btn-sm-exact">В корзину</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Пицца -->
-                <div class="category-slider-exact" id="pizza-slider">
-                    <div class="swiper dishes-swiper-exact">
-                        <div class="swiper-wrapper">
-                            <!-- 3 блюда для пиццы -->
-                            <div class="swiper-slide">
-                                <div class="dish-item-exact">
-                                    <div class="dish-image-exact">
-                                        <img src="{{ asset('images/dishes/pizza1.jpg') }}" alt="Маргарита">
-                                    </div>
-                                    <div class="dish-name-exact">Маргарита</div>
-                                    <div class="dish-weight-exact">500 гр.</div>
-                                    <div class="dish-price-exact">550 ₽</div>
-                                    <button class="btn-exact btn-sm-exact">В корзину</button>
-                                </div>
-                            </div>
-                            <div class="swiper-slide">
-                                <div class="dish-item-exact">
-                                    <div class="dish-image-exact">
-                                        <img src="{{ asset('images/dishes/pizza2.jpg') }}" alt="Пепперони">
-                                    </div>
-                                    <div class="dish-name-exact">Пепперони</div>
-                                    <div class="dish-weight-exact">550 гр.</div>
-                                    <div class="dish-price-exact">680 ₽</div>
-                                    <button class="btn-exact btn-sm-exact">В корзину</button>
-                                </div>
-                            </div>
-                            <div class="swiper-slide">
-                                <div class="dish-item-exact">
-                                    <div class="dish-image-exact">
-                                        <img src="{{ asset('images/dishes/pizza3.jpg') }}" alt="Четыре сыра">
-                                    </div>
-                                    <div class="dish-name-exact">Четыре сыра</div>
-                                    <div class="dish-weight-exact">480 гр.</div>
-                                    <div class="dish-price-exact">620 ₽</div>
-                                    <button class="btn-exact btn-sm-exact">В корзину</button>
-                                </div>
-                            </div>
-                        </div>   
-                    </div>
-                </div>
-                
-                <!-- Горячее -->
-                <div class="category-slider-exact" id="hot-slider">
-                    <div class="swiper dishes-swiper-exact">
-                        <div class="swiper-wrapper">
-                            <!-- 3 блюда для горячего -->
-                            <div class="swiper-slide">
-                                <div class="dish-item-exact">
-                                    <div class="dish-image-exact">
-                                        <img src="{{ asset('images/dishes/hot1.jpg') }}" alt="Стейк Рибай">
-                                    </div>
-                                    <div class="dish-name-exact">Стейк Рибай</div>
-                                    <div class="dish-weight-exact">350 гр.</div>
-                                    <div class="dish-price-exact">1200 ₽</div>
-                                    <button class="btn-exact btn-sm-exact">В корзину</button>
-                                </div>
-                            </div>
-                            <div class="swiper-slide">
-                                <div class="dish-item-exact">
-                                    <div class="dish-image-exact">
-                                        <img src="{{ asset('images/dishes/hot2.jpg') }}" alt="Лосось на гриле">
-                                    </div>
-                                    <div class="dish-name-exact">Лосось на гриле</div>
-                                    <div class="dish-weight-exact">300 гр.</div>
-                                    <div class="dish-price-exact">850 ₽</div>
-                                    <button class="btn-exact btn-sm-exact">В корзину</button>
-                                </div>
-                            </div>
-                            <div class="swiper-slide">
-                                <div class="dish-item-exact">
-                                    <div class="dish-image-exact">
-                                        <img src="{{ asset('images/dishes/hot3.jpg') }}" alt="Утиная грудка">
-                                    </div>
-                                    <div class="dish-name-exact">Утиная грудка</div>
-                                    <div class="dish-weight-exact">280 гр.</div>
-                                    <div class="dish-price-exact">780 ₽</div>
-                                    <button class="btn-exact btn-sm-exact">В корзину</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Десерты -->
-                <div class="category-slider-exact" id="desserts-slider">
-                    <div class="swiper dishes-swiper-exact">
-                        <div class="swiper-wrapper">
-                            <!-- 3 блюда для десертов -->
-                            <div class="swiper-slide">
-                                <div class="dish-item-exact">
-                                    <div class="dish-image-exact">
-                                        <img src="{{ asset('images/dishes/dessert1.jpg') }}" alt="Тирамису">
-                                    </div>
-                                    <div class="dish-name-exact">Тирамису</div>
-                                    <div class="dish-weight-exact">150 гр.</div>
-                                    <div class="dish-price-exact">450 ₽</div>
-                                    <button class="btn-exact btn-sm-exact">В корзину</button>
-                                </div>
-                            </div>
-                            <div class="swiper-slide">
-                                <div class="dish-item-exact">
-                                    <div class="dish-image-exact">
-                                        <img src="{{ asset('images/dishes/dessert2.jpg') }}" alt="Чизкейк">
-                                    </div>
-                                    <div class="dish-name-exact">Чизкейк</div>
-                                    <div class="dish-weight-exact">180 гр.</div>
-                                    <div class="dish-price-exact">380 ₽</div>
-                                    <button class="btn-exact btn-sm-exact">В корзину</button>
-                                </div>
-                            </div>
-                            <div class="swiper-slide">
-                                <div class="dish-item-exact">
-                                    <div class="dish-image-exact">
-                                        <img src="{{ asset('images/dishes/dessert3.jpg') }}" alt="Шоколадный фондан">
-                                    </div>
-                                    <div class="dish-name-exact">Шоколадный фондан</div>
-                                    <div class="dish-weight-exact">160 гр.</div>
-                                    <div class="dish-price-exact">420 ₽</div>
-                                    <button class="btn-exact btn-sm-exact">В корзину</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="text-center mt-4">
-                <a href="{{ route('menu') }}" class="btn-exact-outline">
-                    Открыть полное меню
-                </a>
-            </div>
-        </div>
-    </div>
-</section>
-
-<style>
-
-    
-    .text-center.mt-4 {
-    margin-top: 0px !important;  /* ИЛИ 10px, ИЛИ -20px */
-}
-    /* Стили для категорий-вкладок */
-    .category-tabs-exact {
-        display: flex;
-        gap: 15px;
-        margin-bottom: 40px;
-        flex-wrap: wrap;
-    }
-    
-    .category-tab-exact {
-        padding: 6px 35px;
-        background: transparent;
-        border: 2px solid #ffffff;
-        color: #ffffff;
-        font-size: 18px;
-        font-weight: 600;
-        cursor: pointer;
-        transition: all 0.3s ease;
-        border-radius: 4px;
-        white-space: nowrap;
-    }
-    
-    .category-tab-exact:hover {
-        background: rgba(55, 55, 55, 0.92);
-    }
-    
-    .category-tab-exact.active {
-        background: #ffffff;
-        color: #000000;
-        border-color: #ffffff;
-    }
-    
-    /* Контейнер для слайдеров */
-    .dishes-slider-container-exact {
-        position: relative;
-        min-height: 0px;
-    }
-    
-    /* Категорийные слайдеры */
-    .category-slider-exact {
-        display: none;
-        opacity: 0;
-        transition: opacity 0.5s ease;
-    }
-    
-    .category-slider-exact.active {
-        display: block;
-        opacity: 1;
-    }
-    
-    /* Стили для слайдера блюд */
-    .dishes-swiper-exact {
-        width: 100%;
-        height: 520px;
-        padding: 20px 0 50px 0;
-        position: relative;
-    }
-    
-    .dishes-swiper-exact .swiper-wrapper {
-        align-items: stretch;
-    }
-    
-    /* Карточка блюда - более компактная */
-    .dish-item-exact {
-      background: #1a1a1a;
-    border-radius: 12px;
-    padding: 15px;
-    height: 350px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    border: none;
-    text-align: center;
-    }
-    
-    
-    .dish-image-exact {
-        width: 180px;
-        height: 180px;
-        border-radius: 8px;
-        overflow: hidden;
-        margin-bottom: 12px;
-    }
-    
-    
-    .dish-name-exact {
-        font-weight: 600;
-        color: var(--text-light);
-        margin-bottom: 5px;
-        font-size: 18px;
-        line-height: 1.2;
-        min-height: 40px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-    
-    .dish-weight-exact {
-        color: var(--text-gray);
-        font-size: 14px;
-        margin-bottom: 8px;
-    }
-    
-    .dish-price-exact {
-        color: var(--accent);
-        font-weight: 700;
-        font-size: 22px;
-        margin-bottom: 12px;
-    }
-    
-    /* Кнопки в слайдере - растянутые на весь блок */
-    .btn-sm-exact {
-        padding: 10px 20px !important;
-        font-size: 16px;
-        width: 100%;
-        display: block;
-        margin-top: auto;
-        min-height: 40px;
-        border-radius: 6px;
-        border: none;
-        background: #ffffff;
-        color: #000000;
-        font-weight: 600;
-        cursor: pointer;
-        transition: all 0.3s ease;
-    }
-    
-    .btn-sm-exact:hover {
-        background: #f0f0f0;
-        transform: translateY(-2px);
-    }
-    
-    /* Кнопки навигации слайдера */
-    .dishes-swiper-exact .dishes-slider-prev,
-    .dishes-swiper-exact .dishes-slider-next {
-        width: 45px;
-        height: 45px;
-        background: rgba(255, 255, 255, 0.15);
-        border-radius: 50%;
-        border: 1px solid rgba(255, 255, 255, 0.3);
-        top: 40%;
-        transform: translateY(-50%);
-        transition: all 0.3s ease;
-    }
-    
-    .dishes-swiper-exact .dishes-slider-prev:hover,
-    .dishes-swiper-exact .dishes-slider-next:hover {
-        background: rgba(255, 255, 255, 0.25);
-        border-color: #ffffff;
-        transform: translateY(-50%) scale(1.1);
-    }
-    
-    .dishes-swiper-exact .dishes-slider-prev:after,
-    .dishes-swiper-exact .dishes-slider-next:after {
-        font-size: 18px;
-        color: #ffffff;
-        font-weight: bold;
-    }
-    
-    .dishes-swiper-exact .dishes-slider-prev {
-        left: -20px;
-    }
-    
-    .dishes-swiper-exact .dishes-slider-next {
-        right: -20px;
-    }
-    
-    .dishes-swiper-exact .dishes-pagination .swiper-pagination-bullet {
-        width: 10px;
-        height: 10px;
-        background: rgba(255, 255, 255, 0.5);
-        opacity: 1;
-        margin: 0 5px !important;
-    }
-    
-    .dishes-swiper-exact .dishes-pagination .swiper-pagination-bullet-active {
-        background: #ffffff;
-        transform: scale(1.2);
-    }
-    
-    /* Уменьшаем расстояние между слайдами */
-    .dishes-swiper-exact .swiper-wrapper {
-        gap: 105px;
-    }
-    
-    .dishes-swiper-exact .swiper-slide {
-        width: 320px !important;
-        padding: 5px;
-    }
-    
-    /* Адаптивность */
-    @media (max-width: 1400px) {
-        .dish-item-exact {
-            height: 340px;
-            padding: 15px;
-        }
-        
-        .dish-image-exact {
-            width: 160px;
-            height: 160px;
-        }
-        
-        .dishes-swiper-exact .swiper-slide {
-            width: 300px !important;
-        }
-        
-        .dishes-swiper-exact .dishes-slider-prev {
-            left: -15px;
-        }
-        
-        .dishes-swiper-exact .dishes-slider-next {
-            right: -15px;
-        }
-    }
-    
-    @media (max-width: 1200px) {
-        .dish-item-exact {
-            height: 330px;
-            width: 280px;
-        }
-        
-        .dish-image-exact {
-            width: 150px;
-            height: 150px;
-        }
-        
-        .dishes-swiper-exact .swiper-slide {
-            width: 280px !important;
-        }
-        
-        .category-tabs-exact {
-            gap: 10px;
-            margin-bottom: 30px;
-        }
-        
-        .category-tab-exact {
-            padding: 10px 18px;
-            font-size: 16px;
-        }
-        
-        .dish-name-exact {
-            font-size: 16px;
-        }
-        
-        .dishes-swiper-exact .dishes-slider-prev,
-        .dishes-swiper-exact .dishes-slider-next {
-            width: 40px;
-            height: 40px;
-        }
-        
-        .dishes-swiper-exact .dishes-slider-prev:after,
-        .dishes-swiper-exact .dishes-slider-next:after {
-            font-size: 16px;
-        }
-        
-        .btn-sm-exact {
-            padding: 8px 16px !important;
-            font-size: 15px;
-        }
-    }
-    
-    @media (max-width: 992px) {
-        .dish-item-exact {
-            height: 320px;
-            width: 260px;
-        }
-        
-        .dish-image-exact {
-            width: 140px;
-            height: 140px;
-        }
-        
-        .dishes-swiper-exact .swiper-slide {
-            width: 260px !important;
-        }
-        
-        .dish-name-exact {
-            min-height: 36px;
-            font-size: 15px;
-        }
-        
-        .dish-price-exact {
-            font-size: 20px;
-        }
-        
-        .btn-sm-exact {
-            padding: 8px 14px !important;
-            font-size: 14px;
-        }
-    }
-    
-    @media (max-width: 768px) {
-        .category-tabs-exact {
-            overflow-x: auto;
-            justify-content: flex-start;
-            padding-bottom: 10px;
-            margin-bottom: 25px;
-            scrollbar-width: thin;
-            scrollbar-color: #555 #333;
-        }
-        
-        .category-tabs-exact::-webkit-scrollbar {
-            height: 4px;
-        }
-        
-        .category-tabs-exact::-webkit-scrollbar-track {
-            background: #333;
-        }
-        
-        .category-tabs-exact::-webkit-scrollbar-thumb {
-            background: #555;
-        }
-        
-        .category-tab-exact {
-            padding: 8px 16px;
-            font-size: 15px;
-        }
-        
-        .dish-item-exact {
-            height: 300px;
-            width: 240px;
-            padding: 12px;
-        }
-        
-        .dish-image-exact {
-            width: 130px;
-            height: 130px;
-            margin-bottom: 10px;
-        }
-        
-        .dishes-swiper-exact .swiper-slide {
-            width: 240px !important;
-        }
-        
-        .dish-name-exact {
-            font-size: 14px;
-            min-height: 32px;
-        }
-        
-        .dish-weight-exact {
-            font-size: 13px;
-        }
-        
-        .dish-price-exact {
-            font-size: 18px;
-        }
-        
-        .dishes-swiper-exact .dishes-slider-prev,
-        .dishes-swiper-exact .dishes-slider-next {
-            display: none;
-        }
-    }
-    
-    @media (max-width: 576px) {
-        .dish-item-exact {
-            height: 280px;
-            width: 220px;
-            padding: 10px;
-        }
-        
-        .dish-image-exact {
-            width: 120px;
-            height: 120px;
-        }
-        
-        .dishes-swiper-exact .swiper-slide {
-            width: 220px !important;
-        }
-        
-        .dish-name-exact {
-            font-size: 13px;
-        }
-        
-        .btn-sm-exact {
-            padding: 6px 12px !important;
-            font-size: 13px;
-        }
-    }
-    
-    @media (max-width: 480px) {
-        .dish-item-exact {
-            height: 260px;
-            width: 200px;
-            padding: 8px;
-        }
-        
-        .dish-image-exact {
-            width: 110px;
-            height: 110px;
-        }
-        
-        .dishes-swiper-exact .swiper-slide {
-            width: 200px !important;
-        }
-        
-        .btn-sm-exact {
-            padding: 5px 10px !important;
-            font-size: 12px;
-        }
-    }
-        .section-title-exact {
-            font-size: 65px;
-            font-family: "Yeseva One";
-            font-weight: 700;
-            color: var(--text-light);
-            margin-bottom: 45px;
-        }
-        
-        .dish-item-exact {
-            padding: 10px;
-            height: 450px;
-            width: 800px;
-        }
-        
-        .dish-name-exact {
-            font-weight: 600;
-            color: var(--text-light);
-            margin-bottom: 5px;
-        }
-        
-        .dish-weight-exact {
-            color: var(--text-gray);
-            font-size: 14px;
-            margin-bottom: 10px;
-        }
-        
-        .dish-price-exact {
-            color: var(--accent);
-            font-weight: 700;
-            font-size: 18px;
-            margin-bottom: 15px;
-        }
-        
-        .btn-sm-exact {
-            padding: 8px 16px;
-            font-size: 14px;
-        }
-    </style>
-
 <!-- О ресторане -->
 <section class="section-exact" id="about">
     <div class="container-exact">
@@ -1029,7 +237,7 @@
                 <div class="photos-grid-exact">
                     <!-- Большая фото слева -->
                     <div class="photo-large-wrapper-exact">
-                        <img src="{{ asset('images/about/restaurant-1.png') }}" 
+                        <img src="{{ asset('images/about/restaurant-1.jpg') }}" 
                              alt="Интерьер ресторана" 
                              class="about-img-large-exact">
                     </div>
@@ -1037,12 +245,12 @@
                     <!-- 2 маленькие квадратные фото справа -->
                     <div class="photos-small-wrapper-exact">
                         <div class="about-photo-small-exact">
-                            <img src="{{ asset('images/about/restaurant-2.png') }}" 
+                            <img src="{{ asset('images/about/restaurant-2.jpg') }}" 
                                  alt="Кухня ресторана" 
                                  class="about-img-small-exact">
                         </div>
                         <div class="about-photo-small-exact">
-                            <img src="{{ asset('images/about/restaurant-3.png') }}" 
+                            <img src="{{ asset('images/about/restaurant-3.jpg') }}" 
                                  alt="Зал ресторана" 
                                  class="about-img-small-exact">
                         </div>
@@ -1056,16 +264,14 @@
 <style>
 
     .text-left.mt-4 {
-    margin-top: -15px !important; /* Поднимаем кнопку выше */
     position: relative;
     z-index: 2;
 }
 
 .about-reservation-btn {
-    margin-left: 290px;
     left: 0;
-    width: 150px;
-    height: 150px;
+    width: 250px;
+    height: 60px;
     position: relative;
     top: -5px; /* Дополнительно поднимаем саму кнопку */
 }
@@ -1075,6 +281,7 @@
         grid-template-columns: 1.2fr 1.8fr; /* Фото занимают больше места */
         gap: 60px;
         align-items: start;
+        margin-top: 60px;
     }
     
     .about-left-exact {
@@ -1085,10 +292,6 @@
     }
     
     .about-title-exact {
-        font-size: 70px;
-        font-family: "Yeseva One";
-        font-weight: 700;
-        color: var(--text-light);
         margin-bottom: 20px; /* Уменьшен отступ */
         line-height: 1.1;
     }
@@ -1300,42 +503,42 @@
                         <!-- 6 слайдов с фотографиями -->
                         <div class="swiper-slide">
                             <div class="slide-image-wrapper-exact">
-                                <img src="{{ asset('images/gallery/photo1.png') }}" 
+                                <img src="{{ asset('images/gallery/photo1.jpg') }}" 
                                      alt="Интерьер ресторана" 
                                      class="gallery-img-exact">
                             </div>
                         </div>
                         <div class="swiper-slide">
                             <div class="slide-image-wrapper-exact">
-                                <img src="{{ asset('images/gallery/photo2.png') }}" 
+                                <img src="{{ asset('images/gallery/photo2.jpg') }}" 
                                      alt="Кухня ресторана" 
                                      class="gallery-img-exact">
                             </div>
                         </div>
                         <div class="swiper-slide">
                             <div class="slide-image-wrapper-exact">
-                                <img src="{{ asset('images/gallery/photo3.png') }}" 
+                                <img src="{{ asset('images/gallery/photo3.jpg') }}" 
                                      alt="Зал ресторана" 
                                      class="gallery-img-exact">
                             </div>
                         </div>
                         <div class="swiper-slide">
                             <div class="slide-image-wrapper-exact">
-                                <img src="{{ asset('images/gallery/photo4.png') }}" 
+                                <img src="{{ asset('images/gallery/photo4.jpg') }}" 
                                      alt="Блюда ресторана" 
                                      class="gallery-img-exact">
                             </div>
                         </div>
                         <div class="swiper-slide">
                             <div class="slide-image-wrapper-exact">
-                                <img src="{{ asset('images/gallery/photo5.png') }}" 
+                                <img src="{{ asset('images/gallery/photo5.jpg') }}" 
                                      alt="Барная стойка" 
                                      class="gallery-img-exact">
                             </div>
                         </div>
                         <div class="swiper-slide">
                             <div class="slide-image-wrapper-exact">
-                                <img src="{{ asset('images/gallery/photo6.png') }}" 
+                                <img src="{{ asset('images/gallery/photo6.jpg') }}" 
                                      alt="Веранда ресторана" 
                                      class="gallery-img-exact">
                             </div>
@@ -1361,7 +564,6 @@
     .gallery-container-exact {
         width: 100%;
         height: 500px;
-        margin-bottom: 40px;
         display: flex;
         justify-content: center;
         align-items: center;
@@ -1585,584 +787,18 @@
     }
 </style>
     
+<!-- Бронирование -->
 <section class="section-exact" id="reservation">
     <div class="container-exact">
-        <!-- Заголовок перенесен внутрь формы -->
-        <div class="reservation-simple-exact">
-            <!-- Левая часть: Картинка на фоне с формой поверх -->
-            <div class="reservation-background-exact">
-                <div class="reservation-bg-image-exact" 
-                     style="background-image: url('{{ asset('images/reservation/photo2.png') }}');">
-                </div>
-                
-                <!-- Форма поверх картинки -->
-                <div class="reservation-form-overlay-exact">
-                    <div class="form-container-exact">
-                        
-                        <form action="{{ route('reservation.store') }}" method="POST">
-                            @csrf
-                            
-                            <!-- Заголовок внутри формы -->
-                            <h2 class="section-title-exact" style="color: var(--text-light);margin-bottom: 20px;">
-                                Столик для вас
-                            </h2>
-                            
-                            <div class="form-grid-exact">
-                                <!-- ПЕРВЫЙ РЯД: Имя и Телефон - ОДИНАКОВЫЕ И ДЛИННЫЕ -->
-                                <div class="form-group-exact name-field">
-                                    <label class="form-label-exact">Имя</label>
-                                    <input type="text" class="form-control-exact" name="name" 
-                                           value="{{ old('name', Auth::check() ? Auth::user()->full_name : '') }}" required>
-                                    @error('name')
-                                    <div class="text-danger small mt-1">{{ $message }}</div>
-                                    @enderror
-                                </div>
-                                
-                                <div class="form-group-exact phone-field">
-                                    <label class="form-label-exact">Телефон</label>
-                                    <input type="tel" class="form-control-exact" name="phone" 
-                                           value="{{ old('phone', Auth::check() ? Auth::user()->phone : '') }}" required>
-                                    @error('phone')
-                                    <div class="text-danger small mt-1">{{ $message }}</div>
-                                    @enderror
-                                </div>
-                                
-                                <!-- ВТОРОЙ РЯД: Дата, Время, Гости - все на одном уровне -->
-                                <!-- Для этого используем отдельный контейнер для второго ряда -->
-                                <div class="second-row-container">
-                                    <div class="form-group-exact date-field">
-                                        <label class="form-label-exact">Дата</label>
-                                        <input type="date" class="form-control-exact" name="date" 
-                                               value="{{ old('date', date('Y-m-d')) }}" required
-                                               min="{{ date('Y-m-d') }}">
-                                        @error('date')
-                                        <div class="text-danger small mt-1">{{ $message }}</div>
-                                        @enderror
-                                    </div>
-                                    
-                                    <div class="form-group-exact time-field">
-                                        <label class="form-label-exact">Время</label>
-                                        <select class="form-control-exact" name="time" required>
-                                            <option value="19:00" {{ old('time') == '19:00' ? 'selected' : '' }}>19:00</option>
-                                            <option value="19:30" {{ old('time') == '19:30' ? 'selected' : '' }}>19:30</option>
-                                            <option value="20:00" {{ old('time') == '20:00' ? 'selected' : '' }}>20:00</option>
-                                            <option value="20:30" {{ old('time') == '20:30' ? 'selected' : '' }}>20:30</option>
-                                            <option value="21:00" {{ old('time') == '21:00' ? 'selected' : '' }}>21:00</option>
-                                        </select>
-                                        @error('time')
-                                        <div class="text-danger small mt-1">{{ $message }}</div>
-                                        @enderror
-                                    </div>
-                                    
-                                    <div class="form-group-exact guests-field">
-                                        <label class="form-label-exact">Гости</label>
-                                        <select class="form-control-exact" name="guests" required>
-                                            @for($i = 1; $i <= 10; $i++)
-                                            <option value="{{ $i }}" {{ old('guests', 2) == $i ? 'selected' : '' }}>
-                                                {{ $i }} {{ trans_choice('гость|гостя|гостей', $i) }}
-                                            </option>
-                                            @endfor
-                                        </select>
-                                        @error('guests')
-                                        <div class="text-danger small mt-1">{{ $message }}</div>
-                                        @enderror
-                                    </div>
-                                </div>
-                                
-                                <div class="form-check-exact">
-                                    <input type="checkbox" class="form-check-input-exact" 
-                                           id="privacy" name="privacy" value="1" 
-                                           {{ old('privacy') ? 'checked' : '' }} required>
-                                    <label class="form-check-label-exact" for="privacy">
-                                        Я даю согласие на обработку персональных данных
-                                    </label>
-                                    @error('privacy')
-                                    <div class="text-danger small mt-1">{{ $message }}</div>
-                                    @enderror
-                                </div>
-                                
-                                <button type="submit" class="btn-exact">
-                                    Забронировать
-                                </button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Правая часть: Картинка -->
-            <div class="reservation-side-image-exact">
-                <img src="{{ asset('images/reservation/photo.png') }}" 
-                     alt="Столик в ресторане Созвездие вкусов" 
-                     class="side-image-exact">
-            </div>
-        </div>
+        @include('booking._content')
     </div>
 </section>
-
 <style>
-    /* Основной контейнер */
-    .reservation-simple-exact {
-        display: grid;
-        grid-template-columns: 1.5fr 1fr;
-        gap: 0;
-        height: 600px;
-        overflow: hidden;
-    }
-    
-    /* Левая часть: фоновая картинка с формой поверх */
-    .reservation-background-exact {
-        position: relative;
-        height: 500px;
-        margin-top: 50px;
-        overflow: hidden;
-    }
-    
-    .reservation-bg-image-exact {
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background-size: cover;
-        background-position: center;
-        background-repeat: no-repeat;
-        z-index: 1;
-    }
-    
-    /* Форма поверх картинки */
-    .reservation-form-overlay-exact {
-        position: relative;
-        z-index: 2;
-        height: 100%;
-        display: flex;
-        align-items: center;
-        padding: 40px;
-        padding-left: 60px;
-    }
-    
-    .form-container-exact {
-        width: 100%;
-        max-width: 800px;
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-    }
-    
-    /* Правая часть: Картинка */
-    .reservation-side-image-exact {
-        height: 100%;
-        overflow: hidden;
-    }
-    
-    .side-image-exact {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        transition: transform 0.7s ease;
-    }
-    
-    .reservation-side-image-exact:hover .side-image-exact {
-        transform: scale(1.05);
-    }
-    
-    /* СТИЛИ ФОРМЫ: ПРОСТАЯ И ЧЕТКАЯ СЕТКА */
-    .form-grid-exact {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 25px;
-    }
-    
-    /* ПЕРВЫЙ РЯД: Имя и Телефон - ОДИНАКОВЫЕ И ДЛИННЫЕ */
-    .form-grid-exact .name-field {
-        grid-column: 1;
-        grid-row: 1;
-    }
-    
-    .form-grid-exact .phone-field {
-        grid-column: 2;
-        grid-row: 1;
-    }
-    
-    /* ВТОРОЙ РЯД: Контейнер для полей даты, времени и гостей */
-    .second-row-container {
-        grid-column: 1 / span 2; /* Занимает обе колонки */
-        grid-row: 2;
-        display: grid;
-        grid-template-columns: 1fr 1fr 1fr; /* 3 равные колонки */
-        gap: 25px;
-        margin-top: 0;
-    }
-    
-    /* Поля внутри второго ряда */
-    .second-row-container .date-field {
-        grid-column: 1;
-    }
-    
-    .second-row-container .time-field {
-        grid-column: 2;
-    }
-    
-    .second-row-container .guests-field {
-        grid-column: 3;
-    }
-    
-    /* Чекбокс и кнопка */
-    .form-check-exact {
-        grid-column: 1 / span 2;
-        grid-row: 3;
-        display: flex;
-        align-items: center;
-        gap: 10px;
-    }
-    
-    .btn-exact {
-        grid-column: 1 / span 2;
-        grid-row: 4;
-        padding: 8px 30px;
-        font-size: 17px;
-        height: 45px;
-        width: 200px;
-    }
-    
-    /* ДЕЛАЕМ ИМЯ И ТЕЛЕФОН ОДИНАКОВЫМИ И ДЛИННЫМИ */
-    .form-group-exact {
-        width: 100%;
-    }
-    
-    .form-control-exact {
-        width: 100%;
-        padding: 15px 20px;
-        background: var(--bg-dark);
-        border: 1px solid var(--border);
-        color: var(--text-light);
-        font-size: 17px;
-        transition: all 0.3s ease;
-        min-height: 55px;
-        box-sizing: border-box;
-    }
-    
-    /* ОДИНАКОВЫЙ РАЗМЕР ДЛЯ ИМЕНИ И ТЕЛЕФОНА */
-    .name-field .form-control-exact,
-    .phone-field .form-control-exact {
-        min-width: 100%;
-    }
-    
-    /* ОДИНАКОВЫЙ РАЗМЕР ДЛЯ ДАТЫ, ВРЕМЕНИ И ГОСТЕЙ */
-    .date-field .form-control-exact,
-    .time-field .form-control-exact,
-    .guests-field .form-control-exact {
-        min-width: 100%;
-    }
-    
-    select.form-control-exact {
-        height: 62px;
-        line-height: 55px;
-    }
-    
-    /* Сделал метки больше */
-    .form-label-exact {
-        display: block;
-        font-weight: 500;
-        color: var(--text-light);
-        font-size: 16px;
-    }
-    
-    .form-control-exact:focus {
-        outline: none;
-        border-color: var(--accent);
-        background: var(--bg-light);
-        box-shadow: 0 0 0 3px rgba(201, 168, 106, 0.3);
-    }
-    
-    .form-check-input-exact {
-        width: 20px;
-        height: 20px;
-        accent-color: var(--accent);
-        flex-shrink: 0;
-    }
-    
-    .form-check-label-exact {
-        color: var(--text-gray);
-        font-size: 15px;
-        line-height: 1.5;
-    }
-    
-    /* Сообщения */
-    .alert {
-        padding: 15px;
-        border-radius: 4px;
-        margin-bottom: 25px;
-        border: 1px solid transparent;
-    }
-    
-    .alert-success {
-        background-color: rgba(25, 135, 84, 0.1);
-        border-color: rgba(25, 135, 84, 0.2);
-        color: #198754;
-    }
-    
-    .alert-danger {
-        background-color: rgba(220, 53, 69, 0.1);
-        border-color: rgba(220, 53, 69, 0.2);
-        color: #dc3545;
-    }
-    
-    /* Адаптивность */
-    @media (max-width: 1400px) {
-        .form-container-exact {
-            max-width: 750px;
-        }
-        
-        .reservation-form-overlay-exact {
-            padding-left: 50px;
-        }
-    }
-    
-    @media (max-width: 1200px) {
-        .reservation-simple-exact {
-            height: 550px;
-        }
-        
-        .form-container-exact {
-            padding: 35px;
-            max-width: 700px;
-        }
-        
-        .reservation-form-overlay-exact {
-            padding: 30px;
-            padding-left: 40px;
-        }
-        
-        .form-control-exact {
-            padding: 14px 18px;
-            font-size: 16px;
-        }
-        
-        /* На средних экранах второй ряд тоже в 3 колонки */
-        .second-row-container {
-            grid-template-columns: 1fr 1fr 1fr;
-            gap: 20px;
-        }
-    }
-    
-    @media (max-width: 1100px) {
-        .form-container-exact {
-            max-width: 650px;
-        }
-        
-        .reservation-form-overlay-exact {
-            padding-left: 30px;
-        }
-        
-        .form-grid-exact {
-            gap: 20px;
-        }
-        
-        .second-row-container {
-            gap: 15px;
-        }
-    }
-    
-    @media (max-width: 992px) {
-        .reservation-simple-exact {
-            grid-template-columns: 1fr;
-            height: auto;
-        }
-        
-        .reservation-background-exact {
-            height: 750px; /* Увеличил высоту для планшета */
-        }
-        
-        .reservation-side-image-exact {
-            height: 400px;
-        }
-        
-        .form-container-exact {
-            max-width: 90%;
-            margin: 0 auto;
-        }
-        
-        .reservation-form-overlay-exact {
-            align-items: flex-start;
-            padding-top: 30px;
-            padding-left: 0;
-            justify-content: center;
-        }
-        
-        /* На планшетах: все поля в 2 колонки */
-        .form-grid-exact {
-            grid-template-columns: 1fr 1fr;
-        }
-        
-        .form-grid-exact .name-field {
-            grid-column: 1;
-            grid-row: 1;
-        }
-        
-        .form-grid-exact .phone-field {
-            grid-column: 2;
-            grid-row: 1;
-        }
-        
-        /* Второй ряд на планшете: 3 поля в 2 колонках (дата и время в первой, гости во второй) */
-        .second-row-container {
-            grid-column: 1 / span 2;
-            grid-row: 2;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
-        }
-        
-        .second-row-container .date-field {
-            grid-column: 1;
-            grid-row: 1;
-        }
-        
-        .second-row-container .time-field {
-            grid-column: 2;
-            grid-row: 1;
-        }
-        
-        .second-row-container .guests-field {
-            grid-column: 1 / span 2; /* Гости занимают всю ширину на следующей строке */
-            grid-row: 2;
-            width: 50%;
-            margin-left: 25%;
-        }
-        
-        .form-check-exact {
-            grid-column: 1 / span 2;
-            grid-row: 3;
-        }
-        
-        .btn-exact {
-            grid-column: 1 / span 2;
-            grid-row: 4;
-        }
-    }
-    
-    @media (max-width: 768px) {
-        .reservation-background-exact {
-            height: 850px; /* Еще увеличил для мобильных */
-        }
-        
-        .reservation-side-image-exact {
-            height: 350px;
-        }
-        
-        .reservation-form-overlay-exact {
-            padding: 20px;
-        }
-        
-        .form-container-exact {
-            padding: 30px;
-            max-width: 95%;
-        }
-        
-        /* На мобильных - одна колонка */
-        .form-grid-exact {
-            grid-template-columns: 1fr;
-            gap: 20px;
-        }
-        
-        /* Сбрасываем позиционирование для мобильных */
-        .form-grid-exact .name-field,
-        .form-grid-exact .phone-field {
-            grid-column: 1;
-            grid-row: auto;
-        }
-        
-        /* Второй ряд на мобильных: все поля в один столбец */
-        .second-row-container {
-            grid-column: 1;
-            grid-row: auto;
-            grid-template-columns: 1fr;
-            gap: 20px;
-            margin-top: 0;
-        }
-        
-        .second-row-container .date-field,
-        .second-row-container .time-field,
-        .second-row-container .guests-field {
-            grid-column: 1;
-            grid-row: auto;
-            width: 100%;
-            margin-left: 0;
-        }
-        
-        .form-check-exact {
-            grid-column: 1;
-            grid-row: auto;
-        }
-        
-        .btn-exact {
-            grid-column: 1;
-            grid-row: auto;
-        }
-        
-        .form-control-exact {
-            padding: 14px 16px;
-            min-height: 52px;
-            font-size: 16px;
-        }
-        
-        .btn-exact {
-            height: 54px;
-            font-size: 16px;
-        }
-
-        
-    }
-    
-    @media (max-width: 576px) {
-        .reservation-background-exact {
-            height: 950px; /* Максимальная высота для самых маленьких экранов */
-        }
-        
-        .reservation-side-image-exact {
-            height: 300px;
-        }
-        
-        .reservation-form-overlay-exact {
-            padding: 15px;
-        }
-        
-        .form-container-exact {
-            padding: 25px;
-        }
-        
-        .form-check-exact {
-            align-items: flex-start;
-        }
-        
-        .section-title-exact {
-            font-size: 26px;
-            margin-bottom: 25px;
-        }
-        
-    }
-    
-    @media (max-width: 400px) {
-        .reservation-background-exact {
-            height: 1000px; /* На очень маленьких экранах */
-        }
-        
-        .form-container-exact {
-            padding: 20px;
-        }
-        
-        .form-grid-exact {
-            gap: 15px;
-        }
-        
-        .second-row-container {
-            gap: 15px;
-        }
-        
-        .btn-exact {
-            height: 52px;
-            font-size: 15px;
-        }
-    }
+    #reservation .booking-page { min-height: auto; }
 </style>
+
+<!-- Контакты -->
+
 
 <!-- Контакты -->
 <section class="section-exact" id="contacts">
@@ -2666,7 +1302,7 @@ document.addEventListener('DOMContentLoaded', function() {
     pointer-events: auto;
     position: relative;
     overflow: hidden;
-    border-left: 6px solid var(--accent);
+    border-left: 6px solid #AD1C43;
 }
 
 /* Иконка уведомления */
@@ -2679,7 +1315,7 @@ document.addEventListener('DOMContentLoaded', function() {
     align-items: center;
     justify-content: center;
     font-size: 22px;
-    color: var(--accent);
+    color: #AD1C43;
     border: 1px solid rgba(201, 168, 106, 0.3);
     flex-shrink: 0;
 }
@@ -2724,8 +1360,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
 .notification-elegant-close:hover {
     background: rgba(201, 168, 106, 0.2);
-    color: var(--accent);
-    border-color: var(--accent);
+    color: #AD1C43;
+    border-color: #AD1C43;
 }
 
 /* Прогресс-бар */
@@ -2734,7 +1370,7 @@ document.addEventListener('DOMContentLoaded', function() {
     bottom: 0;
     left: 0;
     height: 3px;
-    background: linear-gradient(90deg, var(--accent), #e6c38a);
+    background: linear-gradient(90deg, #AD1C43, #e6c38a);
     animation: progress 4s linear forwards;
     border-radius: 0 0 0 3px;
 }

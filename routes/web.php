@@ -24,6 +24,10 @@ Route::get('/menu/category/{slug}', [MenuController::class, 'category'])->name('
 Route::get('/api/tables', [TableBookingController::class, 'tables']);
 Route::get('/api/table-availability', [TableBookingController::class, 'availability']);
 Route::post('/api/table-reservations', [TableBookingController::class, 'store']);
+// Роут страницы бронирования
+Route::get('/booking', function () {
+    return view('booking.index');
+})->name('booking.index');
 
 // ============= ВОССТАНОВЛЕНИЕ ПАРОЛЯ =============
 Route::middleware('guest')->group(function () {
@@ -76,6 +80,8 @@ Route::middleware('auth')->group(function () {
         ->name('two-factor.enable');
     Route::post('/two-factor/disable', [TwoFactorController::class, 'disable'])
         ->name('two-factor.disable');
+    Route::get('/table-reservations', [TableBookingController::class, 'userIndex'])
+        ->name('table-reservations.index');
 });
 
 // ============= БРОНИРОВАНИЕ =============
@@ -128,6 +134,11 @@ Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () 
     // Бронирования в админке
     Route::get('/reservations', [AdminController::class, 'reservations'])->name('reservations');
     Route::put('/reservations/{id}', [AdminController::class, 'updateReservation'])->name('reservations.update');
+    // Бронирования столиков
+    Route::get('/table-reservations', [AdminController::class, 'tableReservations'])
+        ->name('table-reservations');
+    Route::put('/table-reservations/{id}/cancel', [AdminController::class, 'cancelTableReservation'])
+        ->name('table-reservations.cancel');
     
     // Заказы
     Route::get('/orders', [AdminController::class, 'orders'])->name('orders');

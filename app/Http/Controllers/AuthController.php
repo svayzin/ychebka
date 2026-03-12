@@ -114,10 +114,10 @@ class AuthController extends Controller
                     <style>
                         body { font-family: Arial, sans-serif; background-color: #f4f4f4; }
                         .container { max-width: 600px; margin: 0 auto; padding: 20px; background: #1a1a1a; border-radius: 10px; }
-                        .header { text-align: center; padding: 20px; border-bottom: 2px solid #C9A86A; }
-                        .header h1 { color: #C9A86A; font-family: 'Yeseva One', serif; margin: 0; }
+                        .header { text-align: center; padding: 20px; border-bottom: 2px solid #AD1C43; }
+                        .header h1 { color: #AD1C43; font-family: 'Yeseva One', serif; margin: 0; }
                         .content { padding: 30px 20px; text-align: center; }
-                        .code { font-size: 48px; font-weight: bold; color: #C9A86A; letter-spacing: 10px; margin: 30px 0; }
+                        .code { font-size: 48px; font-weight: bold; color: #AD1C43; letter-spacing: 10px; margin: 30px 0; }
                         .footer { text-align: center; padding: 20px; color: #b0b0b0; font-size: 14px; border-top: 1px solid #333; }
                     </style>
                 </head>

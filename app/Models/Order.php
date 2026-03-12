@@ -12,23 +12,26 @@ class Order extends Model
 
     protected $fillable = [
         'user_id',
-        'total',
+        'full_name',
+        'phone',
+        'email',
         'address',
-        'notes',
-        'delivery_type',
-        'payment_method',
-        'status',
         'city',
         'street',
         'house',
         'apartment',
         'entrance',
         'floor',
-        'intercom'
+        'intercom',
+        'total_amount',
+        'comment',
+        'delivery_type',
+        'payment_method',
+        'status',
     ];
 
     protected $casts = [
-        'total' => 'decimal:2',
+        'total_amount' => 'decimal:2',
     ];
 
     public function user()
@@ -43,7 +46,7 @@ class Order extends Model
 
     public function getFormattedTotalAttribute()
     {
-        return number_format($this->total, 0, '.', ' ') . ' ₽';
+        return number_format($this->total_amount, 0, '.', ' ') . ' ₽';
     }
 
     public function getStatusTextAttribute()

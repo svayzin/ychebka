@@ -225,4 +225,9 @@ class User extends Authenticatable
         // Delete all unused codes
         $this->twoFactorCodes()->delete();
     }
+
+    public function tableReservations()
+{
+    return $this->hasMany(\App\Models\TableReservation::class);
+}
 }

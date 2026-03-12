@@ -106,7 +106,7 @@
                                         'price_desc' => 'По убыванию цены'
                                     ];
                                 @endphp
-                                <span class="badge-admin" style="background: var(--accent); color: var(--bg-dark);">
+                                <span class="badge-admin" style="background: #AD1C43; color: var(--bg-dark);">
                                     <i class="bi bi-funnel-fill"></i>
                                     {{ $sortLabelsFull[$currentSort] ?? 'По умолчанию' }}
                                     <a href="{{ route('menu.category', $category->slug) }}" class="text-dark ms-1" title="Сбросить">
@@ -120,7 +120,7 @@
                     <!-- Информация о количестве блюд -->
                     <div class="mt-2 text-end">
                         <span class="text-muted">
-                            Найдено блюд: <strong style="color: var(--accent);">{{ $category->products->count() }}</strong>
+                            Найдено блюд: <strong style="color: #AD1C43;">{{ $category->products->count() }}</strong>
                         </span>
                     </div>
                 </div>
@@ -170,7 +170,7 @@
 }
 
 .breadcrumb-item a {
-    color: var(--accent);
+    color: #AD1C43;
     text-decoration: none;
     transition: color 0.3s ease;
 }
@@ -224,8 +224,8 @@
 }
 
 .btn-exact-outline:hover {
-    border-color: var(--accent);
-    color: var(--accent);
+    border-color: #AD1C43;
+    color: #AD1C43;
     background: rgba(201, 168, 106, 0.05);
 }
 
@@ -249,7 +249,7 @@
     margin-bottom: 20px;
     color: var(--text-light);
     padding-bottom: 15px;
-    border-bottom: 2px solid var(--accent);
+    border-bottom: 2px solid #AD1C43;
     font-family: "Yeseva One", serif;
 }
 
@@ -274,15 +274,15 @@
 
 .category-sidebar-link:hover {
     background: var(--bg-light);
-    border-color: var(--accent);
-    color: var(--accent);
+    border-color: #AD1C43;
+    color: #AD1C43;
     transform: translateX(5px);
 }
 
 .category-sidebar-link.active {
     background: rgba(201, 168, 106, 0.15);
-    border-color: var(--accent);
-    color: var(--accent);
+    border-color: #AD1C43;
+    color: #AD1C43;
     font-weight: 600;
 }
 
@@ -305,7 +305,7 @@
 
 .category-sidebar-link:hover .category-count,
 .category-sidebar-link.active .category-count {
-    background: var(--accent);
+    background: #AD1C43;
     color: var(--bg-dark);
 }
 
@@ -340,15 +340,15 @@
 
 .btn-outline-exact:hover,
 .btn-outline-exact:focus {
-    border-color: var(--accent);
-    color: var(--accent);
+    border-color: #AD1C43;
+    color: #AD1C43;
     background: rgba(201, 168, 106, 0.05);
 }
 
 .btn-outline-exact.active {
-    background: var(--accent);
+    background: #AD1C43;
     color: var(--bg-dark);
-    border-color: var(--accent);
+    border-color: #AD1C43;
 }
 
 .dropdown-menu {
@@ -375,7 +375,7 @@
 .dropdown-item:hover,
 .dropdown-item:focus,
 .dropdown-item.active {
-    background: var(--accent);
+    background: #AD1C43;
     color: var(--bg-dark);
 }
 
@@ -398,7 +398,7 @@
     display: inline-flex;
     align-items: center;
     gap: 10px;
-    background: var(--accent);
+    background: #AD1C43;
     color: var(--bg-dark);
     box-shadow: 0 2px 10px rgba(201, 168, 106, 0.3);
     letter-spacing: 0.3px;
@@ -658,14 +658,14 @@
 }
 
 .sidebar-categories::-webkit-scrollbar-thumb:hover {
-    background: var(--accent);
+    background: #AD1C43;
 }
 
 /* Фокус для доступности */
 .category-sidebar-link:focus-visible,
 .btn-outline-exact:focus-visible,
 .dropdown-item:focus-visible {
-    outline: 2px solid var(--accent);
+    outline: 2px solid #AD1C43;
     outline-offset: 2px;
 }
 

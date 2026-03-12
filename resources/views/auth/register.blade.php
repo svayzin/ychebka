@@ -202,7 +202,7 @@ body {
     font-weight: 700;
     margin-bottom: 10px;
     font-family: "Yeseva One", serif;
-    color: var(--accent);
+    color: #AD1C43;
 }
 
 .auth-image-text {
@@ -275,7 +275,7 @@ body {
 
 .form-control:focus {
     outline: none;
-    border-color: var(--accent);
+    border-color: #AD1C43;
     box-shadow: 0 0 0 4px rgba(201, 168, 106, 0.15);
     background: var(--bg-card);
 }
@@ -310,7 +310,7 @@ body {
     width: 20px;
     height: 20px;
     margin-top: 0;
-    accent-color: var(--accent); /* Это делает галочку желтой */
+    accent-color: #AD1C43; /* Это делает галочку желтой */
     flex-shrink: 0;
     cursor: pointer;
     /* Дополнительные стили для кастомизации */
@@ -321,8 +321,8 @@ body {
 }
 
 .form-check-input:checked {
-    background-color: var(--accent);
-    border-color: var(--accent);
+    background-color: #AD1C43;
+    border-color: #AD1C43;
 }
 
 .form-check-input:focus {
@@ -338,7 +338,7 @@ body {
 }
 
 .text-link {
-    color: var(--accent);
+    color: #AD1C43;
     text-decoration: none;
     transition: color 0.3s ease;
     font-size: 15px;
@@ -353,7 +353,7 @@ body {
     display: block;
     width: 100%;
     padding: 16px;
-    background: var(--accent);
+    background: #AD1C43;
     color: var(--bg-dark);
     border: none;
     border-radius: 16px;

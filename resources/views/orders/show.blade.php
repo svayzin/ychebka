@@ -4,7 +4,7 @@
 <div class="container py-5">
     <div class="order-details-card">
         <div class="order-header">
-            <h1 class="section-title-exact">Заказ #{{ $order->order_number }}</h1>
+            <h1 class="section-title-exact">Заказ #{{ $order->id }}</h1>
             <div class="order-status status-{{ $order->status }}">
                 @switch($order->status)
                     @case('new')
@@ -166,7 +166,7 @@
 }
 
 .info-title {
-    color: #c9a86a;
+    color: #AD1C43;
     font-size: 20px;
     font-weight: 600;
     margin-bottom: 20px;
@@ -192,7 +192,7 @@
 }
 
 .info-value.price {
-    color: #c9a86a;
+    color: #AD1C43;
     font-weight: 700;
     font-size: 18px;
 }
@@ -248,7 +248,7 @@
 }
 
 .item-quantity {
-    color: #c9a86a;
+    color: #AD1C43;
     font-size: 15px;
 }
 
@@ -299,8 +299,8 @@
 }
 
 .btn-back:hover {
-    border-color: #c9a86a;
-    color: #c9a86a;
+    border-color: #AD1C43;
+    color: #AD1C43;
 }
 
 @media (max-width: 768px) {

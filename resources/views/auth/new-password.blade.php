@@ -147,7 +147,7 @@
 }
 
 .password-toggle:hover {
-    color: var(--accent);
+    color: #AD1C43;
 }
 
 .password-requirements {
