@@ -4,101 +4,121 @@
    <!-- Герой секция с полями -->
 <section class="hero-exact" id="home">
     <div class="hero-exact-background-photo">
-        <div class="container-exact">
-        <div class="row align-items-center">
-            <!-- Текст слева - ДОБАВЛЯЕМ ОТСТУП СВЕРХУ -->
-            <div class="col-lg-6">
-                <div class="hero-text-wrapper-exact" style="margin-top: 60px;"> <!-- ДОБАВЬТЕ ЭТОТ DIV -->
-                    <h1 class="hero-title-exact">Crimson Flame</h1>
-                    <p class="hero-text-exact">
-                        Попробуйте любое блюдо из нашего широкого ассортимента — и вас затянет его вкус уже с первой ложки, не отпуская до последнего кусочка.
-                    </p>
-                    <div class="hero-buttons-exact">
-                        <a href="{{ route('menu') }}" class="btn-menu-primary">
-                            Посмотреть меню
-                        </a>
-                        <a href="{{ route('home') }}#reservation" class="btn-reservation-outline hero-reservation-btn btn-menu-primary">
-                            Забронировать стол
-                        </a>
+        <div class="container-exact hero-container-exact">
+            <div class="row align-items-center hero-row-exact">
+                <!-- Текст слева -->
+                <div class="col-12 col-lg-6 order-2 order-lg-1">
+                    <div class="hero-text-wrapper-exact">
+                        <h1 class="hero-title-exact">Crimson Flame</h1>
+                        <p class="hero-text-exact">
+                            Широкий выбор блюд, в которых каждая ложка — это путешествие вкуса: от первого укуса до последнего мы создаём моменты, которые хочется повторять.
+                        </p>
+                        <div class="hero-buttons-exact">
+                            <a href="{{ route('menu') }}" class="btn-menu-primary">
+                                Посмотреть меню
+                            </a>
+                            <a href="{{ route('home') }}#reservation" class="btn-reservation-outline hero-reservation-btn btn-menu-primary">
+                                Забронировать стол
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <!-- Картинка справа (скрывается при ≤990px) -->
+                <div class="col-12 col-lg-6 order-1 order-lg-2 hero-image-col">
+                    <div class="hero-image-exact">
+                        <img src="{{ asset('images/hero/hero-photo.png') }}" 
+                             alt="Интерьер ресторана Crimson Flame" 
+                             class="hero-img-exact">
                     </div>
                 </div>
             </div>
-            
-            <!-- Картинка справа -->
-            <div class="col-lg-6">
-                <div class="hero-image-exact">
-                    <img src="{{ asset('images/hero/') }}" 
-                         alt="Интерьер ресторана Созвездие вкусов" 
-                         class="hero-img-exact">
-                </div>
-            </div>
         </div>
-    </div>
     </div>
 </section>
 
 <!-- Стили для героя -->
 <style>
-     
     .hero-exact {
         background: #000000;
+        overflow-x: hidden;
     }
+
     .hero-exact-background-photo {
         background-image:
-        linear-gradient(rgba(0,0,0,.75), rgba(0,0,0,.45)),
-        url("../images/hero/black-stone-background-photo.webp");
+            linear-gradient(rgba(0,0,0,.75), rgba(0,0,0,.45)),
+            url("../images/hero/black-stone-background-photo.webp");
         background-size: cover;
         background-position: center;
+        padding: 40px 0 60px;
     }
-    
+
+    .hero-container-exact {
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+
+    .hero-row-exact {
+        --hero-gap: 40px;
+    }
+
+    .hero-text-wrapper-exact {
+        margin-top: 20px;
+    }
+
     .hero-title-exact {
-        font-size: 90px;
+        font-size: clamp(36px, 8vw, 90px);
         font-family: "Adieu-Bold";
         font-weight: 900;
         color: var(--text-light);
-        margin-bottom: 26px;
+        margin-bottom: 20px;
         line-height: 1.1;
     }
-    
+
     .hero-text-exact {
         font-family: "Adieu-Regular";
-        font-size: 25px;
+        font-size: clamp(16px, 2.2vw, 25px);
         color: #ffffff;
-        line-height: 1.4;
+        line-height: 1.45;
+        max-width: 540px;
     }
-    
+
     .hero-buttons-exact {
         display: flex;
-        margin-top: 35px;
-        gap: 25px;
+        margin-top: 28px;
+        margin-bottom: 0;
+        gap: 20px;
         align-items: center;
+        flex-wrap: wrap;
     }
-    
-    /* Стиль ДЛЯ КНОПКИ "ПОСМОТРЕТЬ МЕНЮ" - УВЕЛИЧЕННАЯ */
+
     .btn-menu-primary {
-        padding: 15px 35px;
+        padding: 14px 28px;
         border-radius: 24px;
         background-color: #AD1C43;
-        color:rgb(255, 255, 255);
+        color: rgb(255, 255, 255);
         border: none;
-        font-size: 16px;
+        font-size: 15px;
         font-weight: 600;
-        margin-bottom: 110px;
+        margin-bottom: 0;
         text-decoration: none;
         transition: all 0.3s ease;
         display: inline-block;
         text-align: center;
         box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
     }
-    
-    /* ОБЩИЕ СТИЛИ ДЛЯ ОБЕИХ КНОПОК */
+
+    .btn-menu-primary:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(173, 28, 67, 0.4);
+    }
+
     .btn-reservation-outline {
-        padding: 15px 35px;
+        padding: 14px 28px;
         border-radius: 24px;
         background-color: #AD1C43;
-        color:rgb(255, 255, 255);
+        color: rgb(255, 255, 255);
         border: none;
-        font-size: 16px;
+        font-size: 15px;
         font-weight: 600;
         text-decoration: none;
         transition: all 0.3s ease;
@@ -106,8 +126,7 @@
         text-align: center;
         box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
     }
-    
-    /* Стрелка для обеих кнопок */
+
     .arrow-tip {
         display: block;
         position: absolute;
@@ -120,87 +139,189 @@
         border-bottom: 6px solid transparent;
         border-left: 10px solid #ffffff;
     }
-    
-    /* УНИКАЛЬНЫЕ СТИЛИ ДЛЯ КНОПКИ В "О РЕСТОРАНЕ" */
-    .hero-img-exact {
-        width: 620px;
-        height: 620px;
-        object-fit: cover;
+
+    .hero-image-exact {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow: visible;
     }
-    
-    /* Адаптивность для кнопки в герое */
-    @media (max-width: 768px) {
-        .hero-exact {
-            padding: 60px 0;
+
+    .hero-img-exact {
+        width: 100%;
+        max-width: 420px;
+        height: auto;
+        aspect-ratio: 1;
+        object-fit: cover;
+        border-radius: 12px;
+        transform: rotate(-6deg);
+    }
+
+    /* От 990px: фото скрыто, весь контент ровно по центру блока */
+    @media (max-width: 990px) {
+        .hero-image-col {
+            display: none !important;
         }
-        
+
+        .hero-row-exact {
+            justify-content: center;
+            text-align: center;
+        }
+
+        .hero-row-exact .col-12.col-lg-6.order-2.order-lg-1 {
+            max-width: 100%;
+            flex: 0 0 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .hero-text-wrapper-exact {
+            margin-top: 0;
+            margin-left: auto;
+            margin-right: auto;
+            text-align: center;
+            max-width: 560px;
+            width: 100%;
+        }
+
         .hero-title-exact {
-            font-size: 36px;
+            text-align: center;
+            margin-left: auto;
+            margin-right: auto;
+            margin-bottom: 20px;
         }
-        
+
         .hero-text-exact {
-            font-size: 18px;
+            text-align: center;
+            max-width: 100%;
+            margin-left: auto;
+            margin-right: auto;
         }
-        
-        .hero-image-exact {
-            height: 300px;
+
+        .hero-buttons-exact {
+            justify-content: center;
+            margin-top: 28px;
         }
-        
+    }
+
+    /* Планшет: отступы (фото уже скрыто выше 990px) */
+    @media (max-width: 991px) {
+        .hero-exact-background-photo {
+            padding: 32px 0 48px;
+        }
+    }
+
+    /* Мобильный */
+    @media (max-width: 768px) {
+        .hero-exact-background-photo {
+            padding: 24px 0 40px;
+        }
+
+        .hero-container-exact {
+            padding-left: 16px;
+            padding-right: 16px;
+        }
+
+        .hero-title-exact {
+            text-align: center;
+            margin-bottom: 14px;
+        }
+
+        .hero-text-exact {
+            text-align: center;
+            font-size: 16px;
+        }
+
+        .hero-text-wrapper-exact {
+            padding-bottom: 8px;
+        }
+
         .hero-buttons-exact {
             flex-direction: column;
+            margin-top: 20px;
+            gap: 12px;
+            align-items: stretch;
         }
-        
 
-        
-        .btn-menu-primary {
-            padding: 16px 40px;
-            font-size: 18px;
-            width: 100%;
-            max-width: 300px;
-        }
-        
-        .hero-img-exact {
-            width: 100%;
-            height: 300px;
-            margin-left: 0;
-        }
-    }
-    
-    /* Адаптивность для кнопки в "О ресторане" */
-    @media (max-width: 768px) {
-        .about-reservation-btn {
-            padding: 10px 25px;
+        .hero-buttons-exact .btn-menu-primary {
             width: 100%;
             max-width: 280px;
-            border: none;
-            width: auto;
-            height: auto;
-            background: transparent;
-            color: #ffffff !important;
-            font-size: 16px;
-            padding: 8px 18px;
-            border: 1px solid #ffffff;
-            border-radius: 4px;
-            margin-top: 15px;
-            margin-left: 0;
+            margin-left: auto;
+            margin-right: auto;
+            padding: 14px 24px;
+            font-size: 15px;
         }
-        
-        .about-reservation-btn::before,
-        .about-reservation-btn::after,
-        .about-reservation-btn .arrow-tip {
-            display: none;
+
+        .hero-img-exact {
+            max-width: 280px;
         }
-        
-        .about-reservation-btn::after {
-            position: static;
-            left: auto;
-            text-align: center;
-            width: auto;
-            white-space: normal;
-            font-size: 16px;
-            color: #ffffff;
-            display: block;
-            padding: 5px;
+    }
+
+    /* Маленькие телефоны (≤480px) — уменьшаем всё, чтобы влезало */
+    @media (max-width: 480px) {
+        .hero-exact-background-photo {
+            padding: 16px 0 24px;
+        }
+
+        .hero-container-exact {
+            padding-left: 10px;
+            padding-right: 10px;
+        }
+
+        .hero-text-wrapper-exact {
+            max-width: 100%;
+        }
+
+        .hero-title-exact {
+            font-size: 24px;
+            margin-bottom: 10px;
+            line-height: 1.15;
+        }
+
+        .hero-text-exact {
+            font-size: 14px;
+            line-height: 1.4;
+        }
+
+        .hero-buttons-exact {
+            margin-top: 16px;
+            gap: 10px;
+        }
+
+        .hero-buttons-exact .btn-menu-primary {
+            max-width: 100%;
+            padding: 12px 20px;
+            font-size: 14px;
+        }
+
+        .hero-img-exact {
+            max-width: 200px;
+        }
+    }
+
+    /* Очень узкие экраны (≤380px) */
+    @media (max-width: 380px) {
+        .hero-exact-background-photo {
+            padding: 12px 0 20px;
+        }
+
+        .hero-container-exact {
+            padding-left: 8px;
+            padding-right: 8px;
+        }
+
+        .hero-title-exact {
+            font-size: 22px;
+        }
+
+        .hero-text-exact {
+            font-size: 13px;
+        }
+
+        .hero-buttons-exact .btn-menu-primary {
+            padding: 11px 16px;
+            font-size: 13px;
         }
     }
     
@@ -212,22 +333,20 @@
         <div class="about-content-exact">
             <!-- Левая часть: Заголовок и текст -->
             <div class="about-left-exact">
-                <h2 class="about-title-exact">О ресторане</h2>
+                <h2 class="section-title-exact">О ресторане</h2>
                 
                 <div class="about-text-content-exact">
                     <p>
-                       Созвездие вкусов — это больше, чем просто ресторан. Это место, где рождаются кулинарные истории. 
-                    <p>
-                        Наш шеф-повар и его команда вдохновляются лучшими локальными продуктами, превращая их в современные и изысканные блюда. В меню вы найдете как смелые авторские интерпретации, так и любимые классические вкусы, исполненные с безупречной техникой.
+                       Crimson Flame — не просто ресторан, а место, где рождаются кулинарные истории.
                     </p>
                     <p>
-                        Мы тщательно продумали каждую деталь: уютный интерьер с теплым светом, тщательно подобранное меню и безупречный сервис, который чувствует ваши пожелания. Здесь время замедляется, чтобы вы могли насладиться главным — вкусной едой, хорошей компанией и моментами настоящего удовольствия.
+                        Шеф-повар и команда берут за основу лучшие локальные продукты и превращают их в современные, изысканные блюда. В меню — смелые авторские решения и классика, исполненная с безупречной техникой.
                     </p>
-                    <div class="text-left mt-4">
-                        <a href="{{ route('home') }}#reservation" class="btn-reservation-outline about-reservation-btn">
-                            <span class="arrow-simple"></span>
-                            Забронировать стол
-                        </a>
+                    <p>
+                        Каждая деталь продумана: уютный интерьер с тёплым светом, выверенное меню и сервис, который чувствует ваши пожелания. Здесь время замедляется — для вкусной еды, хорошей компании и настоящего удовольствия.
+                    </p>
+                    <div class="about-btn-wrap">
+                        <a href="{{ route('home') }}#reservation" class="about-reservation-btn">Забронировать стол</a>
                     </div>
                 </div>
             </div>
@@ -263,19 +382,32 @@
 
 <style>
 
-    .text-left.mt-4 {
-    position: relative;
-    z-index: 2;
-}
+    .about-btn-wrap {
+        margin-top: 24px;
+    }
 
-.about-reservation-btn {
-    left: 0;
-    width: 250px;
-    height: 60px;
-    position: relative;
-    top: -5px; /* Дополнительно поднимаем саму кнопку */
-}
-    /* Новая структура для секции "О ресторане" */
+    .about-reservation-btn {
+        display: inline-block;
+        padding: 14px 28px;
+        border-radius: 24px;
+        background-color: var(--accent, #AD1C43);
+        color: #fff;
+        font-size: 16px;
+        font-weight: 600;
+        text-decoration: none;
+        transition: all 0.3s ease;
+        border: none;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    .about-reservation-btn:hover {
+        background-color: #c92355;
+        color: #fff;
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(173, 28, 67, 0.4);
+    }
+
+    /* Структура секции "О ресторане" */
     .about-content-exact {
         display: grid;
         grid-template-columns: 1.2fr 1.8fr; /* Фото занимают больше места */
@@ -291,9 +423,8 @@
         padding-right: 30px; /* Отступ от фото */
     }
     
-    .about-title-exact {
-        margin-bottom: 20px; /* Уменьшен отступ */
-        line-height: 1.1;
+    #about .section-title-exact {
+        margin-bottom: 20px;
     }
     
     .about-text-content-exact {
@@ -385,108 +516,210 @@
     }
     
     
-    /* Адаптивность */
+    /* Секция "О ресторане": контент не выходит за пределы, фото не залезают на следующий блок */
+    #about.section-exact {
+        overflow: hidden;
+    }
+
+    /* Адаптивность блока "О ресторане" */
     @media (max-width: 1200px) {
-        .about-title-exact {
-            font-size: 60px;
+        .about-content-exact {
+            gap: 50px;
+            margin-top: 40px;
         }
-        
+
         .photos-grid-exact {
-            height: 550px;
+            height: 520px;
         }
-        
+
         .about-text-content-exact {
-            max-width: 450px;
+            max-width: 480px;
         }
     }
-    
+
+    /* С ~1000px: контент по центру; фото в одну сетку без обрезки */
     @media (max-width: 1024px) {
+        #about.section-exact {
+            margin-bottom: 80px;
+            padding-bottom: 48px;
+        }
+
         .about-content-exact {
             grid-template-columns: 1fr;
-            gap: 40px;
+            gap: 36px;
+            margin-top: 32px;
+            justify-items: center;
+            text-align: center;
         }
-        
+
         .about-left-exact {
             padding-right: 0;
             max-width: 100%;
+            align-items: center;
         }
-        
-        .about-title-exact {
-            font-size: 50px;
-            margin-bottom: 20px;
+
+        #about .section-title-exact {
+            margin-bottom: 16px;
         }
-        
+
         .about-text-content-exact {
             max-width: 100%;
+            margin-left: auto;
+            margin-right: auto;
         }
-        
-        .photos-grid-exact {
-            height: 400px;
-            grid-template-columns: 1.5fr 1fr;
-        }
-    }
-    
-    @media (max-width: 768px) {
-        .about-title-exact {
-            font-size: 40px;
-        }
-        
+
         .about-text-content-exact p {
-            font-size: 15px;
+            margin-bottom: 16px;
         }
-        
+
+        .about-btn-wrap {
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+        }
+
+        /* Сетка: большое + два маленьких без обрезки последнего */
         .photos-grid-exact {
-            grid-template-columns: 1fr;
-            grid-template-rows: 250px auto;
-            height: auto;
-            gap: 20px;
+            height: 340px;
+            grid-template-columns: 2fr 1fr;
+            grid-template-rows: 1fr;
+            gap: 12px;
+            max-width: 100%;
+            margin: 0 auto;
         }
-        
-        .photo-large-wrapper-exact {
-            grid-column: 1;
-            grid-row: 1;
-            height: 250px;
-        }
-        
+
         .photos-small-wrapper-exact {
-            grid-column: 1;
-            grid-row: 2;
-            flex-direction: row;
-            gap: 15px;
-            height: 150px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            min-height: 0;
         }
-        
+
         .about-photo-small-exact {
-            height: 150px;
             flex: 1;
-            aspect-ratio: 1/1; /* Сохраняем квадратные на мобильных */
+            min-height: 0;
+            aspect-ratio: unset;
+            height: auto;
         }
-        
+
         .about-img-small-exact {
             width: 100%;
             height: 100%;
+            object-fit: cover;
         }
     }
-    
-    @media (max-width: 480px) {
-        .about-title-exact {
-            font-size: 32px;
+
+    /* Ниже 770px: три фото в один ряд одинакового размера, без смены кадра */
+    @media (max-width: 768px) {
+        #about.section-exact {
+            margin-bottom: 60px;
+            padding-bottom: 32px;
         }
-        
+
+        #about .container-exact {
+            padding-left: 16px;
+            padding-right: 16px;
+        }
+
+        .about-content-exact {
+            gap: 28px;
+            margin-top: 24px;
+        }
+
+        #about .section-title-exact {
+            margin-bottom: 14px;
+        }
+
+        .about-text-content-exact p {
+            font-size: 16px;
+            margin-bottom: 14px;
+        }
+
+        .about-reservation-btn {
+            padding: 12px 24px;
+            font-size: 15px;
+        }
+
+        /* Один ряд, три равных колонки — все фото видны и полезны */
+        .photos-grid-exact {
+            grid-template-columns: 1fr 1fr 1fr;
+            grid-template-rows: 1fr;
+            height: 200px;
+            gap: 10px;
+            max-width: 100%;
+        }
+
+        .photo-large-wrapper-exact {
+            grid-column: 1;
+        }
+
         .photos-small-wrapper-exact {
-            flex-direction: column;
-            height: auto;
+            display: contents;
         }
-        
+
         .about-photo-small-exact {
-            height: 150px;
-            width: 100%;
-            aspect-ratio: 1/1;
+            min-height: 0;
+            height: 100%;
+            aspect-ratio: unset;
         }
-        
-        .btn-exact-outline {
-            padding: 8px 20px;
-            font-size: 13px;
+
+        .photos-small-wrapper-exact .about-photo-small-exact:first-child {
+            grid-column: 2;
+        }
+
+        .photos-small-wrapper-exact .about-photo-small-exact:last-child {
+            grid-column: 3;
+        }
+
+        .about-img-small-exact,
+        .about-img-large-exact {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+    }
+
+    @media (max-width: 480px) {
+        #about.section-exact {
+            margin-bottom: 48px;
+        }
+
+        #about .container-exact {
+            padding-left: 12px;
+            padding-right: 12px;
+        }
+
+        .about-content-exact {
+            gap: 20px;
+            margin-top: 16px;
+        }
+
+        #about .section-title-exact {
+            margin-bottom: 12px;
+        }
+
+        .about-text-content-exact p {
+            font-size: 14px;
+            margin-bottom: 12px;
+        }
+
+        .about-btn-wrap {
+            margin-top: 16px;
+            text-align: center;
+        }
+
+        .about-reservation-btn {
+            display: block;
+            width: 100%;
+            max-width: 280px;
+            margin: 0 auto;
+            padding: 12px 20px;
+            font-size: 14px;
+        }
+
+        .photos-grid-exact {
+            height: 160px;
+            gap: 8px;
         }
     }
 </style>
@@ -494,7 +727,7 @@
 <!-- Фотогалерея -->
 <section class="section-exact" id="gallery">
     <div class="container-exact">
-        <h2 class="section-title-exact">Фотогалерея ресторана</h2>
+        <h2 class="section-title-exact">Crimson Flame в кадре</h2>
         
         <div class="gallery-wrapper-exact">
             <div class="gallery-container-exact">
@@ -826,11 +1059,10 @@
                     </p>
                 </div>
                 
-                <!-- Кнопка в стиле главной -->
-                 <a href="https://yandex.ru/maps/?text=г.%20Набережные%20Челны,%20проспект%20Сююмбике,%202" 
+                <a href="https://yandex.ru/maps/?text=г.%20Набережные%20Челны,%20проспект%20Сююмбике,%202" 
                    target="_blank" 
-                    class="btn-exact how-to-get-btn">
-                   Как добраться
+                   class="how-to-get-btn">
+                    Как добраться
                 </a>
             </div>
             
@@ -866,28 +1098,30 @@
         padding-top: 20px;
     }
     
-    /* Стили для кнопки "Как добраться" как главная кнопка */
+    /* Кнопка "Как добраться" в стиле остальных (как "Забронировать стол") */
     .how-to-get-btn {
         display: inline-block;
-        padding: 14px 32px;
-        background: #ffffff;
-        color: black;
+        padding: 14px 28px;
+        border-radius: 24px;
+        background-color: var(--accent, #AD1C43);
+        color: #fff;
         border: none;
-        height: 60px;
         text-decoration: none;
         font-weight: 600;
-        font-size: 20px;
+        font-size: 16px;
         cursor: pointer;
         transition: all 0.3s ease;
         text-align: center;
         margin-top: 20px;
         max-width: 250px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
     }
     
     .how-to-get-btn:hover {
-        background: #f0f0f0;
+        background-color: #c92355;
+        color: #fff;
         transform: translateY(-2px);
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        box-shadow: 0 6px 20px rgba(173, 28, 67, 0.4);
     }
     
     .contact-item-exact {
@@ -954,12 +1188,14 @@
         }
         
         .contacts-info-exact {
-            order: 2;
+            order: 1;
             padding-top: 0;
+            text-align: center;
+            align-items: center;
         }
         
         .contacts-map-exact {
-            order: 1;
+            order: 2;
         }
         
         .contacts-map-exact iframe {
@@ -976,6 +1212,11 @@
     @media (max-width: 768px) {
         .contacts-grid-exact {
             gap: 30px;
+        }
+        
+        .contacts-info-exact {
+            text-align: center;
+            align-items: center;
         }
         
         .contacts-map-exact iframe {
@@ -996,8 +1237,8 @@
         }
         
         .how-to-get-btn {
-            padding: 10px 24px;
-            font-size: 16px;
+            padding: 12px 24px;
+            font-size: 15px;
             max-width: 200px;
         }
     }
@@ -1005,6 +1246,11 @@
     @media (max-width: 480px) {
         .contacts-map-exact iframe {
             height: 280px;
+        }
+        
+        .contacts-info-exact {
+            text-align: center;
+            align-items: center;
         }
         
         .contact-item-exact {
@@ -1021,9 +1267,9 @@
         }
         
         .how-to-get-btn {
-            padding: 8px 20px;
+            padding: 12px 20px;
             font-size: 14px;
-            max-width: 180px;
+            max-width: 280px;
         }
     }
 </style>
@@ -1033,8 +1279,8 @@
 @push('scripts')
 <script>
 
- // Слайдер для популярных блюд
-document.addEventListener('DOMContentLoaded', function() {
+    // Слайдер для популярных блюд
+    document.addEventListener('DOMContentLoaded', function() {
     // Инициализация всех слайдеров
     const dishSliders = document.querySelectorAll('.dishes-swiper-exact');
     const swiperInstances = {};
@@ -1144,7 +1390,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         }
     });
-});
+    });
     
     document.addEventListener('DOMContentLoaded', function() {
         // Инициализация галереи с 3 фото одновременно
@@ -1271,180 +1517,180 @@ document.addEventListener('DOMContentLoaded', function() {
 
 <!-- ===== КРАСИВЫЕ УВЕДОМЛЕНИЯ ТОЛЬКО В ПРАВОМ ВЕРХНЕМ УГЛУ ===== -->
 <style>
-/* Контейнер для уведомлений - ТОЛЬКО СПРАВА */
-.notification-elegant-container {
-    position: fixed;
-    top: 100px;
-    right: 30px;
-    z-index: 99999;
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-    max-width: 380px;
-    width: 100%;
-    pointer-events: none;
-}
-
-/* Стиль уведомления */
-.notification-elegant {
-    background: rgba(31, 31, 31, 0.95);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    border: 1px solid rgba(201, 168, 106, 0.3);
-    border-radius: 16px;
-    padding: 18px 22px;
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    transform: translateX(120%);
-    animation: slideIn 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-    pointer-events: auto;
-    position: relative;
-    overflow: hidden;
-    border-left: 6px solid #AD1C43;
-}
-
-/* Иконка уведомления */
-.notification-elegant-icon {
-    width: 44px;
-    height: 44px;
-    background: linear-gradient(135deg, rgba(201, 168, 106, 0.15), rgba(201, 168, 106, 0.05));
-    border-radius: 12px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 22px;
-    color: #AD1C43;
-    border: 1px solid rgba(201, 168, 106, 0.3);
-    flex-shrink: 0;
-}
-
-/* Контент уведомления */
-.notification-elegant-content {
-    flex: 1;
-}
-
-.notification-elegant-title {
-    font-weight: 700;
-    font-size: 16px;
-    color: #fff;
-    margin-bottom: 4px;
-    letter-spacing: 0.3px;
-}
-
-.notification-elegant-message {
-    font-size: 14px;
-    color: rgba(255, 255, 255, 0.8);
-    line-height: 1.4;
-}
-
-/* Кнопка закрытия */
-.notification-elegant-close {
-    position: absolute;
-    top: 12px;
-    right: 12px;
-    width: 24px;
-    height: 24px;
-    border-radius: 50%;
-    background: rgba(255, 255, 255, 0.1);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    color: rgba(255, 255, 255, 0.7);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 12px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
-
-.notification-elegant-close:hover {
-    background: rgba(201, 168, 106, 0.2);
-    color: #AD1C43;
-    border-color: #AD1C43;
-}
-
-/* Прогресс-бар */
-.notification-elegant-progress {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    height: 3px;
-    background: linear-gradient(90deg, #AD1C43, #e6c38a);
-    animation: progress 4s linear forwards;
-    border-radius: 0 0 0 3px;
-}
-
-/* Анимации */
-@keyframes slideIn {
-    0% { transform: translateX(120%); opacity: 0; }
-    100% { transform: translateX(0); opacity: 1; }
-}
-
-@keyframes slideOut {
-    0% { transform: translateX(0); opacity: 1; }
-    100% { transform: translateX(120%); opacity: 0; }
-}
-
-@keyframes progress {
-    0% { width: 100%; }
-    100% { width: 0%; }
-}
-
-/* Типы уведомлений */
-.notification-elegant.success {
-    border-left-color: #4CAF50;
-}
-.notification-elegant.success .notification-elegant-icon {
-    color: #4CAF50;
-    border-color: rgba(76, 175, 80, 0.3);
-    background: linear-gradient(135deg, rgba(76, 175, 80, 0.15), rgba(76, 175, 80, 0.05));
-}
-
-.notification-elegant.warning {
-    border-left-color: #FFC107;
-}
-.notification-elegant.warning .notification-elegant-icon {
-    color: #FFC107;
-    border-color: rgba(255, 193, 7, 0.3);
-    background: linear-gradient(135deg, rgba(255, 193, 7, 0.15), rgba(255, 193, 7, 0.05));
-}
-
-.notification-elegant.error {
-    border-left-color: #F44336;
-}
-.notification-elegant.error .notification-elegant-icon {
-    color: #F44336;
-    border-color: rgba(244, 67, 54, 0.3);
-    background: linear-gradient(135deg, rgba(244, 67, 54, 0.15), rgba(244, 67, 54, 0.05));
-}
-
-.notification-elegant.info {
-    border-left-color: #29B6F6;
-}
-.notification-elegant.info .notification-elegant-icon {
-    color: #29B6F6;
-    border-color: rgba(41, 182, 246, 0.3);
-    background: linear-gradient(135deg, rgba(41, 182, 246, 0.15), rgba(41, 182, 246, 0.05));
-}
-
-/* Адаптивность */
-@media (max-width: 768px) {
+    /* Контейнер для уведомлений - ТОЛЬКО СПРАВА */
     .notification-elegant-container {
-        top: 20px;
-        right: 20px;
-        left: auto;
-        max-width: 300px;
+        position: fixed;
+        top: 100px;
+        right: 30px;
+        z-index: 99999;
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+        max-width: 380px;
+        width: 100%;
+        pointer-events: none;
     }
-}
+
+    /* Стиль уведомления */
+    .notification-elegant {
+        background: rgba(31, 31, 31, 0.95);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        border: 1px solid rgba(201, 168, 106, 0.3);
+        border-radius: 16px;
+        padding: 18px 22px;
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        transform: translateX(120%);
+        animation: slideIn 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        pointer-events: auto;
+        position: relative;
+        overflow: hidden;
+        border-left: 6px solid #AD1C43;
+    }
+
+    /* Иконка уведомления */
+    .notification-elegant-icon {
+        width: 44px;
+        height: 44px;
+        background: linear-gradient(135deg, rgba(201, 168, 106, 0.15), rgba(201, 168, 106, 0.05));
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 22px;
+        color: #AD1C43;
+        border: 1px solid rgba(201, 168, 106, 0.3);
+        flex-shrink: 0;
+    }
+
+    /* Контент уведомления */
+    .notification-elegant-content {
+        flex: 1;
+    }
+
+    .notification-elegant-title {
+        font-weight: 700;
+        font-size: 16px;
+        color: #fff;
+        margin-bottom: 4px;
+        letter-spacing: 0.3px;
+    }
+
+    .notification-elegant-message {
+        font-size: 14px;
+        color: rgba(255, 255, 255, 0.8);
+        line-height: 1.4;
+    }
+
+    /* Кнопка закрытия */
+    .notification-elegant-close {
+        position: absolute;
+        top: 12px;
+        right: 12px;
+        width: 24px;
+        height: 24px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.1);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        color: rgba(255, 255, 255, 0.7);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 12px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+
+    .notification-elegant-close:hover {
+        background: rgba(201, 168, 106, 0.2);
+        color: #AD1C43;
+        border-color: #AD1C43;
+    }
+
+    /* Прогресс-бар */
+    .notification-elegant-progress {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        height: 3px;
+        background: linear-gradient(90deg, #AD1C43, #e6c38a);
+        animation: progress 4s linear forwards;
+        border-radius: 0 0 0 3px;
+    }
+
+    /* Анимации */
+    @keyframes slideIn {
+        0% { transform: translateX(120%); opacity: 0; }
+        100% { transform: translateX(0); opacity: 1; }
+    }
+
+    @keyframes slideOut {
+        0% { transform: translateX(0); opacity: 1; }
+        100% { transform: translateX(120%); opacity: 0; }
+    }
+
+    @keyframes progress {
+        0% { width: 100%; }
+        100% { width: 0%; }
+    }
+
+    /* Типы уведомлений */
+    .notification-elegant.success {
+        border-left-color: #4CAF50;
+    }
+    .notification-elegant.success .notification-elegant-icon {
+        color: #4CAF50;
+        border-color: rgba(76, 175, 80, 0.3);
+        background: linear-gradient(135deg, rgba(76, 175, 80, 0.15), rgba(76, 175, 80, 0.05));
+    }
+
+    .notification-elegant.warning {
+        border-left-color: #FFC107;
+    }
+    .notification-elegant.warning .notification-elegant-icon {
+        color: #FFC107;
+        border-color: rgba(255, 193, 7, 0.3);
+        background: linear-gradient(135deg, rgba(255, 193, 7, 0.15), rgba(255, 193, 7, 0.05));
+    }
+
+    .notification-elegant.error {
+        border-left-color: #F44336;
+    }
+    .notification-elegant.error .notification-elegant-icon {
+        color: #F44336;
+        border-color: rgba(244, 67, 54, 0.3);
+        background: linear-gradient(135deg, rgba(244, 67, 54, 0.15), rgba(244, 67, 54, 0.05));
+    }
+
+    .notification-elegant.info {
+        border-left-color: #29B6F6;
+    }
+    .notification-elegant.info .notification-elegant-icon {
+        color: #29B6F6;
+        border-color: rgba(41, 182, 246, 0.3);
+        background: linear-gradient(135deg, rgba(41, 182, 246, 0.15), rgba(41, 182, 246, 0.05));
+    }
+
+    /* Адаптивность */
+    @media (max-width: 768px) {
+        .notification-elegant-container {
+            top: 20px;
+            right: 20px;
+            left: auto;
+            max-width: 300px;
+        }
+    }
 </style>
 
 <!-- Контейнер для уведомлений ТОЛЬКО СПРАВА -->
 <div class="notification-elegant-container" id="notificationContainer"></div>
 
 <script>
-// Функция показа красивых уведомлений ТОЛЬКО В ПРАВОМ УГЛУ
-function showElegantNotification(message, type = 'success', title = '') {
+    // Функция показа красивых уведомлений ТОЛЬКО В ПРАВОМ УГЛУ
+    function showElegantNotification(message, type = 'success', title = '') {
     const container = document.getElementById('notificationContainer');
     if (!container) return;
     
@@ -1507,10 +1753,10 @@ function showElegantNotification(message, type = 'success', title = '') {
             setTimeout(() => notification.remove(), 500);
         }
     }, 4000);
-}
+    }
 
-// Показываем ТОЛЬКО уведомления из сессии - НИКАКИХ ПРИВЕТСТВИЙ
-document.addEventListener('DOMContentLoaded', function() {
+    // Показываем ТОЛЬКО уведомления из сессии - НИКАКИХ ПРИВЕТСТВИЙ
+    document.addEventListener('DOMContentLoaded', function() {
     @if(session('success'))
         showElegantNotification('{{ session('success') }}', 'success', 'Успешно!');
     @endif
@@ -1526,5 +1772,5 @@ document.addEventListener('DOMContentLoaded', function() {
     @if(session('info'))
         showElegantNotification('{{ session('info') }}', 'info', 'Информация');
     @endif
-});
+    });
 </script>

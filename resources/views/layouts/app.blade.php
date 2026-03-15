@@ -256,15 +256,24 @@
             display: block;
         }
         
-        /* Мобильное меню */
+        /* Бургер-меню (появляется от 900px) */
         .mobile-menu-btn {
             display: none;
             background: none;
             border: none;
             color: var(--text-light);
-            font-size: 24px;
+            font-size: 26px;
             cursor: pointer;
-            padding: 8px;
+            padding: 8px 12px;
+            line-height: 1;
+        }
+
+        .mobile-menu-btn:hover {
+            color: var(--accent);
+        }
+
+        .header-elegant {
+            position: relative;
         }
         
         /* Герой секция */
@@ -346,11 +355,28 @@
         .container-exact {
             max-width: 1200px;
             padding-top: 40px;
+            padding-left: 24px;
+            padding-right: 24px;
             margin: 0 auto;
         }
         
         .section-exact {
             margin-bottom: 130px;
+        }
+
+        .section-title-exact {
+            font-family: "Adieu-Bold";
+            font-size: clamp(26px, 4vw, 42px);
+            color: var(--text-light);
+            margin-bottom: 24px;
+            line-height: 1.2;
+        }
+
+        /* Заголовки секций по центру только на мобильных, когда и остальной текст по центру */
+        @media (max-width: 992px) {
+            .section-title-exact {
+                text-align: center;
+            }
         }
         
         /* Адаптивность */
@@ -364,52 +390,110 @@
             }
         }
         
-        @media (max-width: 768px) {
-            .main-nav {
+        /* В бургер-меню телефон скрыт на десктопе */
+        .nav-item-phone {
+            display: none;
+        }
+
+        /* От 900px: показываем бургер, скрываем обычное меню, телефон только в списке */
+        @media (max-width: 900px) {
+            .header-contacts .header-phone {
                 display: none;
             }
-            
+
+            .nav-item-phone {
+                display: block;
+            }
+
+            .main-nav {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                flex-direction: column;
+                background: var(--bg-dark);
+                padding: 20px;
+                gap: 0;
+                box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+                z-index: 1000;
+            }
+
+            .main-nav.is-open {
+                display: flex !important;
+            }
+
+            .main-nav .nav-item {
+                padding: 14px 0;
+                border-bottom: 1px solid var(--border);
+            }
+
+            .main-nav .nav-item:last-child {
+                border-bottom: none;
+            }
+
             .mobile-menu-btn {
                 display: block;
             }
-            
+        }
+
+        @media (max-width: 768px) {
             .header-contacts {
                 gap: 15px;
             }
-            
+
             .auth-links {
                 flex-direction: column;
                 gap: 8px;
             }
-            
+
             .btn-auth {
                 width: 120px;
                 justify-content: center;
             }
-            
+
             .hero-title {
                 font-size: 40px;
             }
-            
+
             .hero-subtitle {
                 font-size: 16px;
             }
         }
         
         @media (max-width: 480px) {
+            .header-elegant {
+                padding: 12px 0;
+            }
+
             .header-container {
-                flex-direction: column;
-                gap: 15px;
+                padding-left: 10px;
+                padding-right: 10px;
+                flex-direction: row;
+                gap: 8px;
             }
-            
+
             .header-contacts {
-                flex-wrap: wrap;
-                justify-content: center;
+                flex-wrap: nowrap;
+                gap: 8px;
             }
-            
+
+            .header-phone {
+                font-size: 14px;
+            }
+
             .user-photo {
-                width: 40px;
-                height: 40px;
+                width: 36px;
+                height: 36px;
+            }
+
+            .mobile-menu-btn {
+                font-size: 22px;
+                padding: 6px 10px;
+            }
+
+            .nav-item {
+                font-size: 16px;
             }
         }
     </style>
@@ -421,27 +505,25 @@
         <div class="header-container">
             <a href="/" class="logo"></a>
             
-            <nav class="main-nav">
+            <nav class="main-nav" id="mainNav">
                 <a class="nav-item" href="{{ route('menu') }}">Меню</a>
-                <a href="#about" class="nav-item">О нас</a>
-                <a href="#gallery" class="nav-item">Галерея</a>
-                <a href="#contacts" class="nav-item">Контакты</a>
+                <a class="nav-item" href="{{ url('/') }}#about">О нас</a>
+                <a class="nav-item" href="{{ url('/') }}#gallery">Галерея</a>
+                <a class="nav-item" href="{{ url('/') }}#contacts">Контакты</a>
+                <a class="nav-item nav-item-phone" href="tel:88545332222">8(8545)-33-22-22</a>
             </nav>
-                
+
             <div class="header-contacts">
                 <a href="tel:88545332222" class="header-phone">
                     8(8545)-33-22-22
                 </a>
-                
+
                 @auth
-                <!-- Иконка корзины для авторизованных -->
                 <div class="cart-counter">
                     <a href="{{ route('cart.index') }}" class="user-icon-photo">
                         <span class="cart-count-badge">0</span>
                     </a>
                 </div>
-                
-                <!-- Выпадающее меню пользователя -->
                 <div class="dropdown">
                     <div class="user-icon-photo dropdown-toggle" data-bs-toggle="dropdown">
                         <img src="{{ asset('images/nav/user-icon.png') }}" alt="Аккаунт" class="user-photo">
@@ -463,21 +545,15 @@
                     </ul>
                 </div>
                 @else
-                <!-- Простые ссылки для входа и регистрации -->
                 <div class="auth-single-button">
-        <a href="{{ route('login') }}" class="btn-auth-single">
-            <img src="{{ asset('images/nav/user-icon.png') }}" alt="Пользователь" class="user-photo">
-            <span class="auth-text"></span>
-        </a>
-    </div>
-    @endauth
-    
-    <button class="mobile-menu-btn" id="mobileMenuBtn">
-        <i class="bi bi-list"></i>
-    </button>
-</div>
-                
-                <button class="mobile-menu-btn" id="mobileMenuBtn">
+                    <a href="{{ route('login') }}" class="btn-auth-single">
+                        <img src="{{ asset('images/nav/user-icon.png') }}" alt="Пользователь" class="user-photo">
+                        <span class="auth-text"></span>
+                    </a>
+                </div>
+                @endauth
+
+                <button type="button" class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Меню" aria-expanded="false">
                     <i class="bi bi-list"></i>
                 </button>
             </div>
@@ -490,27 +566,115 @@
     </main>
 
     <!-- Подвал -->
-        
-        <div class="footer-bottom">
-            <p class="copyright">© 2026, Созвездие вкусов. Все права защищены.</p>
+    <footer class="footer-elegant">
+        <div class="footer-inner">
+            <a href="{{ url('/') }}" class="footer-logo" aria-label="На главную">
+                <img src="{{ asset('images/logo/logotype.svg') }}" alt="Crimson Flame" class="footer-logo-img">
+            </a>
+            <nav class="footer-nav" aria-label="Подвал">
+                <a class="footer-link" href="{{ route('menu') }}">Меню</a>
+                <a class="footer-link" href="{{ url('/') }}#about">О нас</a>
+                <a class="footer-link" href="{{ url('/') }}#gallery">Галерея</a>
+                <a class="footer-link" href="{{ url('/') }}#contacts">Контакты</a>
+            </nav>
+            <p class="footer-copyright">© {{ date('Y') }}, Crimson Flame. Все права защищены.</p>
         </div>
     </footer>
 
     <style>
-        .footer-bottom {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-            text-align: center;
-            border: 3px solid var(--border);
-            padding-top: 40px;
+        .footer-elegant {
+            background: var(--bg-dark, #171717);
+            border-top: 1px solid var(--border, #333333);
+            padding: 64px 24px 48px;
+            margin-top: 0;
         }
 
-        .copyright {
-            color: #ffffff;
-            font-size: 20px;
+        .footer-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
         }
-        
+
+        .footer-logo {
+            display: inline-block;
+            margin-bottom: 28px;
+        }
+
+        .footer-logo-img {
+            display: block;
+            height: 44px;
+            width: auto;
+        }
+
+        .footer-nav {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 24px 32px;
+            margin-bottom: 28px;
+        }
+
+        .footer-link {
+            color: var(--text-gray, #B0B0B0);
+            text-decoration: none;
+            font-size: 16px;
+            transition: color 0.2s ease;
+        }
+
+        .footer-link:hover {
+            color: var(--accent, #AD1C43);
+        }
+
+        .footer-copyright {
+            color: var(--text-gray, #B0B0B0);
+            font-size: 15px;
+            margin: 0;
+        }
+
+        /* На больших экранах — больше воздуха */
+        @media (min-width: 1024px) {
+            .footer-elegant {
+                padding: 96px 24px 72px;
+            }
+            .footer-logo {
+                margin-bottom: 40px;
+            }
+            .footer-logo-img {
+                height: 56px;
+            }
+            .footer-nav {
+                gap: 28px 40px;
+                margin-bottom: 40px;
+            }
+            .footer-link {
+                font-size: 17px;
+            }
+            .footer-copyright {
+                font-size: 16px;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .footer-elegant {
+                padding: 40px 16px 28px;
+            }
+            .footer-logo {
+                margin-bottom: 20px;
+            }
+            .footer-logo-img {
+                height: 36px;
+            }
+            .footer-nav {
+                gap: 16px 24px;
+                margin-bottom: 20px;
+            }
+            .footer-link {
+                font-size: 14px;
+            }
+            .footer-copyright {
+                font-size: 14px;
+            }
+        }
     </style>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
@@ -520,57 +684,61 @@
 
 
         document.addEventListener('DOMContentLoaded', function() {
-            // Мобильное меню
             const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-            if (mobileMenuBtn) {
+            const mainNav = document.getElementById('mainNav');
+
+            // Бургер-меню: открыть/закрыть
+            if (mobileMenuBtn && mainNav) {
                 mobileMenuBtn.addEventListener('click', function() {
-                    const mainNav = document.querySelector('.main-nav');
-                    if (mainNav) {
-                        mainNav.style.display = mainNav.style.display === 'flex' ? 'none' : 'flex';
-                        this.innerHTML = mainNav.style.display === 'flex' ? 
-                            '<i class="bi bi-x"></i>' : '<i class="bi bi-list"></i>';
-                    }
+                    const isOpen = mainNav.classList.toggle('is-open');
+                    mobileMenuBtn.setAttribute('aria-expanded', isOpen);
+                    mobileMenuBtn.innerHTML = isOpen ? '<i class="bi bi-x"></i>' : '<i class="bi bi-list"></i>';
                 });
-                
-                // Закрытие меню при ресайзе окна
+
                 window.addEventListener('resize', function() {
-                    if (window.innerWidth > 768) {
-                        const mainNav = document.querySelector('.main-nav');
-                        if (mainNav) {
-                            mainNav.style.display = 'flex';
-                            mobileMenuBtn.innerHTML = '<i class="bi bi-list"></i>';
-                        }
+                    if (window.innerWidth > 900) {
+                        mainNav.classList.remove('is-open');
+                        mobileMenuBtn.setAttribute('aria-expanded', 'false');
+                        mobileMenuBtn.innerHTML = '<i class="bi bi-list"></i>';
                     }
                 });
             }
-            
-            // Плавная прокрутка для навигации
-            document.querySelectorAll('.nav-item, .footer-link[href^="#"]').forEach(link => {
+
+            // Ссылки с якорем: с главной — плавная прокрутка, не с главной — переход на главную (якорь сработает при загрузке)
+            document.querySelectorAll('.nav-item[href*="#"], .footer-link[href^="#"]').forEach(link => {
                 link.addEventListener('click', function(e) {
-                    const href = this.getAttribute('href');
-                    if (!href.startsWith('#')) return;
-                    
-                    e.preventDefault();
-                    const targetId = href.substring(1);
-                    const targetElement = document.getElementById(targetId);
-                    
-                    if (targetElement) {
-                        // Закрыть мобильное меню если открыто
-                        if (window.innerWidth <= 768) {
-                            const mainNav = document.querySelector('.main-nav');
-                            if (mainNav) {
-                                mainNav.style.display = 'none';
-                                mobileMenuBtn.innerHTML = '<i class="bi bi-list"></i>';
+                    const href = this.getAttribute('href') || '';
+                    const hashIndex = href.indexOf('#');
+                    if (hashIndex === -1) return;
+
+                    const path = href.slice(0, hashIndex) || '/';
+                    const hash = href.slice(hashIndex + 1);
+                    const isHome = window.location.pathname === '/' || window.location.pathname === '';
+
+                    if (hash && isHome) {
+                        const targetElement = document.getElementById(hash);
+                        if (targetElement) {
+                            e.preventDefault();
+                            if (mainNav && window.innerWidth <= 900) {
+                                mainNav.classList.remove('is-open');
+                                if (mobileMenuBtn) {
+                                    mobileMenuBtn.setAttribute('aria-expanded', 'false');
+                                    mobileMenuBtn.innerHTML = '<i class="bi bi-list"></i>';
+                                }
                             }
+                            targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
                         }
-                        
-                        window.scrollTo({
-                            top: targetElement.offsetTop - 80,
-                            behavior: 'smooth'
-                        });
                     }
+                    // Если не на главной — ссылка ведёт на url('/')#section, переход произойдёт, браузер сам проскроллит к якорю
                 });
             });
+
+            // На главной при загрузке с якорем в URL — прокрутить к секции
+            if (window.location.hash && (window.location.pathname === '/' || window.location.pathname === '')) {
+                const id = window.location.hash.slice(1);
+                const el = document.getElementById(id);
+                if (el) setTimeout(function() { el.scrollIntoView({ behavior: 'smooth', block: 'start' }); }, 100);
+            }
             
             // Обновление счетчика корзины
             function updateCartCounter() {

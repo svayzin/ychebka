@@ -9,7 +9,7 @@
             <!-- Левая часть с фото -->
             <div class="auth-image-side">
                 <div class="auth-image-content">
-                    <img src="{{ asset('images/auth/login-photo.png') }}" alt="Ресторан Созвездие вкусов" class="auth-image">
+                    <img src="{{ asset('images/auth/login-photo.jpg') }}" alt="Ресторан Созвездие вкусов" class="auth-image">
                     <div class="auth-image-overlay">
                     </div>
                 </div>
@@ -82,21 +82,6 @@
                     
                     <div class="auth-divider">
                         <span>или</span>
-                    </div>
-                    
-                    <div class="social-auth">
-                        <p class="text-center mb-3">Войти через социальные сети</p>
-                        <div class="social-buttons">
-                            <button type="button" class="btn-social google">
-                                <i class="bi bi-google"></i> Google
-                            </button>
-                            <button type="button" class="btn-social vk">
-                                <i class="bi bi-vk"></i> VK
-                            </button>
-                            <button type="button" class="btn-social yandex">
-                                <i class="bi bi-yandex"></i> Яндекс
-                            </button>
-                        </div>
                     </div>
                     
                     <div class="auth-footer text-center mt-4">

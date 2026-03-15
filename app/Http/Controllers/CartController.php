@@ -187,18 +187,28 @@ class CartController extends Controller
         'delivery_type' => 'required|in:delivery,pickup',
         'notes' => 'nullable|string|max:1000',
         'payment_method' => 'required|in:card,online,cash',
-        
-        // Для доставки
+
         'city' => 'nullable|string|max:255',
         'street' => 'required_if:delivery_type,delivery|nullable|string|max:255',
-        'house' => 'required_if:delivery_type,delivery|nullable|string|max:50',
-        'apartment' => 'nullable|string|max:50',
-        'entrance' => 'nullable|string|max:50',
-        'floor' => 'nullable|string|max:50',
-        'intercom' => 'nullable|string|max:50',
-        
-        // Для самовывоза
+        'house' => 'required_if:delivery_type,delivery|nullable|string|max:15|regex:/^[\dа-яА-Яa-zA-Z\/\-]+$/u',
+        'apartment' => 'nullable|string|max:15',
+        'entrance' => 'nullable|string|max:10',
+        'floor' => 'nullable|string|max:10',
+        'intercom' => 'nullable|string|max:20',
+
         'pickup_address' => 'required_if:delivery_type,pickup|nullable|string|max:500',
+    ], [
+        'delivery_type.required' => 'Выберите способ получения заказа.',
+        'delivery_type.in' => 'Некорректный способ получения.',
+        'payment_method.required' => 'Выберите способ оплаты.',
+        'payment_method.in' => 'Некорректный способ оплаты.',
+        'notes.max' => 'Комментарий не должен превышать 1000 символов.',
+        'street.required_if' => 'Укажите улицу для доставки.',
+        'house.required_if' => 'Укажите номер дома для доставки.',
+        'house.max' => 'Номер дома — не более 15 символов.',
+        'house.regex' => 'Номер дома: только цифры, буквы (корпус), слэш или дефис.',
+        'apartment.max' => 'Номер квартиры — не более 15 символов.',
+        'pickup_address.required_if' => 'Укажите адрес самовывоза.',
     ]);
 
     $cartItems = $this->getCartItems();

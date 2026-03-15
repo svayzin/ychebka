@@ -48,12 +48,30 @@ class TableBookingController extends Controller
     {
         $data = $request->validate([
             'table_id' => 'required|exists:tables,id',
-            'guest_name' => 'required|string|max:255|min:2',
-            'guest_phone' => 'required|string|max:32',
+            'guest_name' => 'required|string|max:255|min:2|regex:/^[\p{L}\s\-\']+$/u',
+            'guest_phone' => 'required|string|max:32|regex:/^[\d\s\-\(\)\+]+$/',
             'guest_email' => 'nullable|email|max:255',
             'guests_count' => 'required|integer|min:1|max:4',
             'start_at' => 'required|date',
             'end_at' => 'required|date|after:start_at',
+        ], [
+            'table_id.required' => 'Выберите столик.',
+            'table_id.exists' => 'Выбранный столик недоступен.',
+            'guest_name.required' => 'Введите ваше имя.',
+            'guest_name.min' => 'Имя должно содержать минимум 2 символа.',
+            'guest_name.max' => 'Имя не должно превышать 255 символов.',
+            'guest_name.regex' => 'В имени допустимы только буквы, пробел, дефис или апостроф.',
+            'guest_phone.required' => 'Введите номер телефона.',
+            'guest_phone.regex' => 'Введите корректный номер телефона.',
+            'guest_email.email' => 'Введите корректный адрес электронной почты.',
+            'guests_count.required' => 'Укажите количество гостей.',
+            'guests_count.min' => 'Минимум 1 гость.',
+            'guests_count.max' => 'Максимум 4 гостя.',
+            'start_at.required' => 'Укажите время начала.',
+            'start_at.date' => 'Некорректная дата или время начала.',
+            'end_at.required' => 'Укажите время окончания.',
+            'end_at.date' => 'Некорректная дата или время окончания.',
+            'end_at.after' => 'Время окончания должно быть позже времени начала.',
         ]);
 
         $table = Table::findOrFail($data['table_id']);

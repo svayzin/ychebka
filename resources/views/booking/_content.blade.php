@@ -1,6 +1,5 @@
-<div class="booking-page">
-    <div class="container-exact py-5">
-    <h2 class="booking-title">Бронирование столика</h2>
+<div class="booking-page" data-tables-url="{{ url('/api/tables') }}" data-availability-url="{{ url('/api/table-availability') }}" data-reservations-url="{{ url('/api/table-reservations') }}">
+    <h2 class="section-title-exact">Бронирование столика</h2>
         <div class="booking-shell">
             
             <div class="booking-topbar">
@@ -40,9 +39,22 @@
             </div>
 
             <div id="booking-list-view">
-                <div id="tables-container" class="booking-grid"></div>
+                <div class="booking-tables-wrap">
+                    <button type="button" class="booking-arrow" id="booking-prev" aria-label="Назад" disabled>
+                        <i class="bi bi-chevron-left"></i>
+                    </button>
+                    <div class="booking-grid-viewport" id="booking-grid-viewport">
+                        <div class="booking-tables-track" id="booking-tables-track">
+                            <!-- страницы заполняются в JS -->
+                        </div>
+                    </div>
+                    <button type="button" class="booking-arrow" id="booking-next" aria-label="Вперёд">
+                        <i class="bi bi-chevron-right"></i>
+                    </button>
+                </div>
+                <div class="booking-pagination-info" id="booking-pagination-info" aria-live="polite"></div>
                 <div id="booking-list-empty" class="booking-empty d-none">
-                    Столики не найдены.
+                    <p class="mb-2">Список столиков пуст.</p>
                 </div>
             </div>
 
@@ -52,7 +64,7 @@
                 </div>
             </div>
         </div>
-    </div>
+
 </div>
 
 <div class="modal fade" id="bookingModal" tabindex="-1" aria-hidden="true">
@@ -90,22 +102,28 @@
 
                     <div class="mb-3">
                         <label class="form-label">Ваше имя *</label>
-                        <input type="text" id="booking-name" class="form-control" required>
+                        <input type="text" id="booking-name" class="form-control" required maxlength="255" placeholder="Только буквы"
+                               pattern="[a-zA-Zа-яА-ЯёЁ\s\-']{2,}" title="Минимум 2 символа, только буквы, пробел, дефис или апостроф" autocomplete="name">
                     </div>
 
                     <div class="mb-3">
                         <label class="form-label">Телефон *</label>
-                        <input type="text" id="booking-phone" class="form-control" required>
+                        <input type="tel" id="booking-phone" class="form-control" required placeholder="+7 (___) ___-__-__" autocomplete="tel">
                     </div>
 
                     <div class="mb-3">
                         <label class="form-label">E-mail</label>
-                        <input type="email" id="booking-email" class="form-control">
+                        <input type="email" id="booking-email" class="form-control" autocomplete="email">
                     </div>
 
                     <div class="mb-3">
                         <label class="form-label">Гостей *</label>
-                        <input type="number" id="booking-guests" class="form-control" min="1" max="4" required>
+                        <input type="number" id="booking-guests" class="form-control d-none" min="1" max="4" required readonly tabindex="-1">
+                        <div class="booking-guests-controls d-flex align-items-center gap-2">
+                            <button type="button" class="btn btn-sm booking-guests-btn booking-guests-minus" aria-label="Меньше">−</button>
+                            <span id="booking-guests-value" class="booking-guests-value">1</span>
+                            <button type="button" class="btn btn-sm booking-guests-btn booking-guests-plus" aria-label="Больше">+</button>
+                        </div>
                         <div class="form-text" id="booking-guests-hint"></div>
                     </div>
 
@@ -124,13 +142,14 @@
 <style>
     .booking-page {
         min-height: 100vh;
+        overflow-x: hidden;
     }
 
     .booking-shell {
-        background: #bfbfbf;
-        border-radius: 28px;
-        padding: 28px 28px 22px;
+        background: var(--bg-dark, #171717);
         max-width: 1280px;
+        width: 100%;
+        box-sizing: border-box;
         margin: 0 auto;
     }
 
@@ -142,39 +161,46 @@
 
     .booking-topbar {
         display: grid;
-        grid-template-columns: 250px minmax(0, 1fr) 160px;
+        grid-template-columns: minmax(0, 250px) minmax(0, 1fr) minmax(0, 160px);
         align-items: center;
         gap: 16px;
         margin-bottom: 20px;
+        min-width: 0;
     }
 
     .booking-tabs {
         display: inline-flex;
-        background: #ededed;
+        background: var(--bg-card, #1F1F1F);
+        border: 1px solid var(--border, #333333);
         border-radius: 999px;
         overflow: hidden;
         height: 50px;
-        width: 240px;
+        width: 100%;
+        max-width: 240px;
+        min-width: 0;
     }
 
     .booking-tab {
         border: none;
         background: transparent;
-        color: #c32355;
+        color: var(--text-gray, #B0B0B0);
         font-size: 20px;
         padding: 0 26px;
         min-width: 90px;
     }
 
     .booking-tab-active {
-        background: #c32355;
+        background: var(--accent, #AD1C43);
         color: #fff;
     }
 
     .booking-date-box {
-        width: 160px;
+        width: 100%;
+        max-width: 160px;
+        min-width: 0;
         height: 50px;
-        background: #ededed;
+        background: var(--bg-card, #1F1F1F);
+        border: 1px solid var(--border, #333333);
         border-radius: 14px;
         display: flex;
         align-items: center;
@@ -185,7 +211,7 @@
         width: 100%;
         border: none;
         background: transparent;
-        color: #111;
+        color: var(--text-light, #fff);
         font-size: 16px;
         outline: none;
     }
@@ -198,14 +224,16 @@
         position: relative;
         height: 34px;
         margin-bottom: 8px;
+        min-width: 0;
+        overflow: hidden;
     }
 
     .booking-selected-time {
         position: absolute;
         top: 0;
-        left: 0;
+        left: 50%;
         transform: translateX(-50%);
-        color: #111;
+        color: var(--text-light, #fff);
         font-weight: 700;
         font-size: 16px;
         white-space: nowrap;
@@ -244,7 +272,7 @@
     .booking-timeline-track-inactive {
         left: 0;
         width: 100%;
-        background: rgba(40, 40, 40, 0.15);
+        background: rgba(255, 255, 255, 0.15);
     }
 
     .booking-timeline-work-track {
@@ -253,7 +281,7 @@
         transform: translateY(-50%);
         left: 0;
         height: 3px;
-        background: rgba(20, 20, 20, 0.55);
+        background: var(--accent, #AD1C43);
         border-radius: 999px;
     }
 
@@ -284,10 +312,9 @@
         left: 50%;
         width: 12px;
         height: 12px;
-        background: #111;
+        background: var(--accent, #AD1C43);
         border-radius: 50%;
-        transform: translate(-50%, -50%);
-        box-shadow: 0 0 0 4px rgba(17, 17, 17, 0.1);
+        box-shadow: 0 0 0 4px rgba(173, 28, 67, 0.3);
         pointer-events: none;
     }
 
@@ -316,58 +343,146 @@
         position: absolute;
         top: 0;
         transform: translateX(-50%);
-        color: #2e2e2e;
+        color: var(--text-gray, #B0B0B0);
         font-size: 12px;
         white-space: nowrap;
     }
 
-    .booking-grid {
-        display: grid;
-        grid-template-columns: repeat(4, minmax(0, 1fr));
-        gap: 16px;
+    .booking-tables-wrap {
+        position: relative;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin: 0 auto;
+        width: 100%;
+        max-width: 100%;
+        min-width: 0;
     }
 
+    .booking-arrow {
+        flex-shrink: 0;
+        width: 48px;
+        height: 48px;
+        border-radius: 50%;
+        border: 1px solid var(--border, #333333);
+        background: var(--bg-card, #1F1F1F);
+        color: var(--text-light, #fff);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: background 0.2s, color 0.2s;
+    }
+
+    .booking-arrow:hover:not(:disabled) {
+        background: var(--accent, #AD1C43);
+        border-color: var(--accent, #AD1C43);
+    }
+
+    .booking-arrow:disabled {
+        opacity: 0.4;
+        cursor: not-allowed;
+    }
+
+    .booking-pagination-info {
+        text-align: center;
+        margin-top: 12px;
+        font-size: 14px;
+        color: var(--text-gray, #B0B0B0);
+    }
+
+    .booking-grid-viewport {
+        flex: 1 1 0;
+        min-width: 0;
+        overflow: hidden;
+        transition: height 0.35s ease-in-out;
+        isolation: isolate;
+        contain: layout style paint;
+    }
+
+    .booking-tables-track {
+        display: flex;
+        align-items: flex-start;
+        transition: transform 0.35s ease-in-out;
+    }
+
+    .booking-grid-page {
+        flex: 0 0 auto;
+        width: max-content;
+        min-width: 0;
+    }
+
+    .booking-grid {
+        display: grid;
+        width: 100%;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 16px;
+        align-content: start;
+    }
+
+    #booking-list-view {
+        min-height: 200px;
+    }
     .booking-empty {
-        color: #222;
-        padding: 20px 0;
+        color: var(--text-gray, #B0B0B0);
+        padding: 24px 0;
+        text-align: center;
     }
 
     .booking-schema-placeholder {
-        background: #ececec;
+        background: var(--bg-card, #1F1F1F);
+        border: 1px solid var(--border, #333333);
         border-radius: 18px;
         padding: 80px 20px;
         text-align: center;
-        color: #444;
+        color: var(--text-gray, #B0B0B0);
     }
 
     .table-card {
-        background: #7a7a7a;
-        border-radius: 18px;
-        padding: 12px 12px 14px;
-        min-height: 225px;
+        background: var(--bg-card, #1F1F1F);
+        border: 1px solid var(--border, #333333);
+        border-radius: 16px;
+        padding: 16px;
+        min-height: 240px;
         display: flex;
         flex-direction: column;
+        align-self: start;
     }
 
     .table-card-header {
         display: flex;
         justify-content: space-between;
-        align-items: flex-start;
+        align-items: center;
         gap: 10px;
-        margin-bottom: 8px;
+        margin-bottom: 10px;
+    }
+
+    .table-card-title-row {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .table-card-number-badge {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 40px;
+        height: 40px;
+        min-width: 40px;
+        border-radius: 50%;
+        background: var(--accent, #AD1C43);
+        color: #fff;
+        font-size: 14px;
+        font-weight: 700;
+        border: 2px solid rgba(255,255,255,0.3);
     }
 
     .table-card-title {
-        color: #fff;
-        font-size: 15px;
+        color: var(--text-light, #fff);
+        font-size: 18px;
         font-weight: 700;
         line-height: 1.2;
-    }
-
-    .table-card-subtitle {
-        color: #d7d7d7;
-        font-size: 12px;
-        margin-top: 2px;
     }
 
     .table-status {
@@ -384,114 +499,198 @@
     }
 
     .table-status-free {
-        background: #6ee06c;
-        color: #1f4f18;
+        background: rgba(110, 224, 108, 0.25);
+        color: #6ee06c;
+        border: 1px solid #6ee06c;
     }
 
     .table-status-busy {
-        background: #c32355;
-        color: #fff;
+        background: rgba(173, 28, 67, 0.3);
+        color: var(--accent, #AD1C43);
+        border: 1px solid var(--accent, #AD1C43);
     }
 
     .table-card-visual {
-        height: 86px;
-        margin: 8px 0 12px;
+        height: 80px;
+        margin: 10px 0 14px;
         background-image: url("/images/table/table-two.svg");
         background-repeat: no-repeat;
         background-position: center;
         background-size: contain;
-        cursor: pointer;
-        transition: transform 0.2s ease, opacity 0.2s ease;
-    }
-
-    .table-card-visual:hover {
-        transform: scale(1.04);
+        pointer-events: none;
+        opacity: 0.9;
     }
 
     .table-card-visual.is-disabled {
-        cursor: not-allowed;
-        opacity: 0.55;
+        opacity: 0.4;
     }
 
     .table-card-bottom {
         margin-top: auto;
     }
 
-    .table-card-info-row {
+    .table-card-meta-row {
         display: flex;
-        justify-content: space-between;
-        align-items: flex-end;
-        gap: 10px;
+        justify-content: flex-end;
+        margin-bottom: 10px;
     }
 
-    .table-card-badge {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        min-width: 34px;
-        height: 24px;
-        padding: 0 8px;
-        background: #c32355;
-        color: #fff;
-        border-radius: 999px;
-        font-size: 12px;
-        font-weight: 700;
-    }
-
-    .table-card-meta {
-        color: #fff;
+    .table-card-meta-wrap {
         text-align: right;
-        font-size: 13px;
-        line-height: 1.2;
     }
 
     .table-card-meta-top {
+        color: var(--text-light, #fff);
+        font-size: 15px;
         font-weight: 700;
+        line-height: 1.2;
     }
 
     .table-card-meta-bottom {
-        color: #ececec;
-        font-size: 12px;
+        color: var(--text-gray, #B0B0B0);
+        font-size: 13px;
         margin-top: 2px;
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        gap: 4px;
+    }
+
+    .table-card-btn {
+        display: block;
+        width: 100%;
+        padding: 12px 16px;
+        border-radius: 12px;
+        border: none;
+        background: var(--accent, #AD1C43);
+        color: #fff;
+        font-size: 14px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: background 0.2s, transform 0.2s;
+    }
+
+    .table-card-btn:hover:not(:disabled) {
+        background: #c92355;
+        transform: translateY(-1px);
+    }
+
+    .table-card-btn:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
     }
 
     .booking-modal-content {
-        background: #f0f0f0;
-        color: #222;
+        background: var(--bg-card, #1F1F1F);
+        color: var(--text-light, #fff);
         border-radius: 20px;
+        border: 1px solid var(--border, #333333);
     }
 
-    @media (max-width: 1100px) {
+    .booking-modal-content .form-label {
+        color: var(--text-gray, #B0B0B0);
+    }
+
+    .booking-modal-content .form-control {
+        background: var(--bg-light, #2A2A2A);
+        border: 1px solid var(--border, #333333);
+        color: var(--text-light, #fff);
+    }
+
+    .booking-modal-content .form-control::placeholder {
+        color: var(--text-gray, #B0B0B0);
+    }
+
+    .booking-modal-content .btn-light {
+        background: var(--bg-light, #2A2A2A);
+        border: 1px solid var(--border, #333333);
+        color: var(--text-light, #fff);
+    }
+
+    .booking-modal-content .btn-light:hover {
+        background: var(--border, #333333);
+        color: var(--text-light, #fff);
+    }
+
+    .booking-modal-content #booking-submit-btn {
+        background: var(--accent, #AD1C43);
+        color: #fff;
+        border: none;
+    }
+
+    .booking-modal-content #booking-submit-btn:hover {
+        background: #c92355;
+        color: #fff;
+    }
+    .booking-guests-controls {
+        margin-top: 4px;
+    }
+    .booking-modal-content .booking-guests-btn {
+        width: 36px;
+        height: 36px;
+        padding: 0;
+        border-radius: 8px;
+        border: 1px solid var(--border, #333333);
+        background: var(--bg-light, #2A2A2A);
+        color: var(--text-light, #fff);
+        font-size: 18px;
+        line-height: 1;
+    }
+    .booking-modal-content .booking-guests-btn:hover {
+        border-color: var(--accent, #AD1C43);
+        color: var(--accent, #AD1C43);
+    }
+    .booking-guests-value {
+        min-width: 24px;
+        text-align: center;
+        font-weight: 600;
+        color: var(--text-light, #fff);
+    }
+
+    @media (max-width: 1200px) {
         .booking-grid {
             grid-template-columns: repeat(3, minmax(0, 1fr));
         }
     }
 
-    @media (max-width: 860px) {
+    @media (max-width: 900px) {
         .booking-topbar {
             grid-template-columns: 1fr;
+            gap: 12px;
+        }
+
+        .booking-tabs {
+            max-width: 100%;
         }
 
         .booking-date-box {
-            width: 100%;
+            max-width: 100%;
         }
 
-        .booking-grid {
-            grid-template-columns: repeat(2, minmax(0, 1fr));
+        .booking-time-panel {
+            order: -1;
         }
     }
 
-    @media (max-width: 580px) {
-        .booking-shell {
-            padding: 18px;
+    @media (max-width: 860px) {
+        .booking-grid {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
         }
 
+        .booking-arrow {
+            width: 40px;
+            height: 40px;
+            font-size: 18px;
+        }
+    }
+
+    @media (max-width: 620px) {
         .booking-title {
             font-size: 38px;
         }
 
         .booking-grid {
-            grid-template-columns: 1fr;
+            grid-template-columns: minmax(0, 1fr);
         }
 
         .booking-tabs {
@@ -507,9 +706,14 @@
 <script>
 document.addEventListener('DOMContentLoaded', () => {
     const dateInput = document.getElementById('booking-date');
-    const tablesContainer = document.getElementById('tables-container');
+    const tablesTrack = document.getElementById('booking-tables-track');
+    const gridViewport = document.getElementById('booking-grid-viewport');
     const emptyBlock = document.getElementById('booking-list-empty');
-    const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+    const bookingPage = document.querySelector('.booking-page');
+    const getCsrfToken = () => document.querySelector('meta[name="csrf-token"]')?.getAttribute('content') || '';
+    const tablesUrl = bookingPage?.getAttribute('data-tables-url') || '/api/tables';
+    const availabilityUrl = bookingPage?.getAttribute('data-availability-url') || '/api/table-availability';
+    const reservationsUrl = bookingPage?.getAttribute('data-reservations-url') || '/api/table-reservations';
 
     const listViewBtn = document.getElementById('view-list');
     const schemaViewBtn = document.getElementById('view-schema');
@@ -540,8 +744,17 @@ document.addEventListener('DOMContentLoaded', () => {
     const DISPLAY_END_MINUTES = DISPLAY_END * 60;
     const TOTAL_DISPLAY_STEPS = (DISPLAY_END_MINUTES - DISPLAY_START_MINUTES) / STEP_MINUTES;
 
+    function getPerPage() {
+        const w = window.innerWidth;
+        if (w >= 1200) return 8;
+        if (w >= 860) return 6;
+        if (w >= 620) return 4;
+        return 2;
+    }
+
     let tables = [];
     let busyTableIds = [];
+    let currentPage = 0;
     let selectedTimeMinutes = START_MINUTES;
     let isDraggingTimeline = false;
     let activePointerId = null;
@@ -561,6 +774,31 @@ document.addEventListener('DOMContentLoaded', () => {
         schemaViewBtn.classList.add('booking-tab-active');
         listView.classList.add('d-none');
         schemaView.classList.remove('d-none');
+    });
+
+    document.getElementById('booking-prev').addEventListener('click', () => {
+        if (currentPage <= 0) return;
+        currentPage--;
+        updateViewportSize();
+        applyTrackTransform();
+        updateArrows();
+    });
+
+    document.getElementById('booking-next').addEventListener('click', () => {
+        const perPage = getPerPage();
+        const totalPages = Math.ceil(tables.length / perPage) || 1;
+        if (currentPage >= totalPages - 1) return;
+        currentPage++;
+        updateViewportSize();
+        applyTrackTransform();
+        updateArrows();
+    });
+
+    window.addEventListener('resize', () => {
+        const perPage = getPerPage();
+        const totalPages = Math.ceil(tables.length / perPage) || 1;
+        if (currentPage >= totalPages) currentPage = Math.max(0, totalPages - 1);
+        renderTables();
     });
 
     function pad(n) {
@@ -632,7 +870,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
         timelineContent.style.transform = `translateX(${translateX}px)`;
         timelineHours.style.transform = `translateX(${translateX}px)`;
-        selectedTimeLabel.style.left = `${viewportWidth / 2}px`;
         selectedTimeLabel.textContent = timeString;
     }
 
@@ -709,14 +946,22 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     async function loadTables() {
-        const res = await fetch('/api/tables');
-        tables = await res.json();
+        try {
+            const res = await fetch(tablesUrl);
+            const data = await res.json();
+            tables = Array.isArray(data) ? data : [];
+            if (!res.ok) tables = [];
+        } catch (e) {
+            tables = [];
+        }
+        const perPage = getPerPage();
+        const totalPages = Math.ceil(tables.length / perPage) || 1;
+        currentPage = Math.min(currentPage, Math.max(0, totalPages - 1));
         renderTables();
         await loadAvailability();
     }
 
     async function loadAvailability() {
-        console.log('loadAvailability called', new Error().stack);
         if (!dateInput.value) return;
 
         const params = new URLSearchParams({
@@ -724,7 +969,7 @@ document.addEventListener('DOMContentLoaded', () => {
             time: minutesToTimeString(selectedTimeMinutes),
         });
 
-        const res = await fetch('/api/table-availability?' + params.toString());
+        const res = await fetch(availabilityUrl + '?' + params.toString());
 
         if (!res.ok) {
             busyTableIds = [];
@@ -736,55 +981,135 @@ document.addEventListener('DOMContentLoaded', () => {
         renderTables();
     }
 
+    function getVisibleTables() {
+        const perPage = getPerPage();
+        const start = currentPage * perPage;
+        return tables.slice(start, start + perPage);
+    }
+
+    function updateArrows() {
+        const prevBtn = document.getElementById('booking-prev');
+        const nextBtn = document.getElementById('booking-next');
+        const infoEl = document.getElementById('booking-pagination-info');
+        if (!prevBtn || !nextBtn) return;
+        const perPage = getPerPage();
+        const totalPages = Math.ceil(tables.length / perPage) || 1;
+        prevBtn.disabled = currentPage <= 0;
+        nextBtn.disabled = currentPage >= totalPages - 1;
+        if (infoEl && tables.length > 0) {
+            infoEl.textContent = totalPages > 1 ? `Страница ${currentPage + 1} из ${totalPages}` : '';
+        }
+    }
+
+    function buildCard(table) {
+        const isBusy = busyTableIds.includes(table.id);
+        const depositPerPerson = table.deposit_per_person || 2000;
+        const card = document.createElement('div');
+        card.className = 'table-card';
+        card.innerHTML = `
+            <div class="table-card-header">
+                <div class="table-card-title-row">
+                    <span class="table-card-number-badge">№${table.number}</span>
+                    <span class="table-card-title">стол</span>
+                </div>
+                <span class="table-status ${isBusy ? 'table-status-busy' : 'table-status-free'}">
+                    ${isBusy ? 'Занято' : 'Свободно'}
+                </span>
+            </div>
+            <div class="table-card-visual ${isBusy ? 'is-disabled' : ''}"></div>
+            <div class="table-card-bottom">
+                <div class="table-card-meta-row">
+                    <div class="table-card-meta-wrap">
+                        <div class="table-card-meta-top">${depositPerPerson.toLocaleString('ru-RU')} ₽</div>
+                        <div class="table-card-meta-bottom">
+                            <i class="bi bi-people-fill"></i> ${table.seats_min}-${table.seats_max}
+                        </div>
+                    </div>
+                </div>
+                <button type="button" class="table-card-btn" ${isBusy ? 'disabled' : ''} data-table-id="${table.id}">
+                    Забронировать
+                </button>
+            </div>
+        `;
+        if (!isBusy) {
+            card.querySelector('.table-card-btn').addEventListener('click', () => openBookingModal(table));
+        }
+        return card;
+    }
+
+    function getViewportWidth() {
+        return gridViewport && gridViewport.offsetWidth > 0 ? gridViewport.offsetWidth : 0;
+    }
+
+    function getSlideOffset() {
+        if (!tablesTrack || !tablesTrack.children.length) return 0;
+        const w = getViewportWidth();
+        return w > 0 ? Math.floor(currentPage * w) : 0;
+    }
+
+    function applyTrackTransform() {
+        if (!tables.length || !tablesTrack) return;
+        const offset = getSlideOffset();
+        tablesTrack.style.transform = `translateX(-${offset}px)`;
+    }
+
+    function updateViewportSize() {
+        if (!gridViewport || !tablesTrack || !tablesTrack.children[currentPage]) return;
+        const slide = tablesTrack.children[currentPage];
+        const viewportW = getViewportWidth();
+        const slideH = slide.offsetHeight;
+        const perPage = getPerPage();
+        const totalPages = Math.ceil(tables.length / perPage) || 1;
+        if (viewportW > 0) {
+            tablesTrack.style.width = (totalPages * viewportW) + 'px';
+            for (let i = 0; i < tablesTrack.children.length; i++) {
+                const s = tablesTrack.children[i];
+                s.style.width = viewportW + 'px';
+                s.style.minWidth = viewportW + 'px';
+            }
+        }
+        gridViewport.style.height = Math.ceil(slideH) + 'px';
+    }
+
     function renderTables() {
-        tablesContainer.innerHTML = '';
+        if (!tablesTrack) return;
+        tablesTrack.innerHTML = '';
 
         if (!tables.length) {
             emptyBlock.classList.remove('d-none');
+            const wrap = document.querySelector('.booking-tables-wrap');
+            if (wrap) wrap.style.display = 'none';
+            const infoEl = document.getElementById('booking-pagination-info');
+            if (infoEl) infoEl.textContent = '';
             return;
         }
 
         emptyBlock.classList.add('d-none');
+        const wrap = document.querySelector('.booking-tables-wrap');
+        if (wrap) wrap.style.display = 'flex';
 
-        tables.forEach(table => {
-            const isBusy = busyTableIds.includes(table.id);
-            const depositPerPerson = table.deposit_per_person || 2000;
+        const perPage = getPerPage();
+        const totalPages = Math.ceil(tables.length / perPage) || 1;
 
-            const card = document.createElement('div');
-            card.className = 'table-card';
+        for (let p = 0; p < totalPages; p++) {
+            const pageEl = document.createElement('div');
+            pageEl.className = 'booking-grid-page';
+            const grid = document.createElement('div');
+            grid.className = 'booking-grid';
+            const start = p * perPage;
+            const pageTables = tables.slice(start, start + perPage);
+            pageTables.forEach(table => grid.appendChild(buildCard(table)));
+            pageEl.appendChild(grid);
+            tablesTrack.appendChild(pageEl);
+        }
 
-            card.innerHTML = `
-                <div class="table-card-header">
-                    <div>
-                        <div class="table-card-title">Стол №${table.number}</div>
-                        <div class="table-card-subtitle">${table.seats_min}-${table.seats_max} гостей</div>
-                    </div>
-                    <span class="table-status ${isBusy ? 'table-status-busy' : 'table-status-free'}">
-                        ${isBusy ? 'Занято' : 'Свободно'}
-                    </span>
-                </div>
-
-                <div class="table-card-visual ${isBusy ? 'is-disabled' : ''}"></div>
-
-                <div class="table-card-bottom">
-                    <div class="table-card-info-row">
-                        <div class="table-card-badge">№${table.number}</div>
-                        <div class="table-card-meta">
-                            <div class="table-card-meta-top">${depositPerPerson.toLocaleString('ru-RU')} ₽</div>
-                            <div class="table-card-meta-bottom">
-                                <i class="bi bi-people-fill"></i> ${table.seats_min}-${table.seats_max}
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            `;
-
-            if (!isBusy) {
-                card.querySelector('.table-card-visual').addEventListener('click', () => openBookingModal(table));
-            }
-
-            tablesContainer.appendChild(card);
-        });
+        function doLayout() {
+            updateViewportSize();
+            applyTrackTransform();
+            if (getViewportWidth() === 0) requestAnimationFrame(doLayout);
+        }
+        requestAnimationFrame(doLayout);
+        updateArrows();
     }
 
     const bookingModalEl = document.getElementById('bookingModal');
@@ -803,6 +1128,71 @@ document.addEventListener('DOMContentLoaded', () => {
     const bookingSubmitBtn = document.getElementById('booking-submit-btn');
 
     const bookingModal = new bootstrap.Modal(bookingModalEl);
+    const bookingGuestsValueEl = document.getElementById('booking-guests-value');
+    const bookingGuestsMinusBtn = document.querySelector('.booking-guests-minus');
+    const bookingGuestsPlusBtn = document.querySelector('.booking-guests-plus');
+
+    // Маска телефона: +7 (XXX) XXX-XX-XX
+    function formatPhoneInput(value) {
+        const digits = (value || '').replace(/\D/g, '');
+        let d = digits;
+        if (d.length > 0 && d[0] === '8') d = '7' + d.slice(1);
+        if (d.length > 0 && d[0] !== '7') d = '7' + d;
+        d = d.slice(0, 11);
+        if (d.length === 0) return '';
+        if (d.length <= 1) return '+7';
+        if (d.length <= 4) return '+7 (' + d.slice(1);
+        if (d.length <= 7) return '+7 (' + d.slice(1, 4) + ') ' + d.slice(4);
+        return '+7 (' + d.slice(1, 4) + ') ' + d.slice(4, 7) + '-' + d.slice(7, 9) + '-' + d.slice(9, 11);
+    }
+    function phoneDigits(displayValue) {
+        return (displayValue || '').replace(/\D/g, '').replace(/^8/, '7').slice(0, 11);
+    }
+    bookingPhone.addEventListener('input', function() {
+        const pos = this.selectionStart;
+        const oldLen = this.value.length;
+        const digits = phoneDigits(this.value);
+        this.value = formatPhoneInput(digits);
+        const newLen = this.value.length;
+        let newPos = Math.max(0, pos + (newLen - oldLen));
+        if (newPos > this.value.length) newPos = this.value.length;
+        this.setSelectionRange(newPos, newPos);
+    });
+
+    // Имя: только буквы, пробел, дефис, апостроф
+    bookingName.addEventListener('input', function() {
+        this.value = (this.value || '').replace(/[^\p{L}\s\-']/gu, '');
+        if (this.value.length > 255) this.value = this.value.slice(0, 255);
+    });
+
+    // Гости: только кнопки +/-, значение в допустимых границах
+    function updateGuestsDisplay() {
+        const min = parseInt(bookingGuests.min, 10) || 1;
+        const max = parseInt(bookingGuests.max, 10) || 4;
+        let n = parseInt(bookingGuests.value, 10);
+        if (isNaN(n)) n = min;
+        n = Math.max(min, Math.min(max, n));
+        bookingGuests.value = n;
+        if (bookingGuestsValueEl) bookingGuestsValueEl.textContent = n;
+    }
+    bookingGuestsMinusBtn.addEventListener('click', function() {
+        const min = parseInt(bookingGuests.min, 10) || 1;
+        let n = parseInt(bookingGuests.value, 10) || min;
+        if (n > min) {
+            bookingGuests.value = n - 1;
+            updateGuestsDisplay();
+        }
+    });
+    bookingGuestsPlusBtn.addEventListener('click', function() {
+        const max = parseInt(bookingGuests.max, 10) || 4;
+        let n = parseInt(bookingGuests.value, 10) || 1;
+        if (n < max) {
+            bookingGuests.value = n + 1;
+            updateGuestsDisplay();
+        }
+    });
+    bookingGuests.addEventListener('input', updateGuestsDisplay);
+    bookingGuests.addEventListener('change', updateGuestsDisplay);
 
     function openBookingModal(table) {
         const selectedTime = minutesToTimeString(selectedTimeMinutes);
@@ -829,9 +1219,10 @@ document.addEventListener('DOMContentLoaded', () => {
             bookingEndTimeInput.value = suggestedEndTime;
         }
 
-        bookingGuests.value = table.seats_min;
         bookingGuests.min = table.seats_min;
         bookingGuests.max = table.seats_max;
+        bookingGuests.value = table.seats_min;
+        updateGuestsDisplay();
         bookingGuestsHint.textContent = `Допустимое количество гостей: от ${table.seats_min} до ${table.seats_max}.`;
 
         bookingError.classList.add('d-none');
@@ -848,6 +1239,24 @@ document.addEventListener('DOMContentLoaded', () => {
         const startTime = bookingStartTimeInput.value;
         const endTime = bookingEndTimeInput.value;
 
+        const name = (bookingName.value || '').trim();
+        const phone = (bookingPhone.value || '').trim();
+        const phoneDig = phone.replace(/\D/g, '');
+        if (!name || name.length < 2) {
+            bookingError.textContent = 'Введите ваше имя (минимум 2 символа).';
+            bookingError.classList.remove('d-none');
+            return;
+        }
+        if (/[0-9]/.test(name)) {
+            bookingError.textContent = 'В имени допустимы только буквы, пробел, дефис или апостроф.';
+            bookingError.classList.remove('d-none');
+            return;
+        }
+        if (phoneDig.length < 10) {
+            bookingError.textContent = 'Введите корректный номер телефона (минимум 10 цифр).';
+            bookingError.classList.remove('d-none');
+            return;
+        }
         if (!tableId || !dateInput.value || !startTime || !endTime) {
             bookingError.textContent = 'Заполните дату и время бронирования.';
             bookingError.classList.remove('d-none');
@@ -872,20 +1281,20 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const payload = {
             table_id: tableId,
-            guest_name: bookingName.value,
-            guest_phone: bookingPhone.value,
-            guest_email: bookingEmail.value || null,
+            guest_name: name,
+            guest_phone: bookingPhone.value.trim(),
+            guest_email: (bookingEmail.value || '').trim() || null,
             guests_count: guests,
             start_at: `${dateInput.value} ${startTime}`,
             end_at: `${dateInput.value} ${endTime}`,
         };
 
         try {
-            const res = await fetch('/api/table-reservations', {
+            const res = await fetch(reservationsUrl, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
-                    'X-CSRF-TOKEN': csrfToken,
+                    'X-CSRF-TOKEN': getCsrfToken(),
                     'Accept': 'application/json',
                 },
                 body: JSON.stringify(payload),
@@ -894,7 +1303,10 @@ document.addEventListener('DOMContentLoaded', () => {
             const data = await res.json();
 
             if (!res.ok) {
-                bookingError.textContent = data.message || 'Не удалось создать бронь.';
+                const firstError = data.errors && typeof data.errors === 'object'
+                    ? Object.values(data.errors).flat()[0]
+                    : null;
+                bookingError.textContent = firstError || data.message || 'Не удалось создать бронь.';
                 bookingError.classList.remove('d-none');
             } else {
                 await loadAvailability();
