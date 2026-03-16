@@ -1,14 +1,12 @@
 @extends('layouts.app')
 
-@section('title', 'Меню - Созвездие вкусов')
+@section('title', 'Меню - Crimson Flame')
 
 @section('content')
 <div class="menu-page">
-    <!-- Заголовок меню УБРАН -->
-
     <div class="container-exact">
         <div class="row">
-            <!-- Боковая навигация - ФИКСИРОВАННАЯ -->
+            <!-- Боковая навигация -->
             <div class="col-lg-3">
                 <div class="sidebar-categories sticky-sidebar">
                 <div class="categories-list">
@@ -69,7 +67,7 @@
                                 <div class="product-image-wrapper" onclick="openProductModal({{ $product->id }})">
                                     <div class="product-image-container">
                                         @if($product->image)
-                                        <img src="{{ asset('storage/' . $product->image) }}" 
+                                        <img src="{{ $product->image_url }}" 
                                              alt="{{ $product->name }}">
                                         @else
                                         <div class="no-image">
@@ -116,7 +114,6 @@
             </div>
             <div class="modal-body p-0">
                 <div class="product-detail-layout">
-                    <!-- Левая часть - большое фото -->
                     <div class="product-detail-image-section">
                         <div class="product-detail-image-container" id="modalImageContainer">
                             <div class="text-center py-5">
@@ -126,8 +123,7 @@
                             </div>
                         </div>
                     </div>
-                    
-                    <!-- Правая часть - информация -->
+
                     <div class="product-detail-info-section">
                         <div class="product-detail-content" id="modalContent">
                             <div class="text-center py-5">
@@ -178,10 +174,8 @@
 .menu-page {
     background: var(--bg-dark);
     min-height: 100vh;
-    padding-top: 30px; /* Добавлен отступ сверху */
+    padding-top: 30px; 
 }
-
-/* Удалены стили для hero-title-exact и hero-text-exact так как они больше не используются */
 
 .cart-indicator {
     display: flex;
@@ -189,7 +183,6 @@
     margin-bottom: 20px;
 }
 
-/* ФИКСИРОВАННАЯ БОКОВАЯ НАВИГАЦИЯ */
 .sidebar-categories {
     background: var(--bg-card);
     border-radius: 12px;
@@ -197,20 +190,18 @@
     border: 1px solid var(--border);
     margin-bottom: 30px;
     position: sticky;
-    top: 100px; /* Фиксируется на расстоянии 100px от верха */
-    max-height: calc(100vh - 120px); /* Ограничение высоты */
-    overflow-y: auto; /* Прокрутка внутри, если категорий много */
+    top: 100px; 
+    max-height: calc(100vh - 120px); 
+    overflow-y: auto; 
     scrollbar-width: thin;
     scrollbar-color: #AD1C43 var(--bg-dark);
 }
 
-/* Стилизация скроллбара для Firefox */
 .sidebar-categories {
     scrollbar-width: thin;
     scrollbar-color: #AD1C43 var(--bg-dark);
 }
 
-/* Стилизация скроллбара для Chrome/Edge/Safari */
 .sidebar-categories::-webkit-scrollbar {
     width: 6px;
 }
@@ -317,7 +308,6 @@
     }
 }
 
-/* ДИЗАЙН КАРТОЧЕК */
 .product-card {
     background: linear-gradient(145deg, #1e1e1e, #1a1a1a);
     border: 1px solid rgba(126, 48, 69, 0.38);
@@ -476,7 +466,6 @@
     font-size: 18px;
 }
 
-/* НОВЫЙ ДИЗАЙН МОДАЛЬНОГО ОКНА */
 .product-modal-content {
     background: #1a1a1a;
     border: none;
@@ -513,7 +502,6 @@
     padding: 0;
 }
 
-/* Лейаут модального окна */
 .product-detail-layout {
     display: flex;
     flex-direction: column;
@@ -526,7 +514,6 @@
     }
 }
 
-/* Левая часть - большое фото */
 .product-detail-image-section {
     flex: 1.2;
     background: #0f0f0f;
@@ -561,7 +548,6 @@
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
 }
 
-/* Правая часть - информация */
 .product-detail-info-section {
     flex: 0.8;
     background: #1a1a1a;
@@ -586,7 +572,6 @@
     line-height: 1.2;
 }
 
-/* Вес под названием */
 .product-detail-weight {
     font-size: 16px;
     color: var(--text-gray);
@@ -611,7 +596,6 @@
     flex: 1;
 }
 
-/* Блок с ценой и кнопкой */
 .product-detail-footer {
     display: flex;
     align-items: center;
@@ -621,7 +605,6 @@
     border-top: 1px solid rgba(201, 168, 106, 0.2);
 }
 
-/* Цена слева */
 .product-detail-price-block {
     flex: 1;
 }
@@ -648,7 +631,6 @@
     margin-left: 2px;
 }
 
-/* Кнопка в корзину справа */
 .btn-modal-add-single {
     padding: 14px 30px;
     background: #AD1C43;
@@ -683,10 +665,9 @@
     border-width: 0.2rem;
 }
 
-/* Адаптивность */
 @media (max-width: 992px) {
     .sidebar-categories {
-        position: static; /* На мобильных отключаем фиксацию */
+        position: static;
         max-height: none;
         overflow-y: visible;
     }
@@ -813,7 +794,7 @@ window.openProductModal = function(productId) {
 
 // Функция для отображения данных в модальном окне
 function renderProductModal(product) {
-    const imageUrl = product.image ? `/storage/${product.image}` : 'https://via.placeholder.com/600x400/2A2A2A/C9A86A?text=' + encodeURIComponent(product.name);
+    const imageUrl = product.image_url || ('https://via.placeholder.com/600x400/2A2A2A/C9A86A?text=' + encodeURIComponent(product.name));
     
     // Вставляем изображение
     document.getElementById('modalImageContainer').innerHTML = `

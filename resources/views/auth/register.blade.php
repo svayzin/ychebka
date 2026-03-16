@@ -1,21 +1,19 @@
 @extends('layouts.app')
 
-@section('title', 'Регистрация - Созвездие вкусов')
+@section('title', 'Регистрация - Crimson Flame')
 
 @section('content')
 <div class="auth-page">
     <div class="auth-container">
         <div class="auth-grid">
-            <!-- Левая часть с фото -->
             <div class="auth-image-side">
                 <div class="auth-image-content">
-                    <img src="{{ asset('images/auth/register-photo.jpg') }}" alt="Интерьер ресторана Созвездие вкусов" class="auth-image">
+                    <img src="{{ asset('images/auth/register-photo.jpg') }}" alt="Интерьер ресторана Crimson Flame" class="auth-image">
                     <div class="auth-image-overlay">
                     </div>
                 </div>
             </div>
             
-            <!-- Правая часть с формой -->
             <div class="auth-form-side">
                 <div class="auth-form-wrapper">
                     <div class="auth-header">

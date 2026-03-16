@@ -6,7 +6,6 @@
     <div class="hero-exact-background-photo">
         <div class="container-exact hero-container-exact">
             <div class="row align-items-center hero-row-exact">
-                <!-- Текст слева -->
                 <div class="col-12 col-lg-6 order-2 order-lg-1">
                     <div class="hero-text-wrapper-exact">
                         <h1 class="hero-title-exact">Crimson Flame</h1>
@@ -23,7 +22,7 @@
                         </div>
                     </div>
                 </div>
-                <!-- Картинка справа (скрывается при ≤990px) -->
+
                 <div class="col-12 col-lg-6 order-1 order-lg-2 hero-image-col">
                     <div class="hero-image-exact">
                         <img src="{{ asset('images/hero/hero-photo.png') }}" 
@@ -258,7 +257,7 @@
         }
     }
 
-    /* Маленькие телефоны (≤480px) — уменьшаем всё, чтобы влезало */
+    /* Маленькие телефоны (≤480px) */
     @media (max-width: 480px) {
         .hero-exact-background-photo {
             padding: 16px 0 24px;
@@ -331,7 +330,6 @@
 <section class="section-exact" id="about">
     <div class="container-exact">
         <div class="about-content-exact">
-            <!-- Левая часть: Заголовок и текст -->
             <div class="about-left-exact">
                 <h2 class="section-title-exact">О ресторане</h2>
                 
@@ -351,17 +349,14 @@
                 </div>
             </div>
             
-            <!-- Правая часть: Фото -->
             <div class="about-right-exact">
                 <div class="photos-grid-exact">
-                    <!-- Большая фото слева -->
                     <div class="photo-large-wrapper-exact">
                         <img src="{{ asset('images/about/restaurant-1.jpg') }}" 
                              alt="Интерьер ресторана" 
                              class="about-img-large-exact">
                     </div>
                     
-                    <!-- 2 маленькие квадратные фото справа -->
                     <div class="photos-small-wrapper-exact">
                         <div class="about-photo-small-exact">
                             <img src="{{ asset('images/about/restaurant-2.jpg') }}" 
@@ -410,7 +405,7 @@
     /* Структура секции "О ресторане" */
     .about-content-exact {
         display: grid;
-        grid-template-columns: 1.2fr 1.8fr; /* Фото занимают больше места */
+        grid-template-columns: 1.2fr 1.8fr;
         gap: 60px;
         align-items: start;
         margin-top: 60px;
@@ -420,7 +415,7 @@
         display: flex;
         flex-direction: column;
         height: 100%;
-        padding-right: 30px; /* Отступ от фото */
+        padding-right: 30px;
     }
     
     #about .section-title-exact {
@@ -432,23 +427,21 @@
         display: flex;
         flex-direction: column;
         justify-content: flex-start;
-        max-width: 500px; /* Ограничиваем ширину текста */
+        max-width: 500px; 
     }
     
     .about-text-content-exact p {
-        margin-bottom: 20px; /* Уменьшен отступ между параграфами */
-        font-size: 18px; /* Немного уменьшен шрифт */
+        margin-bottom: 20px;
+        font-size: 18px; 
         line-height: 1.5;
         color: #ffffff;
     }
     
-    /* Правая часть с фотографиями */
     .about-right-exact {
         height: 100%;
         width: 100%;
     }
     
-    /* Стили для фото справа */
     .photos-grid-exact {
         display: grid;
         grid-template-columns: 2fr 1fr;
@@ -488,7 +481,7 @@
         width: 100%;
         height: calc(50% - 7.5px);
         overflow: hidden;
-        aspect-ratio: 1/1; /* Делаем квадратными */
+        aspect-ratio: 1/1; 
     }
     
     .about-img-small-exact {
@@ -515,8 +508,6 @@
         margin-top: 10px;
     }
     
-    
-    /* Секция "О ресторане": контент не выходит за пределы, фото не залезают на следующий блок */
     #about.section-exact {
         overflow: hidden;
     }
@@ -537,7 +528,6 @@
         }
     }
 
-    /* С ~1000px: контент по центру; фото в одну сетку без обрезки */
     @media (max-width: 1024px) {
         #about.section-exact {
             margin-bottom: 80px;
@@ -578,7 +568,6 @@
             justify-content: center;
         }
 
-        /* Сетка: большое + два маленьких без обрезки последнего */
         .photos-grid-exact {
             height: 340px;
             grid-template-columns: 2fr 1fr;
@@ -733,7 +722,6 @@
             <div class="gallery-container-exact">
                 <div class="swiper gallery-swiper-exact">
                     <div class="swiper-wrapper">
-                        <!-- 6 слайдов с фотографиями -->
                         <div class="swiper-slide">
                             <div class="slide-image-wrapper-exact">
                                 <img src="{{ asset('images/gallery/photo1.jpg') }}" 
@@ -779,8 +767,7 @@
                     </div>
                 </div>
             </div>
-            
-            <!-- Пагинация (кружочки отдельно под фотографиями) -->
+
             <div class="gallery-pagination-wrapper-exact">
                 <div class="swiper-pagination-gallery-exact"></div>
             </div>
@@ -856,7 +843,7 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        padding: 25px 0; /* Увеличил padding */
+        padding: 25px 0; 
     }
     
     .swiper-pagination-gallery-exact {
@@ -866,18 +853,18 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        gap: 20px; /* Увеличил gap между кружочками */
+        gap: 20px; 
         margin-top: 0;
         bottom: auto !important;
         left: auto !important;
     }
     
     .swiper-pagination-gallery-exact .swiper-pagination-bullet {
-        width: 16px; /* УВЕЛИЧИЛ с 12px до 16px */
-        height: 16px; /* УВЕЛИЧИЛ с 12px до 16px */
+        width: 16px; 
+        height: 16px; 
         background: transparent;
         opacity: 0.7;
-        border: 2px solid #ffffff; /* Увеличил толщину границы */
+        border: 2px solid #ffffff; 
         border-radius: 50%;
         cursor: pointer;
         transition: all 0.3s ease;
@@ -887,17 +874,16 @@
     .swiper-pagination-gallery-exact .swiper-pagination-bullet-active {
         background: #ffffff;
         opacity: 1;
-        transform: scale(1.3); /* УВЕЛИЧИЛ с 1.2 до 1.3 */
-        box-shadow: 0 0 12px rgba(255, 255, 255, 0.5); /* Усилил тень */
+        transform: scale(1.3); 
+        box-shadow: 0 0 12px rgba(255, 255, 255, 0.5); 
     }
     
     .swiper-pagination-gallery-exact .swiper-pagination-bullet:hover {
         opacity: 0.9;
-        transform: scale(1.2); /* Увеличил эффект при наведении */
+        transform: scale(1.2); 
         border-color: #ffffff;
     }
     
-    /* Адаптивность - обновленные значения для больших фото */
     @media (max-width: 1400px) {
         .gallery-container-exact {
             height: 450px;
@@ -931,7 +917,7 @@
         }
         
         .swiper-pagination-gallery-exact .swiper-pagination-bullet {
-            width: 14px; /* Немного меньше на планшетах */
+            width: 14px; 
             height: 14px;
         }
         
@@ -952,7 +938,7 @@
         }
         
         .gallery-pagination-wrapper-exact {
-            padding: 20px 0; /* Меньше padding на мобильных */
+            padding: 20px 0; 
         }
         
         .swiper-pagination-gallery-exact {
@@ -1031,15 +1017,11 @@
 </style>
 
 <!-- Контакты -->
-
-
-<!-- Контакты -->
 <section class="section-exact" id="contacts">
     <div class="container-exact">
         <h2 class="section-title-exact">Контакты</h2>
         
         <div class="contacts-grid-exact">
-            <!-- Левая часть: информация -->
             <div class="contacts-info-exact">
                 <div class="contact-item-exact">
                     <strong>Телефон</strong>
@@ -1054,8 +1036,8 @@
                 <div class="contact-item-exact">
                     <strong>Время работы</strong>
                     <p>
-                        Пн-пт: 10:00-23:00<br>
-                        Сб-вс: 9:00-23:00
+                        Пн-пт: 8:00-22:00<br>
+                        Сб-вс: 8:00-22:00
                     </p>
                 </div>
                 
@@ -1066,7 +1048,6 @@
                 </a>
             </div>
             
-            <!-- Правая часть: Яндекс Карта -->
             <div class="contacts-map-exact">
                 <iframe 
                     src="https://yandex.ru/map-widget/v1/?ll=52.413870%2C55.724955&z=16&pt=52.413870,55.724955,pm2rdm" 
@@ -1082,7 +1063,7 @@
 </section>
 
 <style>
-    /* Стили ТОЛЬКО для блока контактов */
+    /* Стили блока контактов */
     .contacts-grid-exact {
         display: grid;
         grid-template-columns: 1fr 1fr;
@@ -1098,7 +1079,6 @@
         padding-top: 20px;
     }
     
-    /* Кнопка "Как добраться" в стиле остальных (как "Забронировать стол") */
     .how-to-get-btn {
         display: inline-block;
         padding: 14px 28px;
@@ -1378,8 +1358,7 @@
             }
         });
     });
-    
-    // Обновление при изменении размера окна
+
     window.addEventListener('resize', function() {
         const activeSlider = document.querySelector('.category-slider-exact.active');
         if (activeSlider) {
@@ -1393,7 +1372,6 @@
     });
     
     document.addEventListener('DOMContentLoaded', function() {
-        // Инициализация галереи с 3 фото одновременно
         const gallerySwiper = new Swiper('.gallery-swiper-exact', {
             loop: true,
             slidesPerView: 3,
@@ -1515,9 +1493,9 @@
 </script>
 @endpush
 
-<!-- ===== КРАСИВЫЕ УВЕДОМЛЕНИЯ ТОЛЬКО В ПРАВОМ ВЕРХНЕМ УГЛУ ===== -->
+<!-- ===== УВЕДОМЛЕНИЯ ===== -->
 <style>
-    /* Контейнер для уведомлений - ТОЛЬКО СПРАВА */
+    /* Контейнер для уведомлений */
     .notification-elegant-container {
         position: fixed;
         top: 100px;
@@ -1685,16 +1663,15 @@
     }
 </style>
 
-<!-- Контейнер для уведомлений ТОЛЬКО СПРАВА -->
+<!-- Контейнер для уведомлений -->
 <div class="notification-elegant-container" id="notificationContainer"></div>
 
 <script>
-    // Функция показа красивых уведомлений ТОЛЬКО В ПРАВОМ УГЛУ
+    // Функция показа уведомлений
     function showElegantNotification(message, type = 'success', title = '') {
     const container = document.getElementById('notificationContainer');
     if (!container) return;
     
-    // Определяем заголовок и иконку
     let notificationTitle = '';
     let iconClass = '';
     

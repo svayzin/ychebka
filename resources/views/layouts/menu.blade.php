@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Меню - Созвездие вкусов')
+@section('title', 'Меню - Crimson Flame')
 
 @section('content')
     <!-- Герой секция меню -->
@@ -81,8 +81,6 @@
                     @endforeach
                 </div>
             </div>
-
-            <!-- Остальные категории (по аналогии) -->
 
             <!-- Кнопка бронирования -->
             <div class="text-center mt-5">

@@ -1,10 +1,9 @@
 @extends('layouts.app')
 
-@section('title', $category->name . ' - Созвездие вкусов')
+@section('title', $category->name . ' - Crimson Flame')
 
 @section('content')
 <div class="category-page">
-    <!-- Заголовок категории -->
     <section class="hero-exact category-hero">
         <div class="container-exact">
             <div class="row align-items-center">
@@ -725,9 +724,6 @@ document.addEventListener('DOMContentLoaded', function() {
     if (savedSort && savedSort !== currentSort && !window.location.search.includes('sort=')) {
         // Показываем уведомление о применении сохраненной сортировки
         showNotification('Применена сохраненная сортировка', 'info');
-        
-        // Раскомментируйте следующую строку, если хотите автоматически применять сохраненную сортировку
-        // window.location.href = window.location.pathname + '?sort=' + savedSort + window.location.hash;
     }
 
     // === ФУНКЦИОНАЛ КОРЗИНЫ ===
@@ -815,7 +811,6 @@ document.addEventListener('DOMContentLoaded', function() {
         alertDiv.style.borderRadius = '8px';
         alertDiv.style.textAlign = 'center';
         
-        // Цвета для разных типов уведомлений
         const colors = {
             'success': '#4CAF50',
             'warning': '#ffc107',

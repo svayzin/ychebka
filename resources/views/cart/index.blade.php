@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Корзина - Созвездие вкусов')
+@section('title', 'Корзина - Crimson Flame')
 
 @section('content')
 <div class="cart-page">
@@ -34,7 +34,7 @@
                         <div class="cart-item" data-item-id="{{ $item->id }}">
                             <div class="cart-item-image">
                                 @if($item->product->image)
-                                <img src="{{ asset('storage/' . $item->product->image) }}" alt="{{ $item->product->name }}">
+                                <img src="{{ $item->product->image_url }}" alt="{{ $item->product->name }}">
                                 @else
                                 <div class="no-image">
                                     <i class="bi bi-image"></i>

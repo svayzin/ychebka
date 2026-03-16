@@ -1,18 +1,12 @@
 <div class="product-card">
     <div class="product-image">
         @if($product->image)
-        <img src="{{ asset('storage/' . $product->image) }}" alt="{{ $product->name }}">
+        <img src="{{ $product->image_url }}" alt="{{ $product->name }}">
         @else
         <div class="no-image">
             <i class="bi bi-image"></i>
         </div>
-        @endif
-        @if($product->is_new)
-        <span class="badge-new">Новинка</span>
-        @endif
-        @if($product->is_popular)
-        <span class="badge-popular">Популярное</span>
-        @endif
+        @endif  
     </div>
     
     <div class="product-info">

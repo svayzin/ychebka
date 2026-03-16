@@ -45,7 +45,6 @@
                     </button>
                     <div class="booking-grid-viewport" id="booking-grid-viewport">
                         <div class="booking-tables-track" id="booking-tables-track">
-                            <!-- страницы заполняются в JS -->
                         </div>
                     </div>
                     <button type="button" class="booking-arrow" id="booking-next" aria-label="Вперёд">
@@ -1158,13 +1157,11 @@ document.addEventListener('DOMContentLoaded', () => {
         this.setSelectionRange(newPos, newPos);
     });
 
-    // Имя: только буквы, пробел, дефис, апостроф
     bookingName.addEventListener('input', function() {
         this.value = (this.value || '').replace(/[^\p{L}\s\-']/gu, '');
         if (this.value.length > 255) this.value = this.value.slice(0, 255);
     });
 
-    // Гости: только кнопки +/-, значение в допустимых границах
     function updateGuestsDisplay() {
         const min = parseInt(bookingGuests.min, 10) || 1;
         const max = parseInt(bookingGuests.max, 10) || 4;

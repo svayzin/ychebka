@@ -27,7 +27,7 @@ class CheckBrokenLinks extends Command
      */
     public function handle()
     {
-        $this->info('=== ПОИСК БИТЫХ ССЫЛОК НА САЙТЕ "СОЗВЕЗДИЕ ВКУСОВ" ===');
+        $this->info('=== ПОИСК БИТЫХ ССЫЛОК НА САЙТЕ "Crimson Flame" ===');
         $this->line('');
         
         // Определяем базовый URL

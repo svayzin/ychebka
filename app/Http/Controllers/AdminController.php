@@ -202,10 +202,10 @@ class AdminController extends Controller
         }
         
         if ($request->search) {
-            $search = $request->search;
+            $search = mb_strtolower(trim($request->search));
             $query->where(function($q) use ($search) {
-                $q->where('name', 'like', "%{$search}%")
-                  ->orWhere('description', 'like', "%{$search}%");
+                $q->whereRaw('LOWER(name) LIKE ?', ["%{$search}%"])
+                  ->orWhereRaw('LOWER(description) LIKE ?', ["%{$search}%"]);
             });
         }
         
@@ -230,7 +230,7 @@ class AdminController extends Controller
             'weight' => 'required|integer|min:1',
             'weight_unit' => 'required|string|max:10',
             'category_id' => 'required|exists:categories,id',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
             'order' => 'nullable|integer',
         ]);
         
@@ -249,8 +249,7 @@ class AdminController extends Controller
         
         if ($request->hasFile('image')) {
             try {
-                $path = $request->file('image')->store('products', 'public');
-                $data['image'] = $path;
+                $data['image'] = $this->storeProductImage($request->file('image'));
             } catch (\Exception $e) {
                 \Log::error('Image upload error: ' . $e->getMessage());
                 return back()->withInput()->with('error', 'Ошибка загрузки изображения');
@@ -316,22 +315,18 @@ class AdminController extends Controller
         
         // 1. ЕСЛИ ПОСТАВЛЕНА ГАЛОЧКА "УДАЛИТЬ ФОТО"
         if ($request->has('remove_image') && $request->remove_image == 1) {
-            // Удаляем файл с диска
             if ($product->image) {
-                Storage::disk('public')->delete($product->image);
+                $this->deleteProductImage($product->image);
             }
-            // Устанавливаем image в null
             $data['image'] = null;
         }
         
         // 2. ЕСЛИ ЗАГРУЖЕНО НОВОЕ ФОТО
         if ($request->hasFile('image')) {
-            // Удаляем старое фото, если есть
             if ($product->image) {
-                Storage::disk('public')->delete($product->image);
+                $this->deleteProductImage($product->image);
             }
-            // Загружаем новое
-            $data['image'] = $request->file('image')->store('products', 'public');
+            $data['image'] = $this->storeProductImage($request->file('image'));
         }
         
         $product->update($data);
@@ -355,7 +350,7 @@ class AdminController extends Controller
             $product = Product::findOrFail($id);
             
             if ($product->image) {
-                Storage::disk('public')->delete($product->image);
+                $this->deleteProductImage($product->image);
             }
             
             $product->delete();
@@ -365,5 +360,31 @@ class AdminController extends Controller
             \Log::error('Delete product error: ' . $e->getMessage());
             return back()->with('error', 'Ошибка при удалении блюда');
         }
+    }
+
+    /** Сохранить фото блюда в public/images/products (работает без симлинка storage) */
+    private function storeProductImage($file): string
+    {
+        $dir = public_path('images/products');
+        if (!is_dir($dir)) {
+            mkdir($dir, 0755, true);
+        }
+        $ext = $file->getClientOriginalExtension() ?: 'jpg';
+        $name = uniqid('', true) . '.' . $ext;
+        $file->move($dir, $name);
+        return 'images/products/' . $name;
+    }
+
+    /** Удалить файл фото (поддержка storage и public) */
+    private function deleteProductImage(string $path): void
+    {
+        if (str_starts_with($path, 'images/')) {
+            $fullPath = public_path($path);
+            if (is_file($fullPath)) {
+                unlink($fullPath);
+            }
+            return;
+        }
+        Storage::disk('public')->delete($path);
     }
 }

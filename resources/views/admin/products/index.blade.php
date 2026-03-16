@@ -74,7 +74,7 @@
                     <td><strong>#{{ $product->id }}</strong></td>
                     <td>
                         @if($product->image)
-                        <img src="{{ asset('storage/' . $product->image) }}" alt="{{ $product->name }}" 
+                        <img src="{{ $product->image_url }}" alt="{{ $product->name }}" 
                              style="width: 60px; height: 60px; object-fit: cover; border-radius: 6px;">
                         @else
                         <div class="text-center" style="width: 60px; height: 60px; background: var(--bg-light); border-radius: 6px; display: flex; align-items: center; justify-content: center;">

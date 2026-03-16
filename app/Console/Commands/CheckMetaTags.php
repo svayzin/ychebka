@@ -14,7 +14,7 @@ class CheckMetaTags extends Command
 
     public function handle()
     {
-        $this->info('=== ПРОВЕРКА МЕТА-ТЕГОВ НА САЙТЕ "СОЗВЕЗДИЕ ВКУСОВ" ===');
+        $this->info('=== ПРОВЕРКА МЕТА-ТЕГОВ НА САЙТЕ "Crimson Flame" ===');
         $this->line('');
         
         $this->checkMainPage();
@@ -140,7 +140,7 @@ class CheckMetaTags extends Command
         $this->line('');
         $this->info('   Примеры созданных категорий:');
         foreach ($categories as $cat) {
-            $this->line("   - {$cat->name}: title будет '{$cat->name} - Созвездие вкусов'");
+            $this->line("   - {$cat->name}: title будет '{$cat->name} - Crimson Flame'");
         }
     }
 

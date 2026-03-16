@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Мои заказы - Созвездие вкусов')
+@section('title', 'Мои заказы - Crimson Flame')
 
 @section('content')
 <div class="orders-page">
@@ -209,7 +209,6 @@
     margin-bottom: 15px;
 }
 
-/* ИЗМЕНЕНИЕ ЦВЕТА ТЕКСТА */
 .empty-text {
     font-size: 18px;
     color: #b0b0b0;

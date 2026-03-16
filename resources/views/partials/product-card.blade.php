@@ -8,7 +8,7 @@
     
     <div class="product-image">
         @if($product->image)
-        <img src="{{ asset('storage/' . $product->image) }}" 
+        <img src="{{ $product->image_url }}" 
              alt="{{ $product->name }}"
              onerror="this.src='https://via.placeholder.com/300x200/2A2A2A/C9A86A?text={{ urlencode($product->name) }}'">
         @else

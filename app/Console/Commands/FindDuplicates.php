@@ -23,7 +23,7 @@ class FindDuplicates extends Command
      */
     public function handle()
     {
-        $this->info('=== ПОИСК ПОТЕНЦИАЛЬНЫХ ДУБЛЕЙ В САЙТЕ "СОЗВЕЗДИЕ ВКУСОВ" ===');
+        $this->info('=== ПОИСК ПОТЕНЦИАЛЬНЫХ ДУБЛЕЙ В САЙТЕ "Crimson Flame" ===');
         $this->line('');
         
         $this->checkRouteDuplicates();

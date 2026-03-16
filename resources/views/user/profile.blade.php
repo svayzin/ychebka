@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Мой профиль - Созвездие вкусов')
+@section('title', 'Мой профиль - Crimson Flame')
 
 @section('content')
 <div class="profile-page">

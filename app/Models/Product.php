@@ -30,6 +30,8 @@ class Product extends Model
         'active' => 'boolean'
     ];
 
+    protected $appends = ['image_url'];
+
     public function category()
     {
         return $this->belongsTo(Category::class);
@@ -43,5 +45,17 @@ class Product extends Model
     public function getWeightDisplayAttribute()
     {
         return $this->weight . ' ' . $this->weight_unit;
+    }
+
+    /** URL изображения (поддержка storage и public/images/products) */
+    public function getImageUrlAttribute()
+    {
+        if (!$this->image) {
+            return null;
+        }
+        if (str_starts_with($this->image, 'images/')) {
+            return asset($this->image);
+        }
+        return asset('storage/' . $this->image);
     }
 }

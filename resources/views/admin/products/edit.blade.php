@@ -62,7 +62,7 @@
                                     @if($product->image)
                                         <div class="current-image mb-3 p-3" style="background: var(--bg-light); border-radius: 8px;">
                                             <div class="d-flex align-items-center gap-3">
-                                                <img src="{{ asset('storage/' . $product->image) }}" 
+                                                <img src="{{ $product->image_url }}" 
                                                      alt="{{ $product->name }}" 
                                                      style="width: 80px; height: 80px; object-fit: cover; border-radius: 8px;">
                                                 <div class="flex-grow-1">
