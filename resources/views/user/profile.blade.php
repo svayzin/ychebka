@@ -106,55 +106,6 @@
                     </form>
                 </div>
                 
-                <!-- Секция двухфакторной аутентификации -->
-                <div class="profile-card">
-                    <h3 class="card-title">
-                        <i class="bi bi-shield-check"></i> 
-                        Двухфакторная аутентификация
-                    </h3>
-                    
-                    <div class="two-factor-section">
-                        @if(Auth::user()->two_factor_enabled)
-                            <div class="alert alert-success">
-                                <i class="bi bi-shield-check"></i> 
-                                <strong>2FA включена</strong> - Ваш аккаунт защищен двухфакторной аутентификацией
-                            </div>
-                            
-                            <div class="two-factor-info mb-3">
-                                <p><i class="bi bi-info-circle"></i> При каждом входе в систему вам будет приходить SMS с кодом подтверждения на номер <strong>{{ Auth::user()->masked_phone }}</strong></p>
-                            </div>
-                            
-                            <form action="{{ route('two-factor.disable') }}" method="POST">
-                                @csrf
-                                <button type="submit" class="btn-exact-outline" onclick="return confirm('Вы уверены, что хотите отключить двухфакторную аутентификацию? Это снизит безопасность вашего аккаунта.')">
-                                    <i class="bi bi-shield-x"></i> Отключить 2FA
-                                </button>
-                            </form>
-                        @else
-                            <p class="mb-3">Двухфакторная аутентификация повышает безопасность вашего аккаунта. При включении 2FA при каждом входе в систему вам будет приходить SMS с кодом подтверждения.</p>
-                            
-                            @if(Auth::user()->phone)
-                                <div class="alert alert-info mb-3">
-                                    <i class="bi bi-phone"></i> 
-                                    2FA будет настроена на номер <strong>{{ Auth::user()->masked_phone }}</strong>
-                                </div>
-                                
-                                <form action="{{ route('two-factor.enable') }}" method="POST">
-                                    @csrf
-                                    <button type="submit" class="btn-exact">
-                                        <i class="bi bi-shield"></i> Включить 2FA
-                                    </button>
-                                </form>
-                            @else
-                                <div class="alert alert-warning">
-                                    <i class="bi bi-exclamation-triangle"></i>
-                                    Для включения двухфакторной аутентификации необходимо указать номер телефона в профиле выше
-                                </div>
-                            @endif
-                        @endif
-                    </div>
-                </div>
-                
                 <!-- Последние заказы -->
                 @if(isset($orders) && $orders->count() > 0)
                 <div class="profile-card mt-4">
@@ -193,18 +144,21 @@
                         @foreach($reservations->take(3) as $reservation)
                         <div class="reservation-item">
                             <div class="reservation-info">
-                                <span class="reservation-date">{{ $reservation->date->format('d.m.Y') }}</span>
-                                <span class="reservation-time">{{ $reservation->time }}</span>
-                                <span class="reservation-guests">{{ $reservation->guests }} чел.</span>
+                                <span class="reservation-date">{{ $reservation->start_at->format('d.m.Y') }}</span>
+                                <span class="reservation-time">{{ $reservation->start_at->format('H:i') }} – {{ $reservation->end_at->format('H:i') }}</span>
+                                <span class="reservation-guests">{{ $reservation->guests_count }} чел.</span>
+                                @if($reservation->table)
+                                <span class="reservation-table">Столик №{{ $reservation->table->number }}</span>
+                                @endif
                             </div>
-                            <div class="reservation-status {{ $reservation->confirmed ? 'confirmed' : 'pending' }}">
-                                {{ $reservation->confirmed ? 'Подтверждено' : 'Ожидает' }}
+                            <div class="reservation-status {{ $reservation->cancelled ? 'cancelled' : ($reservation->end_at->isPast() ? 'past' : 'confirmed') }}">
+                                @if($reservation->cancelled) Отменено @elseif($reservation->end_at->isPast()) Завершено @else Подтверждено @endif
                             </div>
                         </div>
                         @endforeach
                     </div>
                     
-                    <a href="{{ route('reservations.index') }}" class="btn-link mt-3">
+                    <a href="{{ route('table-reservations.index') }}" class="btn-link mt-3">
                         <i class="bi bi-calendar-check me-1"></i> Перейти к моим бронированиям
                     </a>
                 </div>
@@ -334,29 +288,6 @@
     border-color: #AD1C43;
     color: var(--text-light);
     box-shadow: 0 0 0 3px rgba(201, 168, 106, 0.2);
-}
-
-/* Стили для 2FA секции */
-.two-factor-section {
-    padding: 10px 0;
-}
-
-.two-factor-info {
-    background: var(--bg-light);
-    padding: 15px;
-    border-radius: 8px;
-    border-left: 4px solid #AD1C43;
-    margin-bottom: 20px;
-}
-
-.two-factor-info p {
-    margin: 0;
-    color: var(--text-light);
-}
-
-.two-factor-info i {
-    color: #AD1C43;
-    margin-right: 8px;
 }
 
 .alert {
@@ -557,6 +488,21 @@
 .reservation-status.pending {
     background: rgba(255, 193, 7, 0.15);
     color: #ffc107;
+}
+
+.reservation-status.cancelled {
+    background: rgba(220, 53, 69, 0.15);
+    color: #dc3545;
+}
+
+.reservation-status.past {
+    background: rgba(108, 117, 125, 0.15);
+    color: #6c757d;
+}
+
+.reservation-table {
+    color: var(--text-gray);
+    font-size: 13px;
 }
 
 /* Адаптивность */

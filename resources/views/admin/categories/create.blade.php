@@ -415,8 +415,6 @@
 }
 
 .btn-create {
-    background: linear-gradient(135deg, #AD1C43 0%, var(--accent-dark) 100%);
-    color: var(--bg-dark);
     font-weight: 600;
     padding: 15px 40px;
     border: none;
@@ -426,8 +424,8 @@
 
 .btn-create:hover {
     transform: translateY(-2px);
-    box-shadow: 0 5px 20px rgba(201, 168, 106, 0.4);
-    background: linear-gradient(135deg, var(--accent-light) 0%, #AD1C43 100%);
+    box-shadow: 0 5px 20px rgba(255, 0, 0, 0.4);
+    background: linear-gradient(135deg, #AD1C43 0%, #AD1C43 100%);
 }
 
 /* ===== АНИМАЦИИ ===== */

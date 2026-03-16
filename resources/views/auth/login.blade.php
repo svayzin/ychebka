@@ -39,14 +39,14 @@
                     </div>
                     @endif
                     
-                    <form method="POST" action="{{ route('login') }}" id="login-form">
+                    <form method="POST" action="{{ route('login') }}" id="login-form" autocomplete="on">
                         @csrf
                         
                         <div class="form-group">
                             <label for="email" class="form-label">Email</label>
                             <input type="email" class="form-control" id="email" name="email" 
                                    value="{{ old('email') }}" required autofocus 
-                                   placeholder="example@mail.ru">
+                                   placeholder="example@mail.ru" autocomplete="email">
                             @error('email')
                                 <div class="text-danger small mt-1">{{ $message }}</div>
                             @enderror
@@ -55,12 +55,7 @@
                         <div class="form-group">
                             <label for="password" class="form-label">Пароль</label>
                             <input type="password" class="form-control" id="password" name="password" required 
-                                   placeholder="Введите пароль">
-                            <div class="text-end mt-2">
-                                <a href="{{ route('password.forgot') }}" class="text-link">
-                                    Забыли пароль?
-                                </a>
-                            </div>
+                                   placeholder="Введите пароль" autocomplete="current-password">
                             @error('password')
                                 <div class="text-danger small mt-1">{{ $message }}</div>
                             @enderror
@@ -233,7 +228,6 @@ body {
     outline: none;
     border-color: #AD1C43;
     box-shadow: 0 0 0 4px rgba(201, 168, 106, 0.15);
-    background: var(--bg-card);
 }
 
 .form-control::placeholder {
@@ -254,7 +248,6 @@ body {
     margin-bottom: 0;
 }
 
-/* ЖЕЛТАЯ ГАЛОЧКА - стили для чекбокса */
 .form-check {
     display: flex;
     align-items: center;
@@ -266,10 +259,9 @@ body {
     width: 20px;
     height: 20px;
     margin-top: 0;
-    accent-color: #AD1C43; /* Это делает галочку желтой */
+    accent-color: #AD1C43;
     flex-shrink: 0;
     cursor: pointer;
-    /* Дополнительные стили для кастомизации */
     background-color: var(--bg-light);
     border: 2px solid var(--border);
     border-radius: 4px;

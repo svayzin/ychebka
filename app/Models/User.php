@@ -69,14 +69,6 @@ class User extends Authenticatable
     }
 
     /**
-     * Get the reservations for the user.
-     */
-    public function reservations()
-    {
-        return $this->hasMany(Reservation::class);
-    }
-
-    /**
      * Get the two factor codes for the user.
      */
     public function twoFactorCodes()

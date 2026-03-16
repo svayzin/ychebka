@@ -10,6 +10,9 @@
                     @case('new')
                         Новый
                         @break
+                    @case('pending')
+                        Ожидание
+                        @break
                     @case('cancelled')
                         Отменен
                         @break
@@ -23,12 +26,16 @@
             <div class="info-section">
                 <h3 class="info-title">Информация о заказе</h3>
                 <div class="info-row">
+                    <span class="info-label">Номер заказа:</span>
+                    <span class="info-value">#{{ $order->id }}</span>
+                </div>
+                <div class="info-row">
                     <span class="info-label">Дата:</span>
                     <span class="info-value">{{ $order->created_at->format('d.m.Y H:i') }}</span>
                 </div>
                 <div class="info-row">
                     <span class="info-label">Сумма:</span>
-                    <span class="info-value price">{{ number_format($order->total) }} ₽</span>
+                    <span class="info-value price">{{ number_format($order->total_amount ?? 0) }} ₽</span>
                 </div>
                 <div class="info-row">
                     <span class="info-label">Способ оплаты:</span>
@@ -54,20 +61,20 @@
                 <h3 class="info-title">Доставка</h3>
                 <div class="info-row">
                     <span class="info-label">Адрес:</span>
-                    <span class="info-value">{{ $order->delivery_address }}</span>
+                    <span class="info-value">{{ $order->address ?? $order->full_address ?? '—' }}</span>
                 </div>
                 <div class="info-row">
                     <span class="info-label">Получатель:</span>
-                    <span class="info-value">{{ $order->customer_name }}</span>
+                    <span class="info-value">{{ $order->full_name ?? '—' }}</span>
                 </div>
                 <div class="info-row">
                     <span class="info-label">Телефон:</span>
-                    <span class="info-value">{{ $order->customer_phone }}</span>
+                    <span class="info-value">{{ $order->phone ?? '—' }}</span>
                 </div>
-                @if($order->customer_email)
+                @if($order->email)
                 <div class="info-row">
                     <span class="info-label">Email:</span>
-                    <span class="info-value">{{ $order->customer_email }}</span>
+                    <span class="info-value">{{ $order->email }}</span>
                 </div>
                 @endif
             </div>
@@ -86,9 +93,9 @@
                 @foreach($order->items as $item)
                 <div class="order-item">
                     <div class="item-info">
-                        <span class="item-name">{{ $item->product_name }}</span>
-                        @if($item->weight)
-                        <span class="item-weight">{{ $item->weight }}</span>
+                        <span class="item-name">{{ $item->product?->name ?? 'Товар #' . $item->product_id }}</span>
+                        @if($item->product?->weight ?? null)
+                        <span class="item-weight">{{ $item->product->weight }}</span>
                         @endif
                     </div>
                     <div class="item-quantity">{{ $item->quantity }} ×</div>

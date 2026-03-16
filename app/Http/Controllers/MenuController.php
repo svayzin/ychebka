@@ -18,7 +18,6 @@ class MenuController extends Controller
             ->with(['products' => function($query) use ($sort) {
                 $query->where('active', true);
                 
-                // ПРИМЕНЯЕМ СОРТИРОВКУ
                 if ($sort === 'price_asc') {
                     $query->orderBy('price', 'asc');
                 } elseif ($sort === 'price_desc') {
@@ -28,9 +27,6 @@ class MenuController extends Controller
                 }
             }])
             ->get();
-
-        // ДЛЯ ОТЛАДКИ - раскомментируйте чтобы увидеть запросы в логах
-        \Log::info('Menu sort applied: ' . $sort);
         
         return view('menu.index', compact('categories'));
     }
@@ -45,7 +41,6 @@ class MenuController extends Controller
             ->with(['products' => function($query) use ($sort) {
                 $query->where('active', true);
                 
-                // ПРИМЕНЯЕМ СОРТИРОВКУ
                 if ($sort === 'price_asc') {
                     $query->orderBy('price', 'asc');
                 } elseif ($sort === 'price_desc') {
@@ -59,9 +54,6 @@ class MenuController extends Controller
         $categories = Category::where('active', true)
             ->orderBy('order')
             ->get();
-
-        // ДЛЯ ОТЛАДКИ
-        \Log::info('Category sort applied: ' . $sort . ' for category: ' . $slug);
 
         return view('menu.category', compact('category', 'categories'));
     }

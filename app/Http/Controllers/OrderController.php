@@ -28,7 +28,7 @@ class OrderController extends Controller
     {
         $order = Order::where('id', $id)
             ->where('user_id', Auth::id())
-            ->with('items')
+            ->with('items.product')
             ->firstOrFail();
 
         return view('orders.show', compact('order'));

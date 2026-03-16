@@ -154,16 +154,6 @@
                                         <input type="checkbox" name="active" class="form-check-input" id="active" value="1" checked>
                                         <label class="form-check-label" for="active">Активное блюдо</label>
                                     </div>
-                                    
-                                    <div class="form-check">
-                                        <input type="checkbox" name="is_new" class="form-check-input" id="is_new" value="1">
-                                        <label class="form-check-label" for="is_new">Новинка</label>
-                                    </div>
-                                    
-                                    <div class="form-check">
-                                        <input type="checkbox" name="is_popular" class="form-check-input" id="is_popular" value="1">
-                                        <label class="form-check-label" for="is_popular">Популярное</label>
-                                    </div>
                                 </div>
                             </div>
                         </div>

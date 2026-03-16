@@ -892,7 +892,6 @@ document.addEventListener('DOMContentLoaded', () => {
             try {
                 timeline.releasePointerCapture?.(activePointerId);
             } catch (e) {
-                // ignore if capture was already released
             }
         }
 

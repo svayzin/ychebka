@@ -4,12 +4,10 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
-use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\MenuController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\OrderController;
-use App\Http\Controllers\TwoFactorController;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\TableBookingController;
 
@@ -29,33 +27,6 @@ Route::get('/booking', function () {
     return view('booking.index');
 })->name('booking.index');
 
-// ============= ВОССТАНОВЛЕНИЕ ПАРОЛЯ =============
-Route::middleware('guest')->group(function () {
-    // Страница "Забыли пароль" (ввод email)
-    Route::get('/forgot-password', [AuthController::class, 'showForgotPassword'])
-        ->name('password.forgot');
-    
-    // Отправка кода на email
-    Route::post('/forgot-password', [AuthController::class, 'sendResetCode'])
-        ->name('password.send-code');
-    
-    // Страница ввода кода подтверждения
-    Route::get('/verify-code', [AuthController::class, 'showVerifyCodeForm'])
-        ->name('password.verify');
-    
-    // Проверка кода
-    Route::post('/verify-code', [AuthController::class, 'verifyCode'])
-        ->name('password.verify.submit');
-    
-    // Страница ввода нового пароля
-    Route::get('/new-password', [AuthController::class, 'showNewPasswordForm'])
-        ->name('password.new');
-    
-    // Сохранение нового пароля
-    Route::post('/reset-password', [AuthController::class, 'resetPassword'])
-        ->name('password.reset.submit');
-});
-
 // ============= АУТЕНТИФИКАЦИЯ =============
 Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
 Route::post('/login', [AuthController::class, 'login']);
@@ -65,27 +36,10 @@ Route::post('/register', [AuthController::class, 'register']);
 // Выход
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
-// ============= ДВУХФАКТОРНАЯ АУТЕНТИФИКАЦИЯ =============
-Route::middleware('guest')->group(function () {
-    Route::get('/two-factor/verify', [TwoFactorController::class, 'showVerifyForm'])
-        ->name('two-factor.verify');
-    Route::post('/two-factor/verify', [TwoFactorController::class, 'verify'])
-        ->name('two-factor.verify.submit');
-    Route::post('/two-factor/resend', [TwoFactorController::class, 'resendCode'])
-        ->name('two-factor.resend');
-});
-
 Route::middleware('auth')->group(function () {
-    Route::post('/two-factor/enable', [TwoFactorController::class, 'enable'])
-        ->name('two-factor.enable');
-    Route::post('/two-factor/disable', [TwoFactorController::class, 'disable'])
-        ->name('two-factor.disable');
     Route::get('/table-reservations', [TableBookingController::class, 'userIndex'])
         ->name('table-reservations.index');
 });
-
-// ============= БРОНИРОВАНИЕ =============
-Route::post('/reservation', [ReservationController::class, 'store'])->name('reservation.store');
 
 // ============= ЗАЩИЩЕННЫЕ МАРШРУТЫ =============
 Route::middleware('auth')->group(function () {
@@ -119,21 +73,12 @@ Route::middleware('auth')->group(function () {
         Route::get('/{id}', [OrderController::class, 'show'])->name('show');
     });
 
-    // Бронирования пользователя
-    Route::prefix('reservations')->name('reservations.')->group(function () {
-        Route::get('/', [ReservationController::class, 'index'])->name('index');
-        Route::get('/{id}', [ReservationController::class, 'show'])->name('show');
-        Route::delete('/{id}/cancel', [ReservationController::class, 'cancel'])->name('cancel');
-    });
 });
 
 // ============= АДМИН ПАНЕЛЬ =============
 Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () {
     Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('dashboard');
     
-    // Бронирования в админке
-    Route::get('/reservations', [AdminController::class, 'reservations'])->name('reservations');
-    Route::put('/reservations/{id}', [AdminController::class, 'updateReservation'])->name('reservations.update');
     // Бронирования столиков
     Route::get('/table-reservations', [AdminController::class, 'tableReservations'])
         ->name('table-reservations');

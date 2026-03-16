@@ -92,7 +92,7 @@
 <div class="admin-table mb-4">
     <div class="table-header">
         <h2 class="table-title">Последние бронирования</h2>
-        <a href="{{ route('admin.reservations') }}" class="btn-outline-exact btn-sm">
+        <a href="{{ route('admin.table-reservations') }}" class="btn-outline-exact btn-sm">
             <i class="bi bi-arrow-right"></i> Все брони
         </a>
     </div>

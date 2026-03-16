@@ -67,7 +67,9 @@
                     </div>
                 @endforeach
 
-                {{ $reservations->links() }}
+                <nav class="reservations-pagination-wrapper mt-4" aria-label="Навигация по страницам">
+                    {{ $reservations->withQueryString()->links('pagination::bootstrap-5') }}
+                </nav>
             </div>
         @else
             <div class="empty-reservations text-center py-5">
@@ -159,6 +161,45 @@
     font-size: 18px;
     color: #b0b0b0;
     font-weight: 500;
+}
+
+/* Пагинация в тёмной теме */
+.reservations-pagination-wrapper {
+    width: 100%;
+}
+.reservations-pagination-wrapper nav {
+    flex-wrap: wrap;
+}
+.reservations-pagination-wrapper .text-muted {
+    color: var(--text-gray) !important;
+}
+.reservations-pagination-wrapper .pagination {
+    margin: 0;
+    gap: 4px;
+    flex-wrap: wrap;
+}
+.reservations-pagination-wrapper .page-item .page-link {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    color: var(--text-light);
+    padding: 10px 16px;
+    border-radius: 8px;
+}
+.reservations-pagination-wrapper .page-item .page-link:hover {
+    background: var(--bg-light);
+    border-color: var(--accent);
+    color: var(--accent-light);
+}
+.reservations-pagination-wrapper .page-item.active .page-link {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #fff;
+}
+.reservations-pagination-wrapper .page-item.disabled .page-link {
+    background: var(--bg-light);
+    border-color: var(--border);
+    color: var(--text-gray);
+    opacity: 0.7;
 }
 </style>
 @endsection

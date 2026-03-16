@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\TableReservation;
-use App\Models\Reservation;
 use App\Models\User;
 use App\Models\Gallery;
 use App\Models\Product;
@@ -52,46 +51,7 @@ class AdminController extends Controller
     return view('admin.dashboard', compact('reservations', 'stats'));
     }
 
-    // ================ БРОНИРОВАНИЯ ================
-    public function reservations(Request $request)
-    {
-        $query = Reservation::with('user')
-            ->orderBy('date', 'desc')
-            ->orderBy('time', 'desc');
-        
-        if ($request->status == 'pending') {
-            $query->where('confirmed', false);
-        } elseif ($request->status == 'confirmed') {
-            $query->where('confirmed', true);
-        }
-        
-        if ($request->search) {
-            $search = $request->search;
-            $query->where(function($q) use ($search) {
-                $q->where('name', 'like', "%{$search}%")
-                  ->orWhere('phone', 'like', "%{$search}%");
-            });
-        }
-        
-        $reservations = $query->paginate(20);
-        
-        return view('admin.reservations.index', compact('reservations'));
-    }
-
-    public function updateReservation(Request $request, $id)
-    {
-        $reservation = Reservation::findOrFail($id);
-        
-        $request->validate([
-            'confirmed' => 'boolean',
-            'notes' => 'nullable|string',
-        ]);
-        
-        $reservation->update($request->only(['confirmed', 'notes']));
-        
-        return back()->with('success', 'Бронь обновлена');
-    }
-
+    // ================ БРОНИРОВАНИЯ СТОЛИКОВ ================
     public function tableReservations(Request $request)
         {
             $query = TableReservation::with(['table', 'user'])->orderBy('start_at', 'desc');
@@ -405,49 +365,5 @@ class AdminController extends Controller
             \Log::error('Delete product error: ' . $e->getMessage());
             return back()->with('error', 'Ошибка при удалении блюда');
         }
-    }
-
-    // ================ ГАЛЕРЕЯ ================
-    public function gallery()
-    {
-        $images = Gallery::orderBy('order')->get();
-        return view('admin.gallery.index', compact('images'));
-    }
-
-    public function storeGallery(Request $request)
-    {
-        $request->validate([
-            'image' => 'required|image|max:2048',
-            'title' => 'nullable|string|max:255',
-        ]);
-        
-        $path = $request->file('image')->store('gallery', 'public');
-        
-        Gallery::create([
-            'title' => $request->title,
-            'image_path' => $path,
-            'order' => Gallery::max('order') + 1,
-        ]);
-        
-        return back()->with('success', 'Изображение добавлено');
-    }
-
-    public function deleteGallery($id)
-    {
-        $image = Gallery::findOrFail($id);
-        
-        Storage::disk('public')->delete($image->image_path);
-        $image->delete();
-        
-        return back()->with('success', 'Изображение удалено');
-    }
-
-    public function updateGalleryOrder(Request $request)
-    {
-        foreach ($request->order as $index => $id) {
-            Gallery::where('id', $id)->update(['order' => $index]);
-        }
-        
-        return response()->json(['success' => true]);
     }
 }

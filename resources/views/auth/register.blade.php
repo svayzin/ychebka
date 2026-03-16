@@ -23,16 +23,6 @@
                         <p class="auth-subtitle">Создайте аккаунт для оформления заказов</p>
                     </div>
                     
-                    @if($errors->any())
-                    <div class="alert alert-danger">
-                        <ul class="mb-0">
-                            @foreach($errors->all() as $error)
-                            <li>{{ $error }}</li>
-                            @endforeach
-                        </ul>
-                    </div>
-                    @endif
-                    
                     @if(session('success'))
                     <div class="alert alert-success">
                         {{ session('success') }}
@@ -92,6 +82,9 @@
                             <input type="password" class="form-control" id="password_confirmation" 
                                    name="password_confirmation" required 
                                    placeholder="Повторите пароль">
+                            @error('password_confirmation')
+                                <div class="text-danger small mt-1">{{ $message }}</div>
+                            @enderror
                         </div>
                         
                         <div class="form-group">
@@ -275,6 +268,7 @@ body {
 
 .form-control:focus {
     outline: none;
+    color: var(--text-light);
     border-color: #AD1C43;
     box-shadow: 0 0 0 4px rgba(201, 168, 106, 0.15);
     background: var(--bg-card);
@@ -310,10 +304,9 @@ body {
     width: 20px;
     height: 20px;
     margin-top: 0;
-    accent-color: #AD1C43; /* Это делает галочку желтой */
+    accent-color: #AD1C43;
     flex-shrink: 0;
     cursor: pointer;
-    /* Дополнительные стили для кастомизации */
     background-color: var(--bg-light);
     border: 2px solid var(--border);
     border-radius: 4px;
